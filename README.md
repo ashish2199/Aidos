@@ -1,2 +1,2 @@
 # Aidos
-A beginner friendly java project
+A beginner friendly project
