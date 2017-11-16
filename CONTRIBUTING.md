@@ -8,3 +8,9 @@
 3. Add meaningful comments
 
 ### Devide your work into a series of commit so that if needed we are able to cherry pick them.
+
+Some useful articles which will help you better understand how to contribute to a project on github
+
+* [The beginner's guide to contributing to a GitHub project](https://akrabat.com/the-beginners-guide-to-contributing-to-a-github-project/)
+
+* [How to Contribute to Open Source](https://opensource.guide/how-to-contribute/)
