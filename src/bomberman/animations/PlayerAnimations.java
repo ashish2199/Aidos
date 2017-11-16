@@ -5,9 +5,7 @@
  */
 package bomberman.animations;
 
-import static bomberman.constants.GlobalConstants.*;
-
-import java.io.File;
+import bomberman.utils.ImageUtils;
 import javafx.animation.KeyFrame;
 import javafx.animation.SequentialTransition;
 import javafx.animation.Timeline;
@@ -15,11 +13,11 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
+import static bomberman.constants.GlobalConstants.*;
+
 /**
- *
  * @author Ashish
  */
 public class PlayerAnimations {
@@ -27,9 +25,8 @@ public class PlayerAnimations {
     static Image img;
 
     public static void init() {
-        img = loadImage("src/Resources/img/sprites.png");
+        img = ImageUtils.loadImage("src/Resources/img/sprites.png");
     }
-
 
 
     public static void walkDownAnimation(GraphicsContext gc) {
@@ -61,7 +58,7 @@ public class PlayerAnimations {
             }
         });
         timeline2.getKeyFrames().addAll(kf2);
-        
+
         final Timeline timeline3 = new Timeline();
         timeline3.setCycleCount(1);
         //timeline3.setAutoReverse(true);
@@ -74,31 +71,12 @@ public class PlayerAnimations {
             }
         });
         timeline3.getKeyFrames().addAll(kf3);
-        
-        SequentialTransition sequence = new SequentialTransition(timeline2,timeline1,timeline3);
+
+        SequentialTransition sequence = new SequentialTransition(timeline2, timeline1, timeline3);
         sequence.setCycleCount(Timeline.INDEFINITE);
         sequence.setAutoReverse(true);
         sequence.play();
     }
-    
-        public static Image loadImage(String path) {
-        File file = new File(path);
-        System.out.println("Loading Sprite sheet " + file.exists());
-        String imagePath = file.getAbsolutePath();
-        System.out.println("Before Imagepath " + imagePath);
-        if (File.separatorChar == '\\') {
-            // From Windows to Linux/Mac
-            imagePath=imagePath.replace('/', File.separatorChar);
-            imagePath = imagePath.replace("\\", "\\\\");
-        } else {
-            // From Linux/Mac to Windows
-            imagePath=imagePath.replace('\\', File.separatorChar);
-            
-        }
-        imagePath="file:"+imagePath;
-        System.out.println("After Imagepath " + imagePath);
 
-       return new Image(imagePath);
-    }
-        
+
 }
