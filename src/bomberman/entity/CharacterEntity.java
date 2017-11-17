@@ -16,13 +16,17 @@ public class CharacterEntity
 
 	Direction currentDirection;
 
+	String name;
+
 	public CharacterEntity()
 	{
-
+		name = "Unnamed Entity";
 	}
 
 
-	// This might be better eventually as a state machine I imagine. Because this is very quickly growing into a pain in the ass
+	// This might be better eventually as a state machine I imagine.
+	// Because this is very quickly growing into a pain in the ass
+
 	public void move(Direction direction)
 	{
 		switch(direction)
@@ -67,6 +71,10 @@ public class CharacterEntity
 	{
 		if(currentSprite != null)
 			Animator.playAnimation(gc, time, currentSprite);
+	}
+
+	public String toString() {
+		return name;
 	}
 
 }
