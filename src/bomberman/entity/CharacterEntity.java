@@ -32,31 +32,30 @@ public class CharacterEntity
 		switch(direction)
 		{
 			case UP:
-				if(moveUp != null)
-					setCurrentSprite(moveUp);
-					currentDirection = Direction.UP;
+				setCurrentSprite(moveUp);
+				currentDirection = Direction.UP;
 				break;
 			case DOWN:
-				if(moveDown != null)
-					setCurrentSprite(moveDown);
+				setCurrentSprite(moveDown);
 				currentDirection = Direction.DOWN;
 				break;
 			case LEFT:
-				if(moveLeft != null)
-					setCurrentSprite(moveLeft);
+				setCurrentSprite(moveLeft);
 				currentDirection = Direction.LEFT;
 				break;
 			case RIGHT:
-				if(moveRight != null)
-					setCurrentSprite(moveRight);
-					currentDirection = Direction.RIGHT;
+				setCurrentSprite(moveRight);
+				currentDirection = Direction.RIGHT;
 				break;
 		}
 	}
 
 	private void setCurrentSprite(Sprite s)
 	{
-		currentSprite = s;
+		if(s != null)
+			currentSprite = s;
+		else
+			System.out.println("Sprite missing!");
 	}
 
 	public void setMoveSprites(Sprite moveUp, Sprite moveDown, Sprite moveLeft, Sprite moveRight)
