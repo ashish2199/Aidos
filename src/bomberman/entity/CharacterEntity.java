@@ -1,5 +1,7 @@
 package bomberman.entity;
 
+import java.util.Vector;
+
 import bomberman.animations.Direction;
 import bomberman.utils.Animator;
 import bomberman.utils.Sprite;
@@ -13,6 +15,8 @@ public class CharacterEntity
 	Sprite moveLeft;
 	Sprite moveUp;
 	Sprite moveDown;
+
+	Vector<Sprite> spriteList = new Vector<Sprite>();
 
 	Direction currentDirection;
 
@@ -61,10 +65,11 @@ public class CharacterEntity
 
 	private void recalulatePositionForSprites()
 	{
-		moveDown.setPosition(x, y);
-		moveUp.setPosition(x, y);
-		moveLeft.setPosition(x, y);
-		moveRight.setPosition(x, y);
+		for(Sprite s : spriteList)
+		{
+			if(s != null)
+				s.setPosition(x, y);
+		}
 	}
 
 
@@ -82,6 +87,11 @@ public class CharacterEntity
 		if(moveDown != null) this.moveDown = moveDown;
 		if(moveLeft != null) this.moveLeft = moveLeft;
 		if(moveRight != null) this.moveRight = moveRight;
+
+		if(!spriteList.contains(moveUp)) spriteList.add(moveUp);
+		if(!spriteList.contains(moveLeft)) spriteList.add(moveLeft);
+		if(!spriteList.contains(moveDown)) spriteList.add(moveDown);
+		if(!spriteList.contains(moveRight)) spriteList.add(moveRight);
 	}
 
 	public void render(GraphicsContext gc, double time)
