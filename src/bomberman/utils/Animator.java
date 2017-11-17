@@ -5,7 +5,11 @@ import javafx.scene.image.Image;
 
 public class Animator
 {
-	   static Image img;
+	/**
+	 *
+	 * @author CoreyHendrey
+	 */
+   static Image img;
 
     public static void init() {
         img = ImageUtils.loadImage("src/Resources/img/sprites.png");

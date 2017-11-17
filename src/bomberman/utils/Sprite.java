@@ -2,6 +2,10 @@ package bomberman.utils;
 
 public class Sprite
 {
+	/**
+	 *
+	 * @author CoreyHendrey
+	 */
 	double playSpeed;
 	int spriteLocationOnSheetX;
 	int spriteLocationOnSheetY;

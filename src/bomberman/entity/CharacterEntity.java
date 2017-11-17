@@ -9,6 +9,10 @@ import javafx.scene.canvas.GraphicsContext;
 
 public class CharacterEntity implements Entity
 {
+	/**
+	 *
+	 * @author CoreyHendrey
+	 */
 	Sprite currentSprite;
 
 	Sprite moveRight;
