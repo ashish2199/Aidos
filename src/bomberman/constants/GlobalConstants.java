@@ -26,13 +26,4 @@ public class GlobalConstants {
     public static int playerHeight = 21;
     public static int playerScale = 2;
 
-    public static int playerSpriteDownLocation = 0;
-    public static int playerSpriteUpLocation = 30;
-    public static int playerSpriteLeftLocation = 60;
-    public static int playerSpriteRightLocation = 90;
-
-    public static boolean  playerSpriteLtR = false;
-
-
-
 }

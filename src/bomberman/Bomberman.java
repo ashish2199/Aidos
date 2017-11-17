@@ -1,7 +1,7 @@
 package bomberman;
 
-import bomberman.animations.PlayerAnimations;
 import bomberman.constants.GlobalConstants;
+import bomberman.entity.PlayerEntity;
 import bomberman.utils.Animator;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -30,13 +30,15 @@ public class Bomberman extends Application {
 
         Animator.init();
 
+        PlayerEntity player = new PlayerEntity();
+
         new AnimationTimer()
         {
             public void handle(long currentNanoTime)
             {
                 double t = (currentNanoTime - startNanoTime) / 1000000000.0;
                 gc.clearRect(0, 0, 512,512);
-                PlayerAnimations.walkDownAnimation(gc, t);
+                player.render(gc, t);
             }
         }.start();
 
