@@ -12,13 +12,7 @@ public class Animator
     }
 
     public static void playAnimation(GraphicsContext gc, double time, int actualHeight, int startingPoint, int numberOfFrames, int x, int y, int width, int height) {
-    	double scale = 1;
-    	double duration = 0.3;
-    	int num = numberOfFrames;
-    	int index = (int)(time % (num * duration) / duration);
-
-    	//gc.fillRect(x, y, width * scale, height * scale);
-    	gc.drawImage(img, startingPoint, index * actualHeight, width, height, x, y, width * scale, height * scale);
+    	playAnimation(gc, time, actualHeight, startingPoint, numberOfFrames, x, y, width, actualHeight, 1);
     }
 
     public static void playAnimation(GraphicsContext gc, double time, int actualHeight, int startingPoint, int numberOfFrames, int x, int y, int width, int height, double scale) {
