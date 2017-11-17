@@ -11,16 +11,18 @@ public class Animator
         img = ImageUtils.loadImage("src/Resources/img/sprites.png");
     }
 
-    public static void playAnimation(GraphicsContext gc, double time, int actualHeight, int startingPoint, int numberOfFrames, int x, int y, int width, int height) {
-    	playAnimation(gc, time, actualHeight, startingPoint, numberOfFrames, x, y, width, actualHeight, 1);
+    public static void playAnimation(GraphicsContext gc, double time, int actualSize, int startingPoint, int numberOfFrames, int x, int y, int width, int height, boolean leftToRight) {
+    	playAnimation(gc, time, actualSize, startingPoint, numberOfFrames, x, y, width, actualSize, 1, leftToRight);
     }
 
-    public static void playAnimation(GraphicsContext gc, double time, int actualHeight, int startingPoint, int numberOfFrames, int x, int y, int width, int height, double scale) {
+    public static void playAnimation(GraphicsContext gc, double time, int actualSize, int startingPoint, int numberOfFrames, int x, int y, int width, int height, double scale, boolean leftToRight) {
     	double duration = 0.3;
     	int num = numberOfFrames;
     	int index = (int)(time % (num * duration) / duration);
 
-    	//gc.fillRect(x, y, width * scale, height * scale);
-    	gc.drawImage(img, startingPoint, index * actualHeight, width, height, x, y, width * scale, height * scale);
+    	if(leftToRight)
+    		gc.drawImage(img, startingPoint + index * actualSize, startingPoint, width, height, x, y, width * scale, height * scale);
+    	else
+    		gc.drawImage(img, startingPoint, startingPoint + index * actualSize, width, height, x, y, width * scale, height * scale);
     }
 }

@@ -15,7 +15,7 @@ import javafx.scene.canvas.GraphicsContext;
 public class PlayerAnimations {
 
     public static void walkDownAnimation(GraphicsContext gc, double time) {
-    	Animator.playAnimation(gc, time, 30, 0, 3, GlobalConstants.playerX, GlobalConstants.playerY, GlobalConstants.playerWidth, GlobalConstants.playerHeight, GlobalConstants.playerScale);
+    	Animator.playAnimation(gc, time, 30, 0, 3, GlobalConstants.playerX, GlobalConstants.playerY, GlobalConstants.playerWidth, GlobalConstants.playerHeight, GlobalConstants.playerScale, false);
     }
 
 }
