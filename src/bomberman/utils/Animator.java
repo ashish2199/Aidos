@@ -25,11 +25,6 @@ public class Animator
     	double duration = 0.3;
     	int index = (int)(time % (numberOfFrames * duration) / duration);
 
- /*   	System.out.println("Index: " + index);
-    	System.out.println("XY: " + startingPointX + ", " + startingPointY + index * actualSize);
-    	System.out.println("Actual Size: " + actualSize);
-    	System.out.println("W / H: " + width + " / " + height);*/
-    	System.out.println("Y: " + y);
 		int newX = leftToRight ? startingPointX + index * actualSize : startingPointX;
 		int newY = leftToRight ? startingPointY : startingPointY + index * actualSize;
 
