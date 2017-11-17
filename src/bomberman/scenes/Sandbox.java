@@ -51,4 +51,8 @@ public class Sandbox {
     public static GraphicsContext getGraphicsContext() {
     	return gc;
     }
+
+    public static Canvas getCanvas() {
+    	return c;
+    }
 }

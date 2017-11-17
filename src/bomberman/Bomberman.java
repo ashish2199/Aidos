@@ -1,6 +1,7 @@
 package bomberman;
 
 import bomberman.animations.PlayerAnimations;
+import bomberman.constants.GlobalConstants;
 import bomberman.utils.Animator;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -14,13 +15,7 @@ public class Bomberman extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-/*        primaryStage.setTitle(GAME_NAME + GAME_VERSION);
-        Scene s = Sandbox.getScene();
-        GraphicsContext gc = Sandbox.getGraphicsContext();
-
-        primaryStage.setScene(s);*/
-
-    	primaryStage.setTitle( "Timeline Example" );
+		primaryStage.setTitle(GlobalConstants.GAME_NAME + GlobalConstants.GAME_VERSION);
 
 	    Group root = new Group();
 	    Scene theScene = new Scene( root );
