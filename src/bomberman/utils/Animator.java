@@ -17,8 +17,7 @@ public class Animator
 
     public static void playAnimation(GraphicsContext gc, double time, int actualSize, int startingPoint, int numberOfFrames, int x, int y, int width, int height, double scale, boolean leftToRight) {
     	double duration = 0.3;
-    	int num = numberOfFrames;
-    	int index = (int)(time % (num * duration) / duration);
+    	int index = (int)(time % (numberOfFrames * duration) / duration);
 
 		int newX = leftToRight ? startingPoint + index * actualSize : startingPoint;
 		int newY = leftToRight ? startingPoint : startingPoint + index * actualSize;
