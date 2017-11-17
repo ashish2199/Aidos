@@ -11,6 +11,10 @@ public class Animator
         img = ImageUtils.loadImage("src/Resources/img/sprites.png");
     }
 
+    public static void playAnimation(GraphicsContext gc, double time, Sprite sprite) {
+    	playAnimation(gc, time, sprite.actualSize, sprite.spriteLocationOnSheet, sprite.numberOfFrames, sprite.x, sprite.y, sprite.width, sprite.actualSize, sprite.scale, sprite.leftToRight);
+    }
+
     public static void playAnimation(GraphicsContext gc, double time, int actualSize, int startingPoint, int numberOfFrames, int x, int y, int width, int height, boolean leftToRight) {
     	playAnimation(gc, time, actualSize, startingPoint, numberOfFrames, x, y, width, actualSize, 1, leftToRight);
     }
