@@ -18,6 +18,6 @@ public class PlayerEntity extends CharacterEntity
 		Sprite moveRight = new Sprite(30, 0.1, 90, 0, 3, GlobalConstants.playerX, GlobalConstants.playerY, GlobalConstants.playerWidth, GlobalConstants.playerHeight, 2, false);
 
 		setMoveSprites(moveUp, moveDown, moveLeft, moveRight);
-		currentSprite = moveRight;
+		currentSprite = moveDown;
 	}
 }
