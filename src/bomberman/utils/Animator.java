@@ -20,9 +20,9 @@ public class Animator
     	int num = numberOfFrames;
     	int index = (int)(time % (num * duration) / duration);
 
-    	if(leftToRight)
-    		gc.drawImage(img, startingPoint + index * actualSize, startingPoint, width, height, x, y, width * scale, height * scale);
-    	else
-    		gc.drawImage(img, startingPoint, startingPoint + index * actualSize, width, height, x, y, width * scale, height * scale);
+		int newX = leftToRight ? startingPoint + index * actualSize : startingPoint;
+		int newY = leftToRight ? startingPoint : startingPoint + index * actualSize;
+
+		gc.drawImage(img, startingPoint, startingPoint + index * actualSize, width, height, x, y, width * scale, height * scale);
     }
 }
