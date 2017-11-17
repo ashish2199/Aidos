@@ -7,7 +7,7 @@ import bomberman.utils.Animator;
 import bomberman.utils.Sprite;
 import javafx.scene.canvas.GraphicsContext;
 
-public class CharacterEntity
+public class CharacterEntity implements Entity
 {
 	Sprite currentSprite;
 
@@ -94,14 +94,23 @@ public class CharacterEntity
 		if(!spriteList.contains(moveRight)) spriteList.add(moveRight);
 	}
 
-	public void render(GraphicsContext gc, double time)
+	public String toString() {
+		return name;
+	}
+
+
+	@Override
+	public boolean isColliding(Entity b)
+	{
+		return false;
+	}
+
+
+	@Override
+	public void draw(GraphicsContext gc, double time)
 	{
 		if(currentSprite != null)
 			Animator.playAnimation(gc, time, currentSprite);
-	}
-
-	public String toString() {
-		return name;
 	}
 
 }

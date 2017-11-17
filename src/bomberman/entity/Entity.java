@@ -5,11 +5,13 @@
  */
 package bomberman.entity;
 
+import javafx.scene.canvas.GraphicsContext;
+
 /**
  *
  * @author Ashish
  */
 public interface Entity {
     boolean isColliding(Entity b);
-    void draw();
+    void draw(GraphicsContext gc, double time);
 }
