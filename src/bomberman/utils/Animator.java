@@ -23,6 +23,6 @@ public class Animator
 		int newX = leftToRight ? startingPoint + index * actualSize : startingPoint;
 		int newY = leftToRight ? startingPoint : startingPoint + index * actualSize;
 
-		gc.drawImage(img, startingPoint, startingPoint + index * actualSize, width, height, x, y, width * scale, height * scale);
+		gc.drawImage(img, newX, newY, width, height, x, y, width * scale, height * scale);
     }
 }
