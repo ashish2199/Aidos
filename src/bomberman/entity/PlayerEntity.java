@@ -12,14 +12,16 @@ public class PlayerEntity extends CharacterEntity
 
 	private void init()
 	{
-		Sprite moveDown = new Sprite(30, 0.1, 0, 0, 3, GlobalConstants.playerX, GlobalConstants.playerY, GlobalConstants.playerWidth, GlobalConstants.playerHeight, 2, false);
-		Sprite moveLeft = new Sprite(30, 0.1, 30, 0, 3, GlobalConstants.playerX, GlobalConstants.playerY, GlobalConstants.playerWidth, GlobalConstants.playerHeight, 2, false);
-		Sprite moveUp = new Sprite(30, 0.1, 60, 0, 3, GlobalConstants.playerX, GlobalConstants.playerY, GlobalConstants.playerWidth, GlobalConstants.playerHeight, 2, false);
-		Sprite moveRight = new Sprite(30, 0.1, 90, 0, 3, GlobalConstants.playerX, GlobalConstants.playerY, GlobalConstants.playerWidth, GlobalConstants.playerHeight, 2, false);
+		x = GlobalConstants.playerX;
+		y = GlobalConstants.playerY;
+
+		Sprite moveDown = new Sprite(30, 0.1, 0, 0, 3, x, y, GlobalConstants.playerWidth, GlobalConstants.playerHeight, 2, false);
+		Sprite moveLeft = new Sprite(30, 0.1, 30, 0, 3, x, y, GlobalConstants.playerWidth, GlobalConstants.playerHeight, 2, false);
+		Sprite moveUp = new Sprite(30, 0.1, 60, 0, 3, x, y, GlobalConstants.playerWidth, GlobalConstants.playerHeight, 2, false);
+		Sprite moveRight = new Sprite(30, 0.1, 90, 0, 3, x, y, GlobalConstants.playerWidth, GlobalConstants.playerHeight, 2, false);
 
 		setMoveSprites(moveUp, moveDown, moveLeft, moveRight);
 
-		//Change this too see the different sprites in action
 		currentSprite = moveDown;
 	}
 }

@@ -30,4 +30,10 @@ public class Sprite
 		this.scale = scale;
 		this.leftToRight = leftToRight;
 	}
+
+	public void setPosition(int x, int y)
+	{
+		this.x = x;
+		this.y = y;
+	}
 }

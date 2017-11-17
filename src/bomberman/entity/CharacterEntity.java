@@ -16,6 +16,9 @@ public class CharacterEntity
 
 	Direction currentDirection;
 
+	int x = 0;
+	int y = 0;
+
 	String name;
 
 	public CharacterEntity()
@@ -32,23 +35,38 @@ public class CharacterEntity
 		switch(direction)
 		{
 			case UP:
+				y--;
 				setCurrentSprite(moveUp);
 				currentDirection = Direction.UP;
 				break;
 			case DOWN:
 				setCurrentSprite(moveDown);
 				currentDirection = Direction.DOWN;
+				y++;
 				break;
 			case LEFT:
 				setCurrentSprite(moveLeft);
 				currentDirection = Direction.LEFT;
+				x--;
 				break;
 			case RIGHT:
 				setCurrentSprite(moveRight);
 				currentDirection = Direction.RIGHT;
+				x++;
 				break;
 		}
+
+		recalulatePositionForSprites();
 	}
+
+	private void recalulatePositionForSprites()
+	{
+		moveDown.setPosition(x, y);
+		moveUp.setPosition(x, y);
+		moveLeft.setPosition(x, y);
+		moveRight.setPosition(x, y);
+	}
+
 
 	private void setCurrentSprite(Sprite s)
 	{
@@ -63,7 +81,7 @@ public class CharacterEntity
 		if(moveUp != null) this.moveUp = moveUp;
 		if(moveDown != null) this.moveDown = moveDown;
 		if(moveLeft != null) this.moveLeft = moveLeft;
-		if(moveRight != null) this.moveUp = moveRight;
+		if(moveRight != null) this.moveRight = moveRight;
 	}
 
 	public void render(GraphicsContext gc, double time)

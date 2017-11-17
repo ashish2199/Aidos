@@ -1,5 +1,6 @@
 package bomberman;
 
+import bomberman.animations.Direction;
 import bomberman.constants.GlobalConstants;
 import bomberman.entity.PlayerEntity;
 import bomberman.utils.Animator;
@@ -39,6 +40,8 @@ public class Bomberman extends Application {
                 double t = (currentNanoTime - startNanoTime) / 1000000000.0;
                 gc.clearRect(0, 0, 512,512);
                 player.render(gc, t);
+              //Change this too see the different sprites and movement in action
+                player.move(Direction.DOWN);
             }
         }.start();
 
