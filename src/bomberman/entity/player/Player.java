@@ -3,15 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bomberman.entity;
+package bomberman.entity.player;
 
 import bomberman.animations.Direction;
+import bomberman.entity.Entity;
+import bomberman.entity.MovingEntity;
 
 /**
  *
  * @author kdost
  */
-public class Player extends MovingEntity {
+public class Player implements MovingEntity {
     private int positionX;
     private int positionY;
     private int health;
@@ -31,5 +33,40 @@ public class Player extends MovingEntity {
     }
     public void run(int steps, Direction direction) {
         
+    }
+
+    @Override
+    public void move(int steps, Direction direction) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void die() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void reduceHealth(int damage) {
+        if (health - damage <= 0) {
+            this.die();
+        } else {
+            health -= damage;            
+        }
+
+    }
+
+    @Override
+    public boolean isColliding(Entity b) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void draw() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void removeFromScene() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
