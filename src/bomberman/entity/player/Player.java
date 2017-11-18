@@ -9,10 +9,7 @@ import bomberman.animations.Direction;
 import bomberman.entity.Entity;
 import bomberman.entity.MovingEntity;
 
-/**
- *
- * @author kdost
- */
+
 public class Player implements MovingEntity {
     private int positionX;
     private int positionY;
@@ -34,17 +31,18 @@ public class Player implements MovingEntity {
     public void run(int steps, Direction direction) {
         
     }
-
+    public int[] getPosition() {
+        int[] currentPosition = { positionX, positionY };
+        return currentPosition;
+    }
     @Override
     public void move(int steps, Direction direction) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
     @Override
     public void die() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
     @Override
     public void reduceHealth(int damage) {
         if (health - damage <= 0) {
