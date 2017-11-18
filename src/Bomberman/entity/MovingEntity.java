@@ -11,41 +11,12 @@ import bomberman.animations.Direction;
  *
  * @author kdost
  */
-public class MovingEntity implements Entity {
+public interface MovingEntity extends Entity {
     
-    private int health;
     
-    public void move(int steps, Direction direction) {
-        
-    }
-    public void die() {
-        
-    }
-    public void reduceHealth(int damage) {
-        if (health - damage <= 0) {
-            this.die();
-        } else {
-            health -= damage;            
-        }
+    public void move(int steps, Direction direction);
+    public void die();
+    public void reduceHealth(int damage);
+    public int getHealth();
 
-    }
-    public int getHealth() {
-        return health;
-    }
-
-    @Override
-    public boolean isColliding(Entity b) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void draw() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void removeFromScene() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }

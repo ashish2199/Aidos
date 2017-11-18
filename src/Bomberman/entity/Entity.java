@@ -7,8 +7,10 @@ package bomberman.entity;
 
 /**
  *
- * @author kdost
+ * @author Ashish
  */
-public interface StaticEntity extends Entity {
-    
+public interface Entity {
+    boolean isColliding(Entity b);
+    void draw();
+    void removeFromScene();
 }
