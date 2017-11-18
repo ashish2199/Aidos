@@ -12,4 +12,5 @@ package bomberman.entity;
 public interface Entity {
     boolean isColliding(Entity b);
     void draw();
+    void removeFromScene();
 }
