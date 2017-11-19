@@ -10,7 +10,7 @@ public class RectBoundedBox {
     int height;
     Rectangle2D boundary;
     
-    public void RectBoundedBox(int x,int y,int w,int h){
+    public RectBoundedBox(int x,int y,int w,int h){
         this.x=x;
         this.y=y;
         this.width=w;
