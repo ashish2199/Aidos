@@ -24,13 +24,13 @@ public class Sandbox {
 
     public static void init() {
         root = new Group();
-        s = new Scene(root, sceneWidth, sceneHeight);
+        s = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
     }
 
     public static Scene getScene() {
         init();
 
-        Canvas c = new Canvas(canvasWidth, canvasHeight);
+        Canvas c = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
         GraphicsContext gc = c.getGraphicsContext2D();
 
         gc.setStroke(Color.BLUE);

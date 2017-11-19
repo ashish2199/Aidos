@@ -40,8 +40,8 @@ public class PlayerAnimations {
             @Override
             public void handle(ActionEvent t) {
                 gc.setFill(backGroundColor);
-                gc.fillRect(playerX, playerY, playerWidth * playerScale, playerHeight * playerScale);
-                gc.drawImage(img, 0, 0, playerWidth, playerHeight, playerX, playerY, playerWidth * playerScale, playerHeight * playerScale);
+                gc.fillRect(playerX, playerY, PLAYER_WIDTH * PLAYER_SCALE, PLAYER_HEIGHT * PLAYER_SCALE);
+                gc.drawImage(img, 0, 0, PLAYER_WIDTH, PLAYER_HEIGHT, playerX, playerY, PLAYER_WIDTH * PLAYER_SCALE, PLAYER_HEIGHT * PLAYER_SCALE);
             }
         });
         timeline1.getKeyFrames().addAll(kf1);
@@ -53,8 +53,8 @@ public class PlayerAnimations {
             @Override
             public void handle(ActionEvent t) {
                 gc.setFill(backGroundColor);
-                gc.fillRect(playerX, playerY, playerWidth * playerScale, playerHeight * playerScale);
-                gc.drawImage(img, 0, 30, playerWidth, playerHeight, playerX, playerY, playerWidth * playerScale, playerHeight * playerScale);
+                gc.fillRect(playerX, playerY, PLAYER_WIDTH * PLAYER_SCALE, PLAYER_HEIGHT * PLAYER_SCALE);
+                gc.drawImage(img, 0, 30, PLAYER_WIDTH, PLAYER_HEIGHT, playerX, playerY, PLAYER_WIDTH * PLAYER_SCALE, PLAYER_HEIGHT * PLAYER_SCALE);
             }
         });
         timeline2.getKeyFrames().addAll(kf2);
@@ -66,8 +66,8 @@ public class PlayerAnimations {
             @Override
             public void handle(ActionEvent t) {
                 gc.setFill(backGroundColor);
-                gc.fillRect(playerX, playerY, playerWidth * playerScale, playerHeight * playerScale);
-                gc.drawImage(img, 0, 60, playerWidth, playerHeight, playerX, playerY, playerWidth * playerScale, playerHeight * playerScale);
+                gc.fillRect(playerX, playerY, PLAYER_WIDTH * PLAYER_SCALE, PLAYER_HEIGHT * PLAYER_SCALE);
+                gc.drawImage(img, 0, 60, PLAYER_WIDTH, PLAYER_HEIGHT, playerX, playerY, PLAYER_WIDTH * PLAYER_SCALE, PLAYER_HEIGHT * PLAYER_SCALE);
             }
         });
         timeline3.getKeyFrames().addAll(kf3);
