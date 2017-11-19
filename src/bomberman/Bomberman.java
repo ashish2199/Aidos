@@ -13,7 +13,7 @@ public class Bomberman extends Application {
         primaryStage.setTitle(GlobalConstants.GAME_NAME + GlobalConstants.GAME_VERSION);
 
         Scene s = Sandbox.getScene();
-
+        primaryStage.setScene(s);
         primaryStage.show();
     }
 

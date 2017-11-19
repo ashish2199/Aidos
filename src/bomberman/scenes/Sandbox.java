@@ -36,6 +36,7 @@ public class Sandbox {
         root = new Group();
         s = new Scene(root, sceneWidth, sceneHeight);
         c = new Canvas(canvasWidth, canvasHeight);
+        root.getChildren().add(c);
         gc = c.getGraphicsContext2D();
     }
 
@@ -65,7 +66,7 @@ public class Sandbox {
                 player.move(Direction.DOWN);
             }
         }.start();
-        root.getChildren().add(c);
+        
         return s;
     }
 

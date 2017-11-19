@@ -36,7 +36,9 @@ public class Renderer
 
 		int newX = reversePlay ? startingPointX + index * actualSize : startingPointX;
 		int newY = reversePlay ? startingPointY : startingPointY + index * actualSize;
-
+        
+                System.out.println(index+" "+newX+" "+newY+" "+width+" "+height+" "+x+" "+y+" "+width * scale+" "+height * scale);
+    
 		gc.drawImage(img, newX, newY, width, height, x, y, width * scale, height * scale);
     }
 }
