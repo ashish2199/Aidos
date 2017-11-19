@@ -3,11 +3,11 @@ package bomberman.entity;
 import java.util.Vector;
 
 import bomberman.animations.Direction;
-import bomberman.utils.Animator;
-import bomberman.utils.Sprite;
+import bomberman.Renderer;
+import bomberman.animations.Sprite;
 import javafx.scene.canvas.GraphicsContext;
 
-public class CharacterEntity implements Entity
+public class CharacterEntity implements MovingEntity
 {
 	/**
 	 *
@@ -111,10 +111,35 @@ public class CharacterEntity implements Entity
 
 
 	@Override
-	public void draw(GraphicsContext gc, double time)
-	{
+	public void draw()
+	{       
 		if(currentSprite != null)
-			Animator.playAnimation(gc, time, currentSprite);
+			Renderer.playAnimation(currentSprite);
 	}
+
+    @Override
+    public void removeFromScene() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void move(int steps, Direction direction) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void die() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void reduceHealth(int damage) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getHealth() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }

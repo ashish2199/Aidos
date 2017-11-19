@@ -5,6 +5,8 @@
  */
 package bomberman.entity;
 
+import javafx.scene.canvas.GraphicsContext;
+
 /**
  *
  * @author Ashish

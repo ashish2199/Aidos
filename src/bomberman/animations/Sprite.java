@@ -1,4 +1,4 @@
-package bomberman.utils;
+package bomberman.animations;
 
 public class Sprite
 {
@@ -6,17 +6,17 @@ public class Sprite
 	 *
 	 * @author CoreyHendrey
 	 */
-	double playSpeed;
-	int spriteLocationOnSheetX;
-	int spriteLocationOnSheetY;
-	int numberOfFrames;
-	int x;
-	int y;
-	int width;
-	int height;
-	int scale;
-	int actualSize;
-	boolean leftToRight;
+	public double playSpeed;
+	public int spriteLocationOnSheetX;
+	public int spriteLocationOnSheetY;
+	public int numberOfFrames;
+	public int x;
+	public int y;
+	public int width;
+	public int height;
+	public int scale;
+	public int actualSize;
+	public boolean resersePlay;
 
 	public Sprite(int actualSize, double playSpeed, int spriteLocationOnSheetX, int spriteLocationOnSheetY, int numberOfFrames, int x, int y, int width, int height,
 			int scale, boolean leftToRight)
@@ -32,7 +32,7 @@ public class Sprite
 		this.width = width;
 		this.height = height;
 		this.scale = scale;
-		this.leftToRight = leftToRight;
+		this.resersePlay = leftToRight;
 	}
 
 	public void setPosition(int x, int y)
