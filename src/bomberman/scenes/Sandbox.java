@@ -11,7 +11,7 @@ import static bomberman.constants.GlobalConstants.canvasHeight;
 import static bomberman.constants.GlobalConstants.canvasWidth;
 import static bomberman.constants.GlobalConstants.sceneHeight;
 import static bomberman.constants.GlobalConstants.sceneWidth;
-import bomberman.entity.PlayerEntity;
+import bomberman.entity.Player;
 import javafx.animation.AnimationTimer;
 
 import javafx.scene.Group;
@@ -55,7 +55,7 @@ public class Sandbox {
 
         Renderer.init();
 
-        PlayerEntity player = new PlayerEntity();
+        Player player = new Player();
 
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
