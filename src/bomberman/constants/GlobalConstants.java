@@ -22,7 +22,7 @@ public class GlobalConstants {
     public static Color backGroundColor = Color.WHITE;
     public static int playerX = 200;
     public static int playerY = 200;
-    public static int playerWidth = 17;
+    public static int playerWidth = 18;
     public static int playerHeight = 21;
     public static int playerScale = 2;
 
