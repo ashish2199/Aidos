@@ -5,17 +5,10 @@
  */
 package bomberman.animations;
 
-import bomberman.constants.GlobalConstants;
-import bomberman.Renderer;
-import javafx.scene.canvas.GraphicsContext;
-
 /**
  * @author Ashish
  */
 public class PlayerAnimations {
 
-    public static void walkDownAnimation(GraphicsContext gc, double time) {
-    	Renderer.playAnimation(gc, time, 30, 0, 3, GlobalConstants.playerX, GlobalConstants.playerY, GlobalConstants.playerWidth, GlobalConstants.playerHeight, GlobalConstants.playerScale, false);
-    }
-
+    
 }

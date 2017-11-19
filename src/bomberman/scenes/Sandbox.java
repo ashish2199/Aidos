@@ -11,7 +11,7 @@ import static bomberman.constants.GlobalConstants.canvasHeight;
 import static bomberman.constants.GlobalConstants.canvasWidth;
 import static bomberman.constants.GlobalConstants.sceneHeight;
 import static bomberman.constants.GlobalConstants.sceneWidth;
-import bomberman.entity.Player;
+import bomberman.entity.player.Player;
 import javafx.animation.AnimationTimer;
 
 import javafx.scene.Group;
