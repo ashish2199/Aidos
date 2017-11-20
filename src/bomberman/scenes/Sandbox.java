@@ -5,15 +5,13 @@
  */
 package bomberman.scenes;
 
-import bomberman.Renderer;
-import bomberman.animations.Direction;
 import static bomberman.constants.GlobalConstants.canvasHeight;
 import static bomberman.constants.GlobalConstants.canvasWidth;
 import static bomberman.constants.GlobalConstants.sceneHeight;
 import static bomberman.constants.GlobalConstants.sceneWidth;
-import bomberman.entity.player.Player;
-import javafx.animation.AnimationTimer;
 
+import bomberman.GameLoop;
+import bomberman.Renderer;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -30,7 +28,7 @@ public class Sandbox {
     static Group root;
     static Canvas c;
     static GraphicsContext gc;
-    static double tickDuration;
+
 
     public static void init() {
         root = new Group();
@@ -40,9 +38,7 @@ public class Sandbox {
         gc = c.getGraphicsContext2D();
     }
 
-    public static double getTickDuration() {
-        return tickDuration;
-    }
+
 
     public static Scene getScene() {
         init();
@@ -51,22 +47,10 @@ public class Sandbox {
         gc.setLineWidth(2);
         gc.setFill(Color.BLUE);
 
-        final long startNanoTime = System.nanoTime();
-
         Renderer.init();
 
-        Player player = new Player();
+        GameLoop.start(gc);
 
-        new AnimationTimer() {
-            public void handle(long currentNanoTime) {
-                tickDuration = (currentNanoTime - startNanoTime) / 1000000000.0;
-                gc.clearRect(0, 0, 512, 512);
-                player.draw();
-                //Change this too see the different sprites and movement in action
-                player.move(Direction.DOWN);
-            }
-        }.start();
-        
         return s;
     }
 
