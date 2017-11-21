@@ -5,10 +5,10 @@
  */
 package bomberman.scenes;
 
-import static bomberman.constants.GlobalConstants.canvasHeight;
-import static bomberman.constants.GlobalConstants.canvasWidth;
-import static bomberman.constants.GlobalConstants.sceneHeight;
-import static bomberman.constants.GlobalConstants.sceneWidth;
+import static bomberman.constants.GlobalConstants.CANVAS_HEIGHT;
+import static bomberman.constants.GlobalConstants.CANVAS_WIDTH;
+import static bomberman.constants.GlobalConstants.SCENE_HEIGHT;
+import static bomberman.constants.GlobalConstants.SCENE_WIDTH;
 
 import bomberman.GameLoop;
 import bomberman.Renderer;
@@ -36,8 +36,8 @@ public class Sandbox {
     
     private static void init() {
         root = new Group();
-        s = new Scene(root, sceneWidth, sceneHeight);
-        c = new Canvas(canvasWidth, canvasHeight);
+        s = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
+        c = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
         root.getChildren().add(c);
         gc = c.getGraphicsContext2D();
         gc.setStroke(Color.BLUE);
