@@ -14,8 +14,8 @@ public class Sprite
 	public int spriteLocationOnSheetX;
 	public int spriteLocationOnSheetY;
 	public int numberOfFrames;
-	public int width;
-	public int height;
+	public double width;
+	public double height;
 	public int scale;
 	public int actualSize;
 	public boolean resersePlay;
@@ -23,7 +23,7 @@ public class Sprite
         public Image[] spriteImages;
         public boolean hasValidSpriteImages;
         
-	public Sprite(int actualSize, double playSpeed, int spriteLocationOnSheetX, int spriteLocationOnSheetY, int numberOfFrames, int width, int height,
+	public Sprite(int actualSize, double playSpeed, int spriteLocationOnSheetX, int spriteLocationOnSheetY, int numberOfFrames, double width, double height,
 			int scale, boolean leftToRight)
 	{
 		super();
@@ -51,6 +51,7 @@ public class Sprite
                 
                 spriteImages[i]=ImageUtils.crop(spriteSheet, x, y, w, h);
             }
+            this.numberOfFrames=specifications.length;
             hasValidSpriteImages=true;
         }
 }

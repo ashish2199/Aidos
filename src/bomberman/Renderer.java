@@ -27,47 +27,45 @@ public class Renderer {
      * width and height.
      *
      */
-
     static Image img;
 
     public static void init() {
         img = ImageUtils.loadImage("src/Resources/img/sprites.png");
     }
 
-    public static void playAnimation(Sprite sprite,Player p) {
+    public static void playAnimation(Sprite sprite, Player p) {
         double time = GameLoop.getTickDuration();
         GraphicsContext gc = Sandbox.getGraphicsContext();
-        if(sprite.hasValidSpriteImages){
-            playAnimation(sprite.spriteImages,sprite.playSpeed,p.positionX,p.positionY,sprite.width,sprite.width);
-        }
-        else{
-            playAnimation(gc, time, sprite.actualSize, sprite.spriteLocationOnSheetX, sprite.spriteLocationOnSheetY, sprite.numberOfFrames, p.positionX,p.positionY, sprite.width, sprite.height, sprite.scale, sprite.resersePlay, sprite.playSpeed);
+        if (sprite.hasValidSpriteImages) {
+            playAnimation(sprite.spriteImages, sprite.playSpeed, p.positionX, p.positionY, sprite.width, sprite.width);
+        } else {
+            playAnimation(gc, time, sprite.actualSize, sprite.spriteLocationOnSheetX, sprite.spriteLocationOnSheetY, sprite.numberOfFrames, p.positionX, p.positionY, sprite.width, sprite.height, sprite.scale, sprite.resersePlay, sprite.playSpeed);
         }
     }
 
-    public static void playAnimation(Image[] imgs,double speed,int x,int y,int w, int h){
+    public static void playAnimation(Image[] imgs, double speed, int x, int y, double w, double h) {
         double time = GameLoop.getTickDuration();
         GraphicsContext gc = Sandbox.getGraphicsContext();
         int numberOfFrames = imgs.length;
         int index = findCurrentFrame(time, numberOfFrames, speed);
-        gc.drawImage(img,x,y,w,h);
+        gc.drawImage(img, x, y, w, h);
     }
-    
-    public static void playAnimation(GraphicsContext gc, double time, int actualSize, int startingPointX, int startingPointY, int numberOfFrames, int x, int y, int width, int height, double scale, boolean reversePlay, double playSpeed) {
-        
+
+    public static void playAnimation(GraphicsContext gc, double time, int actualSize, int startingPointX, int startingPointY, int numberOfFrames, int x, int y, double width, double height, double scale, boolean reversePlay, double playSpeed) {
+
         double speed = playSpeed >= 0 ? playSpeed : 0.3;
-        
+
         // index reporesents the index of image to be drawn from the set of images representing frames of animation
         int index = findCurrentFrame(time, numberOfFrames, speed);
-        
+
         // newX represents the X coardinate of image in the spritesheet image to be drawn on screen
         int newSpriteSheetX = reversePlay ? startingPointX + index * actualSize : startingPointX;
         // newY represents the X coardinate of image in the spritesheet image to be drawn on screen
         int newSpriteSheetY = reversePlay ? startingPointY : startingPointY + index * actualSize;
 
-        System.out.println("index="+index + " newSpriteSheetX=" + newSpriteSheetX + " newSpriteSheetY=" + newSpriteSheetY + " width=" + width + " height=" + height + " x=" + x + " y=" + y + " width=" + width * scale + " height=" + height * scale);
-                    //img,             sx,              sy,     w,     h,  dx, dy,        dw,             dh
-        gc.drawImage(img, newSpriteSheetX, newSpriteSheetY, width, height,  x,  y, width * scale, height * scale);
+        System.out.println("index=" + index + " newSpriteSheetX=" + newSpriteSheetX + " newSpriteSheetY=" + newSpriteSheetY + " width=" + width + " height=" + height + " x=" + x + " y=" + y + " width=" + width * scale + " height=" + height * scale);
+        //img,             sx,              sy,     w,     h,  dx, dy,        dw,             dh
+        gc.drawImage(img, newSpriteSheetX, newSpriteSheetY, width, height, x, y, width * scale, height * scale);
     }
 
     private static int findCurrentFrame(double time, int totalFrames, double speed) {
