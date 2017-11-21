@@ -28,29 +28,32 @@ public class Sandbox {
     static Group root;
     static Canvas c;
     static GraphicsContext gc;
+    private static boolean sceneStarted;
 
-
-    public static void init() {
+    static{
+        sceneStarted=false;
+    }
+    
+    private static void init() {
         root = new Group();
         s = new Scene(root, sceneWidth, sceneHeight);
         c = new Canvas(canvasWidth, canvasHeight);
         root.getChildren().add(c);
         gc = c.getGraphicsContext2D();
-    }
-
-
-
-    public static Scene getScene() {
-        init();
-
         gc.setStroke(Color.BLUE);
         gc.setLineWidth(2);
         gc.setFill(Color.BLUE);
-
         Renderer.init();
-
         GameLoop.start(gc);
-
+    }
+    
+    public static void setupScene(){
+        if(!sceneStarted){
+            init();
+            sceneStarted=true;
+        }
+    }
+    public static Scene getScene() {
         return s;
     }
 

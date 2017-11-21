@@ -11,7 +11,7 @@ public class Bomberman extends Application {
     @Override
     public void start(Stage primaryStage) {
         primaryStage.setTitle(GlobalConstants.GAME_NAME + GlobalConstants.GAME_VERSION);
-
+        Sandbox.setupScene();
         Scene s = Sandbox.getScene();
         primaryStage.setScene(s);
         primaryStage.show();
