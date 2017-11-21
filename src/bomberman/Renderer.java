@@ -31,7 +31,7 @@ public class Renderer
     }
 
     public static void playAnimation(Sprite sprite) {
-        double time =  Sandbox.getTickDuration();
+        double time =  GameLoop.getTickDuration();
         GraphicsContext gc = Sandbox.getGraphicsContext();
         playAnimation(gc, time, sprite.actualSize, sprite.spriteLocationOnSheetX, sprite.spriteLocationOnSheetY, sprite.numberOfFrames, sprite.x, sprite.y, sprite.width, sprite.height, sprite.scale, sprite.resersePlay, sprite.playSpeed);
     }
