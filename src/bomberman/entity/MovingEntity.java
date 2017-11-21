@@ -12,11 +12,8 @@ import bomberman.animations.Direction;
  * @author kdost
  */
 public interface MovingEntity extends Entity {
-    
-    
+
+
     public void move(int steps, Direction direction);
-    public void die();
-    public void reduceHealth(int damage);
-    public int getHealth();
 
 }

@@ -1,22 +1,24 @@
 package bomberman.entity.player;
 
-import bomberman.Renderer;
-import bomberman.animations.Direction;
-import bomberman.constants.GlobalConstants;
-import bomberman.animations.Sprite;
-import bomberman.entity.Entity;
-import bomberman.entity.MovingEntity;
-import bomberman.entity.boundedbox.RectBoundedBox;
 import java.util.Vector;
 
-public class Player implements MovingEntity {
+import bomberman.Renderer;
+import bomberman.animations.Direction;
+import bomberman.animations.Sprite;
+import bomberman.constants.GlobalConstants;
+import bomberman.entity.Entity;
+import bomberman.entity.KillableEntity;
+import bomberman.entity.MovingEntity;
+import bomberman.entity.boundedbox.RectBoundedBox;
+
+public class Player implements MovingEntity, KillableEntity {
 
     private int positionX;
     private int positionY;
     private int health;
     private boolean isAlive;
     RectBoundedBox playerBoundary;
-    
+
     Sprite currentSprite;
 
     Sprite moveRight;
@@ -172,7 +174,7 @@ public class Player implements MovingEntity {
     @Override
     public void reduceHealth(int damage) {
         if (health - damage <= 0) {
-            this.die();
+            die();
         } else {
             health -= damage;
         }
