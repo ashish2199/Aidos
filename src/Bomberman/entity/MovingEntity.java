@@ -5,7 +5,7 @@
  */
 package bomberman.entity;
 
-import bomberman.animations.Direction;
+import bomberman.constants.Direction;
 
 /**
  *

@@ -1,7 +1,7 @@
 package bomberman.entity.player;
 
 import bomberman.Renderer;
-import bomberman.animations.Direction;
+import bomberman.constants.Direction;
 import bomberman.animations.PlayerAnimations;
 import bomberman.animations.Sprite;
 import bomberman.constants.GlobalConstants;
@@ -43,7 +43,7 @@ public class Player implements MovingEntity, KillableEntity {
         name = "Player";
         playerBoundary = new RectBoundedBox(positionX, positionY, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
 
-    	playerAnimations = new PlayerAnimations();
+    	playerAnimations = new PlayerAnimations(this);
 
         positionX = GlobalConstants.PLAYER_X;
         positionY = GlobalConstants.PLAYER_Y;
@@ -83,8 +83,7 @@ public class Player implements MovingEntity, KillableEntity {
 
     @Override
     public void draw() {
-    	currentSprite.setPosition(positionX, positionY);
-        if (currentSprite != null) {
+    	if (currentSprite != null) {
             Renderer.playAnimation(currentSprite);
         }
     }
@@ -132,5 +131,15 @@ public class Player implements MovingEntity, KillableEntity {
     @Override
     public void removeFromScene() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getPositionX() {
+        return this.positionX;
+    }
+
+    @Override
+    public int getPositionY() {
+        return this.positionY;
     }
 }

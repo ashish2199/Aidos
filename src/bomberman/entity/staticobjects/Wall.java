@@ -14,6 +14,8 @@ import javafx.scene.paint.Color;
  * @author kdost
  */
 public class Wall implements StaticEntity {
+    public int positionX = 0;
+    public int positionY = 0;
     private int height;
     private int width;
     private int health;
@@ -39,6 +41,16 @@ public class Wall implements StaticEntity {
     @Override
     public void removeFromScene() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getPositionX() {
+        return this.positionX;
+    }
+
+    @Override
+    public int getPositionY() {
+        return this.positionY;
     }
     
 }

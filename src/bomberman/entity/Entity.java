@@ -13,4 +13,6 @@ public interface Entity {
     boolean isColliding(Entity b);
     void draw();
     void removeFromScene();
+    int getPositionX();
+    int getPositionY();
 }
