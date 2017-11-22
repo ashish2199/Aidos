@@ -12,6 +12,8 @@ import static bomberman.constants.GlobalConstants.sceneWidth;
 
 import bomberman.GameLoop;
 import bomberman.Renderer;
+import bomberman.entity.player.Player;
+import bomberman.gamecontroller.GameVariables;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -33,7 +35,7 @@ public class Sandbox {
     static{
         sceneStarted=false;
     }
-    
+
     private static void init() {
         root = new Group();
         s = new Scene(root, sceneWidth, sceneHeight);
@@ -45,8 +47,17 @@ public class Sandbox {
         gc.setFill(Color.BLUE);
         Renderer.init();
         GameLoop.start(gc);
+
+        //Initialize Objects
+        Player p = new Player();
+        Player p2 = new Player();
+        p2.positionX = 300;
+        p2.positionY = 100;
+
+        GameVariables.addEntityToGame(p);
+        GameVariables.addEntityToGame(p2);
     }
-    
+
     public static void setupScene(){
         if(!sceneStarted){
             init();
