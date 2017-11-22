@@ -2,28 +2,23 @@ package bomberman.entity.player;
 
 import bomberman.Renderer;
 import bomberman.animations.Direction;
-import bomberman.constants.GlobalConstants;
+import bomberman.animations.PlayerAnimations;
 import bomberman.animations.Sprite;
+import bomberman.constants.GlobalConstants;
 import bomberman.entity.Entity;
+import bomberman.entity.KillableEntity;
 import bomberman.entity.MovingEntity;
 import bomberman.entity.boundedbox.RectBoundedBox;
-import java.util.ArrayList;
-import java.util.List;
 
-public class Player implements MovingEntity {
+
+public class Player implements MovingEntity, KillableEntity {
 
     private int health;
     private boolean isAlive;
     RectBoundedBox playerBoundary;
 
     Sprite currentSprite;
-
-    Sprite moveRight;
-    Sprite moveLeft;
-    Sprite moveUp;
-    Sprite moveDown;
-
-    List<Sprite> spriteList = new ArrayList<Sprite>();
+    PlayerAnimations playerAnimations;
 
     Direction currentDirection;
 
@@ -34,8 +29,6 @@ public class Player implements MovingEntity {
 
     public Player() {
         init();
-        name = "Unnamed Entity";
-        playerBoundary = new RectBoundedBox(positionX, positionY, GlobalConstants.playerWidth, GlobalConstants.playerHeight);
     }
 
     public Player(int posX, int posY) {
@@ -47,17 +40,15 @@ public class Player implements MovingEntity {
     }
 
     private void init() {
+        name = "Player";
+        playerBoundary = new RectBoundedBox(positionX, positionY, GlobalConstants.playerWidth, GlobalConstants.playerHeight);
+
+    	playerAnimations = new PlayerAnimations();
+
         positionX = GlobalConstants.playerX;
         positionY = GlobalConstants.playerY;
 
-        Sprite moveDown = new Sprite(30, 0.1, 0, 0, 3, GlobalConstants.playerWidth, GlobalConstants.playerHeight, 2, false);
-        Sprite moveLeft = new Sprite(30, 0.1, 30, 0, 3, GlobalConstants.playerWidth, GlobalConstants.playerHeight, 2, false);
-        Sprite moveUp = new Sprite(30, 0.1, 60, 0, 3, GlobalConstants.playerWidth-1.5, GlobalConstants.playerHeight, 2, false);
-        Sprite moveRight = new Sprite(30, 0.1, 90, 0, 3, GlobalConstants.playerWidth, GlobalConstants.playerHeight, 2, false);
-
-        setMoveSprites(moveUp, moveDown, moveLeft, moveRight);
-
-        currentSprite = moveDown;
+        currentSprite = playerAnimations.getMoveUpSprite();
     }
 
     public void move(Direction direction) {
@@ -69,34 +60,6 @@ public class Player implements MovingEntity {
             currentSprite = s;
         } else {
             System.out.println("Sprite missing!");
-        }
-    }
-
-    public void setMoveSprites(Sprite moveUp, Sprite moveDown, Sprite moveLeft, Sprite moveRight) {
-        if (moveUp != null) {
-            this.moveUp = moveUp;
-        }
-        if (moveDown != null) {
-            this.moveDown = moveDown;
-        }
-        if (moveLeft != null) {
-            this.moveLeft = moveLeft;
-        }
-        if (moveRight != null) {
-            this.moveRight = moveRight;
-        }
-
-        if (!spriteList.contains(moveUp)) {
-            spriteList.add(moveUp);
-        }
-        if (!spriteList.contains(moveLeft)) {
-            spriteList.add(moveLeft);
-        }
-        if (!spriteList.contains(moveDown)) {
-            spriteList.add(moveDown);
-        }
-        if (!spriteList.contains(moveRight)) {
-            spriteList.add(moveRight);
         }
     }
 
@@ -120,8 +83,9 @@ public class Player implements MovingEntity {
 
     @Override
     public void draw() {
+    	currentSprite.setPosition(positionX, positionY);
         if (currentSprite != null) {
-            Renderer.playAnimation(currentSprite, this);
+            Renderer.playAnimation(currentSprite);
         }
     }
 
@@ -130,21 +94,21 @@ public class Player implements MovingEntity {
         switch (direction) {
             case UP:
                 positionY -= steps;
-                setCurrentSprite(moveUp);
+                setCurrentSprite(playerAnimations.getMoveUpSprite());
                 currentDirection = Direction.UP;
                 break;
             case DOWN:
-                setCurrentSprite(moveDown);
+                setCurrentSprite(playerAnimations.getMoveDownSprite());
                 currentDirection = Direction.DOWN;
                 positionY += steps;
                 break;
             case LEFT:
-                setCurrentSprite(moveLeft);
+                setCurrentSprite(playerAnimations.getMoveLeftSprite());
                 currentDirection = Direction.LEFT;
                 positionX -= steps;
                 break;
             case RIGHT:
-                setCurrentSprite(moveRight);
+                setCurrentSprite(playerAnimations.getMoveRightSprite());
                 currentDirection = Direction.RIGHT;
                 positionX += steps;
                 break;
@@ -159,7 +123,7 @@ public class Player implements MovingEntity {
     @Override
     public void reduceHealth(int damage) {
         if (health - damage <= 0) {
-            this.die();
+            die();
         } else {
             health -= damage;
         }
