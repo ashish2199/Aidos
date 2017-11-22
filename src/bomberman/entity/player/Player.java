@@ -10,8 +10,6 @@ import bomberman.entity.Entity;
 import bomberman.entity.KillableEntity;
 import bomberman.entity.MovingEntity;
 import bomberman.entity.boundedbox.RectBoundedBox;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class Player implements MovingEntity, KillableEntity {
@@ -26,8 +24,6 @@ public class Player implements MovingEntity, KillableEntity {
     Sprite moveLeft;
     Sprite moveUp;
     Sprite moveDown;
-
-    List<Sprite> spriteList = new ArrayList<Sprite>();
 
     Direction currentDirection;
 
@@ -54,10 +50,10 @@ public class Player implements MovingEntity, KillableEntity {
         positionX = GlobalConstants.playerX;
         positionY = GlobalConstants.playerY;
 
-        Sprite moveDown = new Sprite(30, 0.1, 0, 0, 3, GlobalConstants.playerWidth, GlobalConstants.playerHeight, 2, false);
-        Sprite moveLeft = new Sprite(30, 0.1, 30, 0, 3, GlobalConstants.playerWidth, GlobalConstants.playerHeight, 2, false);
-        Sprite moveUp = new Sprite(30, 0.1, 60, 0, 3, GlobalConstants.playerWidth-1.5, GlobalConstants.playerHeight, 2, false);
-        Sprite moveRight = new Sprite(30, 0.1, 90, 0, 3, GlobalConstants.playerWidth, GlobalConstants.playerHeight, 2, false);
+        Sprite moveDown = new Sprite(30, 0.1, positionX, positionY, 3, 0, 0, GlobalConstants.playerWidth, GlobalConstants.playerHeight, 2, false);
+        Sprite moveLeft = new Sprite(30, 0.1, positionX, positionY, 30, 0, 3, GlobalConstants.playerWidth, GlobalConstants.playerHeight, 2, false);
+        Sprite moveUp = new Sprite(30, 0.1, positionX, positionY, 60, 0, 3, GlobalConstants.playerWidth-1.5, GlobalConstants.playerHeight, 2, false);
+        Sprite moveRight = new Sprite(30, 0.1, positionX, positionY, 90, 0, 3, GlobalConstants.playerWidth, GlobalConstants.playerHeight, 2, false);
 
         setMoveSprites(moveUp, moveDown, moveLeft, moveRight);
 
@@ -90,18 +86,6 @@ public class Player implements MovingEntity, KillableEntity {
             this.moveRight = moveRight;
         }
 
-        if (!spriteList.contains(moveUp)) {
-            spriteList.add(moveUp);
-        }
-        if (!spriteList.contains(moveLeft)) {
-            spriteList.add(moveLeft);
-        }
-        if (!spriteList.contains(moveDown)) {
-            spriteList.add(moveDown);
-        }
-        if (!spriteList.contains(moveRight)) {
-            spriteList.add(moveRight);
-        }
     }
 
     public int getHealth() {
@@ -124,8 +108,9 @@ public class Player implements MovingEntity, KillableEntity {
 
     @Override
     public void draw() {
+    	currentSprite.setPosition(positionX, positionY);
         if (currentSprite != null) {
-            Renderer.playAnimation(currentSprite, this);
+            Renderer.playAnimation(currentSprite);
         }
     }
 

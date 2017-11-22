@@ -19,11 +19,13 @@ public class Sprite
 	public int scale;
 	public int actualSize;
 	public boolean resersePlay;
-        
+	private int positionX;
+	private int positionY;
+
         public Image[] spriteImages;
         public boolean hasValidSpriteImages;
-        
-	public Sprite(int actualSize, double playSpeed, int spriteLocationOnSheetX, int spriteLocationOnSheetY, int numberOfFrames, double width, double height,
+
+	public Sprite(int actualSize, double playSpeed, int positionX, int positionY, int spriteLocationOnSheetX, int spriteLocationOnSheetY, int numberOfFrames, double width, double height,
 			int scale, boolean leftToRight)
 	{
 		super();
@@ -35,23 +37,38 @@ public class Sprite
 		this.width = width;
 		this.height = height;
 		this.scale = scale;
-		this.resersePlay = leftToRight;
+		this.positionX = positionX;
+		this.positionY = positionY;
+		resersePlay = leftToRight;
 	}
-        
-        public Sprite(Image spriteSheet,Rectangle[] specifications){
-            spriteImages=new Image[specifications.length];
-            for (int i = 0; i < specifications.length; i++) {
-                Rectangle specification = specifications[i];
-                int x=(int)specification.getX();
-                int y=(int)specification.getY();
-                int w=(int)specification.getWidth();
-                int h=(int)specification.getHeight();
-                
-                //To DO Check dimensions provided are not going out of spritesheet dimensions\
-                
-                spriteImages[i]=ImageUtils.crop(spriteSheet, x, y, w, h);
-            }
-            this.numberOfFrames=specifications.length;
-            hasValidSpriteImages=true;
+
+	public int getXPosition() {
+		return positionX;
+	}
+
+	public int getYPosition() {
+		return positionY;
+	}
+
+	public void setPosition(int x, int y) {
+		positionX = x;
+		positionY = y;
+	}
+
+    public Sprite(Image spriteSheet,Rectangle[] specifications){
+        spriteImages=new Image[specifications.length];
+        for (int i = 0; i < specifications.length; i++) {
+            Rectangle specification = specifications[i];
+            int x=(int)specification.getX();
+            int y=(int)specification.getY();
+            int w=(int)specification.getWidth();
+            int h=(int)specification.getHeight();
+
+            //To DO Check dimensions provided are not going out of spritesheet dimensions\
+
+            spriteImages[i]=ImageUtils.crop(spriteSheet, x, y, w, h);
         }
+        numberOfFrames=specifications.length;
+        hasValidSpriteImages=true;
+    }
 }
