@@ -43,12 +43,12 @@ public class Player implements MovingEntity, KillableEntity {
         name = "Player";
         playerBoundary = new RectBoundedBox(positionX, positionY, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
 
-    	playerAnimations = new PlayerAnimations(this);
+        playerAnimations = new PlayerAnimations(this);
 
         positionX = GlobalConstants.PLAYER_X;
         positionY = GlobalConstants.PLAYER_Y;
 
-        currentSprite = playerAnimations.getMoveUpSprite();
+        currentSprite = playerAnimations.getPlayerIdleSprite();
     }
 
     public void move(Direction direction) {
@@ -83,34 +83,41 @@ public class Player implements MovingEntity, KillableEntity {
 
     @Override
     public void draw() {
-    	if (currentSprite != null) {
+        if (currentSprite != null) {
             Renderer.playAnimation(currentSprite);
         }
     }
 
     @Override
     public void move(int steps, Direction direction) {
-        switch (direction) {
-            case UP:
-                positionY -= steps;
-                setCurrentSprite(playerAnimations.getMoveUpSprite());
-                currentDirection = Direction.UP;
-                break;
-            case DOWN:
-                setCurrentSprite(playerAnimations.getMoveDownSprite());
-                currentDirection = Direction.DOWN;
-                positionY += steps;
-                break;
-            case LEFT:
-                setCurrentSprite(playerAnimations.getMoveLeftSprite());
-                currentDirection = Direction.LEFT;
-                positionX -= steps;
-                break;
-            case RIGHT:
-                setCurrentSprite(playerAnimations.getMoveRightSprite());
-                currentDirection = Direction.RIGHT;
-                positionX += steps;
-                break;
+        if (steps == 0) {
+            setCurrentSprite(playerAnimations.getPlayerIdleSprite());
+            return;
+        } else {
+            switch (direction) {
+                case UP:
+                    positionY -= steps;
+                    setCurrentSprite(playerAnimations.getMoveUpSprite());
+                    currentDirection = Direction.UP;
+                    break;
+                case DOWN:
+                    setCurrentSprite(playerAnimations.getMoveDownSprite());
+                    currentDirection = Direction.DOWN;
+                    positionY += steps;
+                    break;
+                case LEFT:
+                    setCurrentSprite(playerAnimations.getMoveLeftSprite());
+                    currentDirection = Direction.LEFT;
+                    positionX -= steps;
+                    break;
+                case RIGHT:
+                    setCurrentSprite(playerAnimations.getMoveRightSprite());
+                    currentDirection = Direction.RIGHT;
+                    positionX += steps;
+                    break;
+                default:
+                    setCurrentSprite(playerAnimations.getPlayerIdleSprite());
+            }
         }
     }
 
