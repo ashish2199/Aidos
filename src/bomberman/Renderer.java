@@ -1,7 +1,6 @@
 package bomberman;
 
 import bomberman.animations.Sprite;
-import bomberman.entity.player.Player;
 import bomberman.scenes.Sandbox;
 import bomberman.utils.ImageUtils;
 import javafx.scene.canvas.GraphicsContext;
@@ -33,13 +32,13 @@ public class Renderer {
         img = ImageUtils.loadImage("src/Resources/img/sprites.png");
     }
 
-    public static void playAnimation(Sprite sprite, Player p) {
+    public static void playAnimation(Sprite sprite) {
         double time = GameLoop.getTickDuration();
         GraphicsContext gc = Sandbox.getGraphicsContext();
         if (sprite.hasValidSpriteImages) {
-            playAnimation(sprite.spriteImages, sprite.playSpeed, p.positionX, p.positionY, sprite.width, sprite.width);
+            playAnimation(sprite.spriteImages, sprite.playSpeed, sprite.getXPosition(), sprite.getYPosition(), sprite.width, sprite.width);
         } else {
-            playAnimation(gc, time, sprite.actualSize, sprite.spriteLocationOnSheetX, sprite.spriteLocationOnSheetY, sprite.numberOfFrames, p.positionX, p.positionY, sprite.width, sprite.height, sprite.scale, sprite.resersePlay, sprite.playSpeed);
+            playAnimation(gc, time, sprite.actualSize, sprite.spriteLocationOnSheetX, sprite.spriteLocationOnSheetY, sprite.numberOfFrames, sprite.getXPosition(), sprite.getYPosition(), sprite.width, sprite.height, sprite.scale, sprite.resersePlay, sprite.playSpeed);
         }
     }
 
@@ -62,7 +61,7 @@ public class Renderer {
         int newSpriteSheetX = reversePlay ? startingPointX + index * actualSize : startingPointX;
         // newY represents the X coardinate of image in the spritesheet image to be drawn on screen
         int newSpriteSheetY = reversePlay ? startingPointY : startingPointY + index * actualSize;
-
+        System.out.println("Time, Total Frames" + time + ", " + numberOfFrames);
         System.out.println("index=" + index + " newSpriteSheetX=" + newSpriteSheetX + " newSpriteSheetY=" + newSpriteSheetY + " width=" + width + " height=" + height + " x=" + x + " y=" + y + " width=" + width * scale + " height=" + height * scale);
         //img,             sx,              sy,     w,     h,  dx, dy,        dw,             dh
         gc.drawImage(img, newSpriteSheetX, newSpriteSheetY, width, height, x, y, width * scale, height * scale);
