@@ -1,6 +1,6 @@
 package bomberman;
 
-import bomberman.animations.Direction;
+import bomberman.constants.Direction;
 import bomberman.entity.player.Player;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;

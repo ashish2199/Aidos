@@ -6,6 +6,7 @@
 package bomberman.animations;
 
 import bomberman.constants.GlobalConstants;
+import bomberman.entity.Entity;
 
 /**
  * @author Ashish
@@ -17,11 +18,11 @@ public class PlayerAnimations {
     Sprite moveUp;
     Sprite moveDown;
 
-    public PlayerAnimations () {
-        moveDown = new Sprite(30, 0.1, 0, 0, 3, 0, 0, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT, 2, false);
-        moveLeft = new Sprite(30, 0.1, 0, 0, 30, 0, 3, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT, 2, false);
-        moveUp = new Sprite(30, 0.1, 0, 0, 60, 0, 3, GlobalConstants.PLAYER_WIDTH-1.5, GlobalConstants.PLAYER_HEIGHT, 2, false);
-        moveRight = new Sprite(30, 0.1, 0, 0, 90, 0, 3, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT, 2, false);
+    public PlayerAnimations (Entity e) {
+        moveDown = new Sprite(e,30, 0.1,  3, 0, 0, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT, 2, false);
+        moveLeft = new Sprite(e,30, 0.1,  30, 0, 3, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT, 2, false);
+        moveUp = new Sprite(e,30, 0.1,  60, 0, 3, GlobalConstants.PLAYER_WIDTH-1.5, GlobalConstants.PLAYER_HEIGHT, 2, false);
+        moveRight = new Sprite(e,30, 0.1, 90, 0, 3, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT, 2, false);
     }
 
     public Sprite getMoveRightSprite() {

@@ -1,5 +1,6 @@
 package bomberman.animations;
 
+import bomberman.entity.Entity;
 import bomberman.utils.ImageUtils;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
@@ -19,13 +20,13 @@ public class Sprite
 	public int scale;
 	public int actualSize;
 	public boolean resersePlay;
-	private int positionX;
-	private int positionY;
 
         public Image[] spriteImages;
         public boolean hasValidSpriteImages;
-
-	public Sprite(int actualSize, double playSpeed, int positionX, int positionY, int spriteLocationOnSheetX, int spriteLocationOnSheetY, int numberOfFrames, double width, double height,
+        
+        public Entity entityReference;
+        
+	public Sprite(Entity e, int actualSize, double playSpeed, int spriteLocationOnSheetX, int spriteLocationOnSheetY, int numberOfFrames, double width, double height,
 			int scale, boolean leftToRight)
 	{
 		super();
@@ -37,23 +38,18 @@ public class Sprite
 		this.width = width;
 		this.height = height;
 		this.scale = scale;
-		this.positionX = positionX;
-		this.positionY = positionY;
 		resersePlay = leftToRight;
+                this.entityReference=e;
 	}
 
 	public int getXPosition() {
-		return positionX;
+		return entityReference.getPositionX();
 	}
 
 	public int getYPosition() {
-		return positionY;
+		return entityReference.getPositionY();
 	}
 
-	public void setPosition(int x, int y) {
-		positionX = x;
-		positionY = y;
-	}
 
     public Sprite(Image spriteSheet,Rectangle[] specifications){
         spriteImages=new Image[specifications.length];
