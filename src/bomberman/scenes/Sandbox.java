@@ -10,10 +10,12 @@ import static bomberman.constants.GlobalConstants.canvasWidth;
 import static bomberman.constants.GlobalConstants.sceneHeight;
 import static bomberman.constants.GlobalConstants.sceneWidth;
 
+import java.util.Vector;
+
 import bomberman.GameLoop;
 import bomberman.Renderer;
+import bomberman.entity.Entity;
 import bomberman.entity.player.Player;
-import bomberman.gamecontroller.GameVariables;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -36,6 +38,21 @@ public class Sandbox {
         sceneStarted=false;
     }
 
+	private static Vector<Entity> entities = new Vector<Entity>();
+
+	public static Vector<Entity> getEntities(){
+		return entities;
+	}
+
+	public static boolean addEntityToGame(Entity e){
+		if(!entities.contains(e)){
+			entities.add(e);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
     private static void init() {
         root = new Group();
         s = new Scene(root, sceneWidth, sceneHeight);
@@ -54,8 +71,8 @@ public class Sandbox {
         p2.positionX = 300;
         p2.positionY = 100;
 
-        GameVariables.addEntityToGame(p);
-        GameVariables.addEntityToGame(p2);
+        addEntityToGame(p);
+        addEntityToGame(p2);
     }
 
     public static void setupScene(){
