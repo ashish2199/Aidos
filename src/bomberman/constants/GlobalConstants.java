@@ -13,17 +13,17 @@ import javafx.scene.paint.Color;
  */
 public class GlobalConstants {
 
-    public static int sceneWidth = 500;
-    public static int sceneHeight = 500;
-    public static int canvasWidth = 500;
-    public static int canvasHeight = 500;
+    public static int SCENE_WIDTH = 500;
+    public static int SCENE_HEIGHT = 500;
+    public static int CANVAS_WIDTH = 500;
+    public static int CANVAS_HEIGHT = 500;
     public static String GAME_NAME = "BomberMan";
     public static String GAME_VERSION = "  v 0.1";
-    public static Color backGroundColor = Color.WHITE;
-    public static int playerX = 200;
-    public static int playerY = 200;
-    public static int playerWidth = 18;
-    public static int playerHeight = 21;
-    public static int playerScale = 2;
+    public static Color BACKGROUND_COLOR = Color.WHITE;
+    public static int PLAYER_X = 200;
+    public static int PLAYER_Y = 200;
+    public static int PLAYER_WIDTH = 18;
+    public static int PLAYER_HEIGHT = 21;
+    public static int PLAYER_SCALE = 2;
 
 }

@@ -18,10 +18,10 @@ public class PlayerAnimations {
     Sprite moveDown;
 
     public PlayerAnimations () {
-        moveDown = new Sprite(30, 0.1, 0, 0, 3, 0, 0, GlobalConstants.playerWidth, GlobalConstants.playerHeight, 2, false);
-        moveLeft = new Sprite(30, 0.1, 0, 0, 30, 0, 3, GlobalConstants.playerWidth, GlobalConstants.playerHeight, 2, false);
-        moveUp = new Sprite(30, 0.1, 0, 0, 60, 0, 3, GlobalConstants.playerWidth-1.5, GlobalConstants.playerHeight, 2, false);
-        moveRight = new Sprite(30, 0.1, 0, 0, 90, 0, 3, GlobalConstants.playerWidth, GlobalConstants.playerHeight, 2, false);
+        moveDown = new Sprite(30, 0.1, 0, 0, 3, 0, 0, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT, 2, false);
+        moveLeft = new Sprite(30, 0.1, 0, 0, 30, 0, 3, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT, 2, false);
+        moveUp = new Sprite(30, 0.1, 0, 0, 60, 0, 3, GlobalConstants.PLAYER_WIDTH-1.5, GlobalConstants.PLAYER_HEIGHT, 2, false);
+        moveRight = new Sprite(30, 0.1, 0, 0, 90, 0, 3, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT, 2, false);
     }
 
     public Sprite getMoveRightSprite() {

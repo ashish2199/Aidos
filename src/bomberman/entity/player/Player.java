@@ -41,12 +41,12 @@ public class Player implements MovingEntity, KillableEntity {
 
     private void init() {
         name = "Player";
-        playerBoundary = new RectBoundedBox(positionX, positionY, GlobalConstants.playerWidth, GlobalConstants.playerHeight);
+        playerBoundary = new RectBoundedBox(positionX, positionY, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
 
     	playerAnimations = new PlayerAnimations();
 
-        positionX = GlobalConstants.playerX;
-        positionY = GlobalConstants.playerY;
+        positionX = GlobalConstants.PLAYER_X;
+        positionY = GlobalConstants.PLAYER_Y;
 
         currentSprite = playerAnimations.getMoveUpSprite();
     }
