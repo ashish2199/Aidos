@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bomberman.entity;
+package bomberman.animations;
 
 /**
  *
  * @author kdost
  */
-public interface StaticEntity extends Entity {
-    
+public enum Direction {
+    UP, DOWN, LEFT, RIGHT
 }
