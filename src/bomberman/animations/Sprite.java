@@ -1,5 +1,9 @@
 package bomberman.animations;
 
+import bomberman.utils.ImageUtils;
+import javafx.scene.image.Image;
+import javafx.scene.shape.Rectangle;
+
 public class Sprite
 {
 	/**
@@ -10,15 +14,16 @@ public class Sprite
 	public int spriteLocationOnSheetX;
 	public int spriteLocationOnSheetY;
 	public int numberOfFrames;
-	public int x;
-	public int y;
-	public int width;
-	public int height;
+	public double width;
+	public double height;
 	public int scale;
 	public int actualSize;
 	public boolean resersePlay;
-
-	public Sprite(int actualSize, double playSpeed, int spriteLocationOnSheetX, int spriteLocationOnSheetY, int numberOfFrames, int x, int y, int width, int height,
+        
+        public Image[] spriteImages;
+        public boolean hasValidSpriteImages;
+        
+	public Sprite(int actualSize, double playSpeed, int spriteLocationOnSheetX, int spriteLocationOnSheetY, int numberOfFrames, double width, double height,
 			int scale, boolean leftToRight)
 	{
 		super();
@@ -27,17 +32,26 @@ public class Sprite
 		this.spriteLocationOnSheetX = spriteLocationOnSheetX;
 		this.spriteLocationOnSheetY = spriteLocationOnSheetY;
 		this.numberOfFrames = numberOfFrames;
-		this.x = x;
-		this.y = y;
 		this.width = width;
 		this.height = height;
 		this.scale = scale;
 		this.resersePlay = leftToRight;
 	}
-
-	public void setPosition(int x, int y)
-	{
-		this.x = x;
-		this.y = y;
-	}
+        
+        public Sprite(Image spriteSheet,Rectangle[] specifications){
+            spriteImages=new Image[specifications.length];
+            for (int i = 0; i < specifications.length; i++) {
+                Rectangle specification = specifications[i];
+                int x=(int)specification.getX();
+                int y=(int)specification.getY();
+                int w=(int)specification.getWidth();
+                int h=(int)specification.getHeight();
+                
+                //To DO Check dimensions provided are not going out of spritesheet dimensions\
+                
+                spriteImages[i]=ImageUtils.crop(spriteSheet, x, y, w, h);
+            }
+            this.numberOfFrames=specifications.length;
+            hasValidSpriteImages=true;
+        }
 }

@@ -23,7 +23,7 @@ public class GameLoop
                 gc.clearRect(0, 0, 512, 512);
                 player.draw();
                 //Change this too see the different sprites and movement in action
-                player.move(Direction.DOWN);
+                player.move(Direction.RIGHT);
             }
         }.start();
 	}

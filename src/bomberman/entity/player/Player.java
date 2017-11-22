@@ -10,11 +10,12 @@ import bomberman.entity.Entity;
 import bomberman.entity.KillableEntity;
 import bomberman.entity.MovingEntity;
 import bomberman.entity.boundedbox.RectBoundedBox;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class Player implements MovingEntity, KillableEntity {
 
-    private int positionX;
-    private int positionY;
     private int health;
     private boolean isAlive;
     RectBoundedBox playerBoundary;
@@ -26,19 +27,19 @@ public class Player implements MovingEntity, KillableEntity {
     Sprite moveUp;
     Sprite moveDown;
 
-    Vector<Sprite> spriteList = new Vector<Sprite>();
+    List<Sprite> spriteList = new ArrayList<Sprite>();
 
     Direction currentDirection;
 
-    int x = 0;
-    int y = 0;
+    public int positionX = 0;
+    public int positionY = 0;
 
     String name;
 
     public Player() {
         init();
         name = "Unnamed Entity";
-        playerBoundary=new RectBoundedBox(positionX,positionY,GlobalConstants.playerWidth, GlobalConstants.playerHeight);
+        playerBoundary = new RectBoundedBox(positionX, positionY, GlobalConstants.playerWidth, GlobalConstants.playerHeight);
     }
 
     public Player(int posX, int posY) {
@@ -50,54 +51,21 @@ public class Player implements MovingEntity, KillableEntity {
     }
 
     private void init() {
-        x = GlobalConstants.playerX;
-        y = GlobalConstants.playerY;
+        positionX = GlobalConstants.playerX;
+        positionY = GlobalConstants.playerY;
 
-        Sprite moveDown = new Sprite(30, 0.1, 0, 0, 3, x, y, GlobalConstants.playerWidth, GlobalConstants.playerHeight, 2, false);
-        Sprite moveLeft = new Sprite(30, 0.1, 30, 0, 3, x, y, GlobalConstants.playerWidth, GlobalConstants.playerHeight, 2, false);
-        Sprite moveUp = new Sprite(30, 0.1, 60, 0, 3, x, y, GlobalConstants.playerWidth, GlobalConstants.playerHeight, 2, false);
-        Sprite moveRight = new Sprite(30, 0.1, 90, 0, 3, x, y, GlobalConstants.playerWidth, GlobalConstants.playerHeight, 2, false);
+        Sprite moveDown = new Sprite(30, 0.1, 0, 0, 3, GlobalConstants.playerWidth, GlobalConstants.playerHeight, 2, false);
+        Sprite moveLeft = new Sprite(30, 0.1, 30, 0, 3, GlobalConstants.playerWidth, GlobalConstants.playerHeight, 2, false);
+        Sprite moveUp = new Sprite(30, 0.1, 60, 0, 3, GlobalConstants.playerWidth-1.5, GlobalConstants.playerHeight, 2, false);
+        Sprite moveRight = new Sprite(30, 0.1, 90, 0, 3, GlobalConstants.playerWidth, GlobalConstants.playerHeight, 2, false);
 
         setMoveSprites(moveUp, moveDown, moveLeft, moveRight);
 
         currentSprite = moveDown;
     }
 
-    // This might be better eventually as a state machine I imagine.
-    // Because this is very quickly growing into a pain in the ass
     public void move(Direction direction) {
-        switch (direction) {
-            case UP:
-                y--;
-                setCurrentSprite(moveUp);
-                currentDirection = Direction.UP;
-                break;
-            case DOWN:
-                setCurrentSprite(moveDown);
-                currentDirection = Direction.DOWN;
-                y++;
-                break;
-            case LEFT:
-                setCurrentSprite(moveLeft);
-                currentDirection = Direction.LEFT;
-                x--;
-                break;
-            case RIGHT:
-                setCurrentSprite(moveRight);
-                currentDirection = Direction.RIGHT;
-                x++;
-                break;
-        }
-
-        recalulatePositionForSprites();
-    }
-
-    private void recalulatePositionForSprites() {
-        for (Sprite s : spriteList) {
-            if (s != null) {
-                s.setPosition(x, y);
-            }
-        }
+        move(1, direction);
     }
 
     private void setCurrentSprite(Sprite s) {
@@ -150,20 +118,41 @@ public class Player implements MovingEntity, KillableEntity {
 
     @Override
     public boolean isColliding(Entity b) {
-        RectBoundedBox otherEntityBoundary=(RectBoundedBox)b;
+        RectBoundedBox otherEntityBoundary = (RectBoundedBox) b;
         return playerBoundary.checkCollision(otherEntityBoundary);
     }
 
     @Override
     public void draw() {
         if (currentSprite != null) {
-            Renderer.playAnimation(currentSprite);
+            Renderer.playAnimation(currentSprite, this);
         }
     }
 
     @Override
     public void move(int steps, Direction direction) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        switch (direction) {
+            case UP:
+                positionY -= steps;
+                setCurrentSprite(moveUp);
+                currentDirection = Direction.UP;
+                break;
+            case DOWN:
+                setCurrentSprite(moveDown);
+                currentDirection = Direction.DOWN;
+                positionY += steps;
+                break;
+            case LEFT:
+                setCurrentSprite(moveLeft);
+                currentDirection = Direction.LEFT;
+                positionX -= steps;
+                break;
+            case RIGHT:
+                setCurrentSprite(moveRight);
+                currentDirection = Direction.RIGHT;
+                positionX += steps;
+                break;
+        }
     }
 
     @Override
@@ -178,7 +167,6 @@ public class Player implements MovingEntity, KillableEntity {
         } else {
             health -= damage;
         }
-
     }
 
     @Override
