@@ -12,6 +12,7 @@ import static bomberman.constants.GlobalConstants.SCENE_WIDTH;
 
 import bomberman.GameLoop;
 import bomberman.Renderer;
+import bomberman.gamecontroller.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -43,6 +44,7 @@ public class Sandbox {
         gc.setStroke(Color.BLUE);
         gc.setLineWidth(2);
         gc.setFill(Color.BLUE);
+        EventHandler.attachEventHandlers(s);
         Renderer.init();
         GameLoop.start(gc);
     }

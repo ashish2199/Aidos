@@ -17,28 +17,32 @@ public class PlayerAnimations {
     Sprite moveLeft;
     Sprite moveUp;
     Sprite moveDown;
+    Sprite idle;
 
-    public PlayerAnimations (Entity e) {
-        moveDown = new Sprite(e,30, 0.1,  3, 0, 0, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT, 2, false);
-        moveLeft = new Sprite(e,30, 0.1,  30, 0, 3, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT, 2, false);
-        moveUp = new Sprite(e,30, 0.1,  60, 0, 3, GlobalConstants.PLAYER_WIDTH-1.5, GlobalConstants.PLAYER_HEIGHT, 2, false);
-        moveRight = new Sprite(e,30, 0.1, 90, 0, 3, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT, 2, false);
+    public PlayerAnimations(Entity e) {
+        moveDown  = new Sprite(e, 30, 0.1, 0,  0, 3, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT, 2, false);
+        moveLeft  = new Sprite(e, 30, 0.1, 30, 0, 3, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT, 2, false);
+        moveUp    = new Sprite(e, 30, 0.1, 60, 0, 3, GlobalConstants.PLAYER_WIDTH - 1.5, GlobalConstants.PLAYER_HEIGHT, 2, false);
+        moveRight = new Sprite(e, 30, 0.1, 90, 0, 3, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT, 2, false);
+        idle      = new Sprite(e, 30, 0.1,118, 0, 1, GlobalConstants.PLAYER_WIDTH + 2, GlobalConstants.PLAYER_HEIGHT, 2, false);
     }
 
     public Sprite getMoveRightSprite() {
-    	return moveRight;
+        return moveRight;
     }
 
     public Sprite getMoveLeftSprite() {
-    	return moveLeft;
+        return moveLeft;
     }
 
     public Sprite getMoveUpSprite() {
-    	return moveUp;
+        return moveUp;
     }
 
     public Sprite getMoveDownSprite() {
-    	return moveDown;
+        return moveDown;
     }
-
+    public Sprite getPlayerIdleSprite(){
+        return idle;
+    }
 }

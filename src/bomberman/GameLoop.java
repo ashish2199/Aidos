@@ -9,7 +9,7 @@ public class GameLoop
 {
 	   static double tickDuration;
 	   final static long startNanoTime = System.nanoTime();
-	   static Player player = new Player();
+	   public static Player player = new Player();
 
     public static double getTickDuration() {
         return tickDuration;
@@ -23,7 +23,7 @@ public class GameLoop
                 gc.clearRect(0, 0, 512, 512);
                 player.draw();
                 //Change this too see the different sprites and movement in action
-                player.move(Direction.RIGHT);
+                //player.move(Direction.RIGHT);
             }
         }.start();
 	}

@@ -61,8 +61,8 @@ public class Renderer {
         int newSpriteSheetX = reversePlay ? startingPointX + index * actualSize : startingPointX;
         // newY represents the X coardinate of image in the spritesheet image to be drawn on screen
         int newSpriteSheetY = reversePlay ? startingPointY : startingPointY + index * actualSize;
-        System.out.println("Time, Total Frames" + time + ", " + numberOfFrames);
-        System.out.println("index=" + index + " newSpriteSheetX=" + newSpriteSheetX + " newSpriteSheetY=" + newSpriteSheetY + " width=" + width + " height=" + height + " x=" + x + " y=" + y + " width=" + width * scale + " height=" + height * scale);
+        //System.out.println("Time, Total Frames" + time + ", " + numberOfFrames);
+        //System.out.println("index=" + index + " newSpriteSheetX=" + newSpriteSheetX + " newSpriteSheetY=" + newSpriteSheetY + " width=" + width + " height=" + height + " x=" + x + " y=" + y + " width=" + width * scale + " height=" + height * scale);
         //img,             sx,              sy,     w,     h,  dx, dy,        dw,             dh
         gc.drawImage(img, newSpriteSheetX, newSpriteSheetY, width, height, x, y, width * scale, height * scale);
     }
