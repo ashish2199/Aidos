@@ -3,17 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bomberman.entity;
-
-import bomberman.animations.Direction;
+package bomberman.animations;
 
 /**
  *
  * @author kdost
  */
-public interface MovingEntity extends Entity {
-
-
-    public void move(int steps, Direction direction);
-
+public enum Direction {
+    UP, DOWN, LEFT, RIGHT
 }

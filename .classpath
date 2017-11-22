@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="lib" path="lib/CopyLibs/org-netbeans-modules-java-j2seproject-copylibstask.jar"/>
+	<classpathentry kind="lib" path="lib/junit_4/junit-4.12-javadoc.jar"/>
+	<classpathentry kind="lib" path="lib/junit_4/junit-4.12-sources.jar"/>
+	<classpathentry kind="lib" path="lib/junit_4/junit-4.12.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

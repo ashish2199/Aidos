@@ -3,14 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bomberman.entity;
+package bomberman;
+
+import java.util.Date;
 
 /**
  *
- * @author Ashish
+ * @author ashish.padalkar
  */
-public interface Entity {
-    boolean isColliding(Entity b);
-    void draw();
-    void removeFromScene();
+public class GameState {
+    int level;
+    Date lastSaved;
+    boolean hasUnsavedChanges;
 }

@@ -9,6 +9,10 @@ package bomberman.entity;
  *
  * @author kdost
  */
-public interface StaticEntity extends Entity {
-    
+public interface KillableEntity extends Entity {
+
+    public void die();
+    public void reduceHealth(int damage);
+    public int getHealth();
+
 }
