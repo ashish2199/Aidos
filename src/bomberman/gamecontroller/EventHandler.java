@@ -51,16 +51,16 @@ class keyPressedHandler implements javafx.event.EventHandler<KeyEvent>{
     @Override
     public void handle(KeyEvent evt) {
         System.out.println("The key pressed is : "+evt.getText()+" with keycode "+evt.getCode().getName());
-        if(evt.getCode()==KeyCode.UP){
+        if(evt.getCode()==KeyCode.UP || evt.getCode() == KeyCode.W){
             player.move(5,Direction.UP);
         }
-        if(evt.getCode()==KeyCode.DOWN){
+        if(evt.getCode()==KeyCode.DOWN || evt.getCode() == KeyCode.S){
             player.move(5,Direction.DOWN);
         }
-        if(evt.getCode()==KeyCode.LEFT){
+        if(evt.getCode()==KeyCode.LEFT || evt.getCode() == KeyCode.A){
             player.move(5,Direction.LEFT);
         }
-        if(evt.getCode()==KeyCode.RIGHT){
+        if(evt.getCode()==KeyCode.RIGHT || evt.getCode() == KeyCode.D){
             player.move(5,Direction.RIGHT);
         }
     }
