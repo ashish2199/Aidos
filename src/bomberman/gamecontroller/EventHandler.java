@@ -23,8 +23,8 @@ public class EventHandler {
     public static char lastKeyReleased;
     
     public static void attachEventHandlers(Scene s){
-        keyReleaseHanlder krh = new keyReleaseHanlder(GameLoop.player);
-        keyPressedHandler kph = new keyPressedHandler(GameLoop.player);
+        keyReleaseHanlder krh = new keyReleaseHanlder(Sandbox.getPlayer());
+        keyPressedHandler kph = new keyPressedHandler(Sandbox.getPlayer());
         s.setOnKeyReleased(krh);
         s.setOnKeyPressed(kph);
     }
