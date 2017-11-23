@@ -5,7 +5,10 @@
  */
 package bomberman.gamecontroller;
 
+import java.util.ArrayList;
+
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 /**
@@ -15,6 +18,7 @@ import javafx.scene.input.KeyEvent;
 public class EventHandler {
     public static char lastKeyPress;
     public static char lastKeyReleased;
+    public static ArrayList<String> input = new ArrayList<String>();
 
     public static void attachEventHandlers(Scene s){
         keyReleaseHanlder krh = new keyReleaseHanlder();
@@ -22,7 +26,14 @@ public class EventHandler {
         s.setOnKeyReleased(krh);
         s.setOnKeyPressed(kph);
     }
+
+    public boolean isKeyDown(KeyCode k) {
+    	if( input.contains(k.toString()))
+    		return true;
+    	return false;
+    }
 }
+
 class keyReleaseHanlder implements javafx.event.EventHandler<KeyEvent>{
 
     public keyReleaseHanlder() {
@@ -33,8 +44,8 @@ class keyReleaseHanlder implements javafx.event.EventHandler<KeyEvent>{
 
         String code = evt.getCode().toString();
 
-        if ( InputHandler.input.contains(code) )
-        	InputHandler.input.remove( code );
+        if ( EventHandler.input.contains(code) )
+        	EventHandler.input.remove( code );
     }
 }
 class keyPressedHandler implements javafx.event.EventHandler<KeyEvent>{
@@ -46,7 +57,7 @@ class keyPressedHandler implements javafx.event.EventHandler<KeyEvent>{
 
         //https://gamedevelopment.tutsplus.com/tutorials/introduction-to-javafx-for-game-development--cms-23835
         // only add once... prevent duplicates
-        if ( !InputHandler.input.contains(code) )
-        	InputHandler.input.add( code );
+        if ( !EventHandler.input.contains(code) )
+        	EventHandler.input.add( code );
     }
 }
