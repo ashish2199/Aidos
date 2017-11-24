@@ -6,6 +6,7 @@
 package bomberman.gamecontroller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -18,7 +19,7 @@ import javafx.scene.input.KeyEvent;
 public class EventHandler {
     public static char lastKeyPress;
     public static char lastKeyReleased;
-    public static ArrayList<String> input = new ArrayList<String>();
+    public static ArrayList<KeyCode> inputList = new ArrayList<KeyCode>();
 
     public static void attachEventHandlers(Scene s){
         keyReleaseHanlder krh = new keyReleaseHanlder();
@@ -28,11 +29,15 @@ public class EventHandler {
     }
 
     public boolean isKeyDown(KeyCode k) {
-    	if( input.contains(k.toString())){
+    	if( inputList.contains(k)){
     		return true;
         }else{
             return false;
         }
+    }
+    
+    public static List getInputList(){
+        return inputList;
     }
 }
 
@@ -41,22 +46,22 @@ class keyReleaseHanlder implements javafx.event.EventHandler<KeyEvent>{
     }
     @Override
     public void handle(KeyEvent evt) {
-        System.out.println("The key released is : "+evt.getText()+" with keycode "+evt.getCode().getName());
+        //System.out.println("The key released is : "+evt.getText()+" with keycode "+evt.getCode().getName());
 
-        String code = evt.getCode().toString();
+        KeyCode code = evt.getCode();
 
-        if ( EventHandler.input.contains(code) )
-        	EventHandler.input.remove( code );
+        if ( EventHandler.inputList.contains(code) )
+        	EventHandler.inputList.remove( code );
     }
 }
 class keyPressedHandler implements javafx.event.EventHandler<KeyEvent>{
     @Override
     public void handle(KeyEvent evt) {
-        System.out.println("The key pressed is : "+evt.getText()+" with keycode "+evt.getCode().getName());
-        String code = evt.getCode().toString();
-        //https://gamedevelopment.tutsplus.com/tutorials/introduction-to-javafx-for-game-development--cms-23835
+        //System.out.println("The key pressed is : "+evt.getText()+" with keycode "+evt.getCode().getName());
+        KeyCode code = evt.getCode();
+        
         // only add once... prevent duplicates
-        if ( !EventHandler.input.contains(code) )
-        	EventHandler.input.add( code );
+        if ( !EventHandler.inputList.contains(code) )
+        	EventHandler.inputList.add( code );
     }
 }

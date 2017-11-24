@@ -28,25 +28,23 @@ public class Player implements MovingEntity, KillableEntity {
     String name;
 
     public Player() {
-        init();
+        init(0,0);
     }
 
     public Player(int posX, int posY) {
-        this();
+        init(posX, posY);
         health = 100;
-        positionX = posX;
-        positionY = posY;
         isAlive = true;
     }
 
-    private void init() {
+    private void init(int x,int y) {
         name = "Player";
         playerBoundary = new RectBoundedBox(positionX, positionY, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
 
         playerAnimations = new PlayerAnimations(this);
 
-        positionX = GlobalConstants.PLAYER_X;
-        positionY = GlobalConstants.PLAYER_Y;
+        positionX = x;
+        positionY = y;
 
         currentSprite = playerAnimations.getPlayerIdleSprite();
     }

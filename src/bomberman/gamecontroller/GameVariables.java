@@ -10,5 +10,5 @@ package bomberman.gamecontroller;
  * @author ashish.padalkar
  */
 public class GameVariables {
-
+    
 }

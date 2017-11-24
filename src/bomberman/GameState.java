@@ -5,6 +5,7 @@
  */
 package bomberman;
 
+import bomberman.constants.GlobalConstants;
 import java.util.Date;
 
 /**
@@ -12,7 +13,8 @@ import java.util.Date;
  * @author ashish.padalkar
  */
 public class GameState {
-    int level;
-    Date lastSaved;
-    boolean hasUnsavedChanges;
+    public static int level;
+    public static Date lastSaved;
+    public static boolean hasUnsavedChanges;
+    public static GlobalConstants.GameStatus gameStatus;
 }
