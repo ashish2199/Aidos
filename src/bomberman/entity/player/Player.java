@@ -91,7 +91,6 @@ public class Player implements MovingEntity, KillableEntity {
     public void move(int steps, Direction direction) {
 
     	steps *= GameLoop.getDeltaTime();
-    	System.out.println(GameLoop.getDeltaTime());
 
         if (steps == 0) {
             setCurrentSprite(playerAnimations.getPlayerIdleSprite());
