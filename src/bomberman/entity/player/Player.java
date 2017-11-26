@@ -1,9 +1,10 @@
 package bomberman.entity.player;
 
+import bomberman.GameLoop;
 import bomberman.Renderer;
-import bomberman.constants.Direction;
 import bomberman.animations.PlayerAnimations;
 import bomberman.animations.Sprite;
+import bomberman.constants.Direction;
 import bomberman.constants.GlobalConstants;
 import bomberman.entity.Entity;
 import bomberman.entity.KillableEntity;
@@ -88,6 +89,10 @@ public class Player implements MovingEntity, KillableEntity {
 
     @Override
     public void move(int steps, Direction direction) {
+
+    	steps *= GameLoop.getDeltaTime();
+    	System.out.println(GameLoop.getDeltaTime());
+
         if (steps == 0) {
             setCurrentSprite(playerAnimations.getPlayerIdleSprite());
             return;
@@ -140,11 +145,11 @@ public class Player implements MovingEntity, KillableEntity {
 
     @Override
     public int getPositionX() {
-        return this.positionX;
+        return positionX;
     }
 
     @Override
     public int getPositionY() {
-        return this.positionY;
+        return positionY;
     }
 }

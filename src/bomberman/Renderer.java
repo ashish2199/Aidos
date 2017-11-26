@@ -33,7 +33,7 @@ public class Renderer {
     }
 
     public static void playAnimation(Sprite sprite) {
-        double time = GameLoop.getTickDuration();
+        double time = GameLoop.getCurrentGameTime();
         GraphicsContext gc = Sandbox.getGraphicsContext();
         if (sprite.hasValidSpriteImages) {
             playAnimation(sprite.spriteImages, sprite.playSpeed, sprite.getXPosition(), sprite.getYPosition(), sprite.width, sprite.width);
@@ -43,7 +43,7 @@ public class Renderer {
     }
 
     public static void playAnimation(Image[] imgs, double speed, int x, int y, double w, double h) {
-        double time = GameLoop.getTickDuration();
+        double time = GameLoop.getCurrentGameTime();
         GraphicsContext gc = Sandbox.getGraphicsContext();
         int numberOfFrames = imgs.length;
         int index = findCurrentFrame(time, numberOfFrames, speed);
