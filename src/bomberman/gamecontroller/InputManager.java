@@ -5,18 +5,18 @@
  */
 package bomberman.gamecontroller;
 
+import java.util.List;
+
 import bomberman.constants.Direction;
 import bomberman.entity.player.Player;
 import bomberman.scenes.Sandbox;
-import java.util.ArrayList;
-import java.util.List;
 import javafx.scene.input.KeyCode;
 /**
  *
  * @author Ashish
  */
 public class InputManager {
-    
+
     public static void handlePlayerMovements(){
         List keyboardInputs = EventHandler.getInputList();
         Player player = Sandbox.getPlayer();
@@ -39,11 +39,11 @@ public class InputManager {
             !keyboardInputs.contains(KeyCode.W) &&
             !keyboardInputs.contains(KeyCode.A) &&
             !keyboardInputs.contains(KeyCode.S) &&
-            !keyboardInputs.contains(KeyCode.D) 
+            !keyboardInputs.contains(KeyCode.D)
           )
         {
             player.move(0, Direction.DOWN);
         }
     }
-    
+
 }

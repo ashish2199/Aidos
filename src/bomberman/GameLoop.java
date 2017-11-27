@@ -9,24 +9,32 @@ import javafx.scene.canvas.GraphicsContext;
 
 public class GameLoop {
 
-    static double tickDuration;
+    static double currentGameTime;
+    static double oldGameTime;
+    static double deltaTime;
     final static long startNanoTime = System.nanoTime();
 
-    public static double getTickDuration() {
-        return tickDuration;
+    public static double getCurrentGameTime() {
+        return currentGameTime;
     }
 
     public static void start(GraphicsContext gc) {
         GameState.gameStatus=GlobalConstants.GameStatus.Running;
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
-                tickDuration = (currentNanoTime - startNanoTime) / 1000000000.0;
+            	oldGameTime = currentGameTime;
+            	currentGameTime = (currentNanoTime - startNanoTime) / 1000000000.0;
+            	deltaTime = currentGameTime - oldGameTime;
                 gc.clearRect(0, 0, 512, 512);
                 //TODO This will have to be something like, currentScene.getEntities()
                 updateGame();
                 renderGame();
             }
         }.start();
+    }
+
+    public static double getDeltaTime() {
+    	return deltaTime * 100;
     }
 
     public static void updateGame() {
