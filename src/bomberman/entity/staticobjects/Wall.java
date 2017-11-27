@@ -5,6 +5,8 @@
  */
 package bomberman.entity.staticobjects;
 
+import bomberman.Renderer;
+import bomberman.animations.Sprite;
 import bomberman.entity.Entity;
 import bomberman.entity.StaticEntity;
 import javafx.scene.paint.Color;
@@ -18,14 +20,22 @@ public class Wall implements StaticEntity {
     public int positionY = 0;
     private int height;
     private int width;
-    private int health;
     private Color wallColor;
-    
+    private Sprite sprite;
+
+
+    public Wall (int x, int y) {
+    	positionX = x;
+    	positionY = y;
+
+    	width = 16;
+    	height = 16;
+
+    	sprite = new Sprite(this, 16, 0, 248, 123, 1, 16, 16, 1, false);
+    }
+
     public void changeColor(Color color) {
         wallColor = color;
-    }
-    public void getDamageLevel() {
-        
     }
 
     @Override
@@ -35,7 +45,7 @@ public class Wall implements StaticEntity {
 
     @Override
     public void draw() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Renderer.playAnimation(sprite);
     }
 
     @Override
@@ -45,12 +55,12 @@ public class Wall implements StaticEntity {
 
     @Override
     public int getPositionX() {
-        return this.positionX;
+        return positionX;
     }
 
     @Override
     public int getPositionY() {
-        return this.positionY;
+        return positionY;
     }
-    
+
 }
