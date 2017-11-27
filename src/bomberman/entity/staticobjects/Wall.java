@@ -9,6 +9,7 @@ import bomberman.Renderer;
 import bomberman.animations.Sprite;
 import bomberman.entity.Entity;
 import bomberman.entity.StaticEntity;
+import bomberman.entity.boundedbox.RectBoundedBox;
 import javafx.scene.paint.Color;
 
 /**
@@ -22,6 +23,7 @@ public class Wall implements StaticEntity {
     private int width;
     private Color wallColor;
     private Sprite sprite;
+    RectBoundedBox entityBoundary;
 
 
     public Wall (int x, int y) {
@@ -32,6 +34,7 @@ public class Wall implements StaticEntity {
     	height = 16;
 
     	sprite = new Sprite(this, 16, 0, 348, 123, 1, 16, 16, 2, false);
+    	entityBoundary = new RectBoundedBox(positionX, positionY, width, height);
     }
 
     public void changeColor(Color color) {
@@ -62,5 +65,11 @@ public class Wall implements StaticEntity {
     public int getPositionY() {
         return positionY;
     }
+
+	@Override
+	public RectBoundedBox getBoundingBox()
+	{
+		return entityBoundary;
+	}
 
 }

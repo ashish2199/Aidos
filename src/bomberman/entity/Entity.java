@@ -5,6 +5,8 @@
  */
 package bomberman.entity;
 
+import bomberman.entity.boundedbox.RectBoundedBox;
+
 /**
  *
  * @author Ashish
@@ -15,4 +17,5 @@ public interface Entity {
     void removeFromScene();
     int getPositionX();
     int getPositionY();
+	RectBoundedBox getBoundingBox();
 }
