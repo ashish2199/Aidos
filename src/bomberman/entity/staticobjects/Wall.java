@@ -31,7 +31,7 @@ public class Wall implements StaticEntity {
     	width = 16;
     	height = 16;
 
-    	sprite = new Sprite(this, 16, 0, 248, 123, 1, 16, 16, 1, false);
+    	sprite = new Sprite(this, 16, 0, 348, 123, 1, 16, 16, 2, false);
     }
 
     public void changeColor(Color color) {
