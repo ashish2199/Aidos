@@ -27,16 +27,20 @@ public class Renderer {
      *
      */
     static Image img;
-
-    public static void init() {
+    static {
         img = ImageUtils.loadImage("src/Resources/img/sprites.png");
     }
-
+    public static void init() {
+        
+    }
+    public static Image getSpiteSheet(){
+        return img;
+    }
     public static void playAnimation(Sprite sprite) {
         double time = GameLoop.getCurrentGameTime();
         GraphicsContext gc = Sandbox.getGraphicsContext();
         if (sprite.hasValidSpriteImages) {
-            playAnimation(sprite.spriteImages, sprite.playSpeed, sprite.getXPosition(), sprite.getYPosition(), sprite.width, sprite.width);
+            playAnimation(sprite.spriteImages, sprite.playSpeed, sprite.getXPosition(), sprite.getYPosition(), sprite.width*sprite.scale, sprite.height*sprite.scale);
         } else {
             playAnimation(gc, time, sprite.actualSize, sprite.spriteLocationOnSheetX, sprite.spriteLocationOnSheetY, sprite.numberOfFrames, sprite.getXPosition(), sprite.getYPosition(), sprite.width, sprite.height, sprite.scale, sprite.resersePlay, sprite.playSpeed);
         }
@@ -47,7 +51,8 @@ public class Renderer {
         GraphicsContext gc = Sandbox.getGraphicsContext();
         int numberOfFrames = imgs.length;
         int index = findCurrentFrame(time, numberOfFrames, speed);
-        gc.drawImage(img, x, y, w, h);
+        //System.out.println("index= "+index+" x="+x+" y="+y+" w="+w+" h="+h+" no of frames="+imgs.length+" speed="+speed+" time="+time);
+        gc.drawImage(imgs[index], x, y, w, h);
     }
 
     public static void playAnimation(GraphicsContext gc, double time, int actualSize, int startingPointX, int startingPointY, int numberOfFrames, int x, int y, double width, double height, double scale, boolean reversePlay, double playSpeed) {

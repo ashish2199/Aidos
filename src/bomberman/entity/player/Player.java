@@ -12,7 +12,6 @@ import bomberman.entity.MovingEntity;
 import bomberman.entity.boundedbox.RectBoundedBox;
 import bomberman.scenes.Sandbox;
 
-
 public class Player implements MovingEntity, KillableEntity {
 
     private int health;
@@ -30,7 +29,7 @@ public class Player implements MovingEntity, KillableEntity {
     String name;
 
     public Player() {
-        init(64,64);
+        init(64, 64);
     }
 
     public Player(int posX, int posY) {
@@ -39,7 +38,7 @@ public class Player implements MovingEntity, KillableEntity {
         isAlive = true;
     }
 
-    private void init(int x,int y) {
+    private void init(int x, int y) {
         name = "Player";
 
         playerAnimations = new PlayerAnimations(this);
@@ -78,7 +77,7 @@ public class Player implements MovingEntity, KillableEntity {
 
     @Override
     public boolean isColliding(Entity b) {
-    	playerBoundary.setPosition(positionX, positionY);
+        playerBoundary.setPosition(positionX, positionY);
         RectBoundedBox otherEntityBoundary = (RectBoundedBox) b.getBoundingBox();
         return playerBoundary.checkCollision(otherEntityBoundary);
     }
@@ -91,15 +90,21 @@ public class Player implements MovingEntity, KillableEntity {
     }
 
     @Override
+    public void die() {
+        setCurrentSprite(playerAnimations.getPlayerDying());
+    }
+
+    @Override
     public void move(int steps, Direction direction) {
 
-    	steps *= GameLoop.getDeltaTime();
-    	for(Entity e : Sandbox.getEntities()) {
-    		if(e != this && isColliding(e)) {
-    			System.out.println("Colliding with " + e.toString());
-    			return;
-    		}
-    	}
+        steps *= GameLoop.getDeltaTime();
+        for (Entity e : Sandbox.getEntities()) {
+            if (e != this && isColliding(e)) {
+                System.out.println("Colliding with " + e.toString());
+                die();
+                return;
+            }
+        }
 
         if (steps == 0) {
             setCurrentSprite(playerAnimations.getPlayerIdleSprite());
@@ -133,11 +138,6 @@ public class Player implements MovingEntity, KillableEntity {
     }
 
     @Override
-    public void die() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public void reduceHealth(int damage) {
         if (health - damage <= 0) {
             die();
@@ -161,10 +161,9 @@ public class Player implements MovingEntity, KillableEntity {
         return positionY;
     }
 
-	@Override
-	public RectBoundedBox getBoundingBox()
-	{
-		playerBoundary.setPosition(positionX, positionY);
-		return playerBoundary;
-	}
+    @Override
+    public RectBoundedBox getBoundingBox() {
+        playerBoundary.setPosition(positionX, positionY);
+        return playerBoundary;
+    }
 }
