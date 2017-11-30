@@ -10,6 +10,7 @@ import bomberman.entity.Entity;
 import bomberman.entity.KillableEntity;
 import bomberman.entity.MovingEntity;
 import bomberman.entity.boundedbox.RectBoundedBox;
+import bomberman.scenes.Sandbox;
 
 
 public class Player implements MovingEntity, KillableEntity {
@@ -29,7 +30,7 @@ public class Player implements MovingEntity, KillableEntity {
     String name;
 
     public Player() {
-        init(0,0);
+        init(64,64);
     }
 
     public Player(int posX, int posY) {
@@ -40,12 +41,13 @@ public class Player implements MovingEntity, KillableEntity {
 
     private void init(int x,int y) {
         name = "Player";
-        playerBoundary = new RectBoundedBox(positionX, positionY, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
 
         playerAnimations = new PlayerAnimations(this);
 
         positionX = x;
         positionY = y;
+
+        playerBoundary = new RectBoundedBox(positionX, positionY, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
 
         currentSprite = playerAnimations.getPlayerIdleSprite();
     }
@@ -76,7 +78,8 @@ public class Player implements MovingEntity, KillableEntity {
 
     @Override
     public boolean isColliding(Entity b) {
-        RectBoundedBox otherEntityBoundary = (RectBoundedBox) b;
+    	playerBoundary.setPosition(positionX, positionY);
+        RectBoundedBox otherEntityBoundary = (RectBoundedBox) b.getBoundingBox();
         return playerBoundary.checkCollision(otherEntityBoundary);
     }
 
@@ -91,6 +94,12 @@ public class Player implements MovingEntity, KillableEntity {
     public void move(int steps, Direction direction) {
 
     	steps *= GameLoop.getDeltaTime();
+    	for(Entity e : Sandbox.getEntities()) {
+    		if(e != this && isColliding(e)) {
+    			System.out.println("Colliding with " + e.toString());
+    			return;
+    		}
+    	}
 
         if (steps == 0) {
             setCurrentSprite(playerAnimations.getPlayerIdleSprite());
@@ -151,4 +160,11 @@ public class Player implements MovingEntity, KillableEntity {
     public int getPositionY() {
         return positionY;
     }
+
+	@Override
+	public RectBoundedBox getBoundingBox()
+	{
+		playerBoundary.setPosition(positionX, positionY);
+		return playerBoundary;
+	}
 }

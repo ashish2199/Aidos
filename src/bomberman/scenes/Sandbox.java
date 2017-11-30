@@ -16,6 +16,7 @@ import bomberman.GameLoop;
 import bomberman.Renderer;
 import bomberman.entity.Entity;
 import bomberman.entity.player.Player;
+import bomberman.entity.staticobjects.Wall;
 import bomberman.gamecontroller.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -69,10 +70,31 @@ public class Sandbox {
         //Initialize Objects
         Player p = new Player();
         setPlayer(p);
-        
+
+        //load map
+        loadMap();
+
         //should be called at last it based on player
         EventHandler.attachEventHandlers(s);
-        
+
+    }
+
+
+    //Eventually this should take some kind of map input, maybe a text file or something
+    public static void loadMap() {
+    	Vector<Wall> walls = new Vector<Wall>();
+
+    	for(int i = 0; i < SCENE_WIDTH; i += 32){
+    		for(int j = 0; j < SCENE_HEIGHT; j += 32){
+    			if(i == 0 || i + 33 > SCENE_HEIGHT || j == 0 || j + 33 > SCENE_WIDTH) {
+    				walls.add(new Wall(i, j));
+    			}
+    		}
+    	}
+
+    	for(Wall wall : walls) {
+    		addEntityToGame(wall);
+    	}
     }
 
     public static void setupScene(){
