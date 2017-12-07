@@ -2,6 +2,7 @@ package bomberman.animations;
 
 import bomberman.entity.Entity;
 import bomberman.utils.ImageUtils;
+import java.util.List;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 
@@ -51,10 +52,20 @@ public class Sprite
 	}
 
 
-    public Sprite(Image spriteSheet,Rectangle[] specifications){
-        spriteImages=new Image[specifications.length];
-        for (int i = 0; i < specifications.length; i++) {
-            Rectangle specification = specifications[i];
+    public Sprite(Entity e,int actualSize,double playSpeed,Image spriteSheet,List<Rectangle> specifications,double width, double height,int scale, boolean leftToRight){
+        super();
+        this.actualSize = actualSize;
+        this.playSpeed = playSpeed;
+        this.numberOfFrames=specifications.size();
+        this.width = width;
+        this.height = height;
+        this.scale = scale;
+        resersePlay = leftToRight;
+        this.entityReference=e;
+        hasValidSpriteImages=true;
+        spriteImages=new Image[specifications.size()];
+        for (int i = 0; i < specifications.size(); i++) {
+            Rectangle specification = specifications.get(i);
             int x=(int)specification.getX();
             int y=(int)specification.getY();
             int w=(int)specification.getWidth();
@@ -64,7 +75,5 @@ public class Sprite
 
             spriteImages[i]=ImageUtils.crop(spriteSheet, x, y, w, h);
         }
-        numberOfFrames=specifications.length;
-        hasValidSpriteImages=true;
     }
 }

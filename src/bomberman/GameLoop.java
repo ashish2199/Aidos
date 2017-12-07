@@ -25,7 +25,7 @@ public class GameLoop {
             	oldGameTime = currentGameTime;
             	currentGameTime = (currentNanoTime - startNanoTime) / 1000000000.0;
             	deltaTime = currentGameTime - oldGameTime;
-                gc.clearRect(0, 0, 512, 512);
+                gc.clearRect(0, 0, GlobalConstants.CANVAS_WIDTH, GlobalConstants.CANVAS_WIDTH);
                 //TODO This will have to be something like, currentScene.getEntities()
                 updateGame();
                 renderGame();
