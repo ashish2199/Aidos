@@ -99,10 +99,25 @@ public class Player implements MovingEntity, KillableEntity {
 
         steps *= GameLoop.getDeltaTime();
         for (Entity e : Sandbox.getEntities()) {
+        	int previousX = positionX;
+        	int previousY = positionY;
             if (e != this && isColliding(e)) {
                 System.out.println("Colliding with " + e.toString());
-                die();
-                return;
+                switch(direction) {
+                case UP:
+                	positionY = previousY + GlobalConstants.PLAYER_WIDTH + GlobalConstants.PLAYER_HEIGHT + steps;
+                	return;
+                case LEFT:
+                	positionX = previousX + steps + GlobalConstants.PLAYER_WIDTH + GlobalConstants.PLAYER_WIDTH;
+                    return;
+                case RIGHT:
+                	positionX = previousX - steps - GlobalConstants.PLAYER_HEIGHT - GlobalConstants.PLAYER_WIDTH;
+                	return;
+                case DOWN: 
+                	positionY = previousY - steps - GlobalConstants.PLAYER_WIDTH - GlobalConstants.PLAYER_HEIGHT;
+                	return;
+                }
+                
             }
         }
 
