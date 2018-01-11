@@ -77,7 +77,7 @@ public class Player implements MovingEntity, KillableEntity {
 
     @Override
     public boolean isColliding(Entity b) {
-        playerBoundary.setPosition(positionX, positionY);
+       // playerBoundary.setPosition(positionX, positionY);
         RectBoundedBox otherEntityBoundary = (RectBoundedBox) b.getBoundingBox();
         return playerBoundary.checkCollision(otherEntityBoundary);
     }
@@ -94,17 +94,23 @@ public class Player implements MovingEntity, KillableEntity {
         setCurrentSprite(playerAnimations.getPlayerDying());
     }
 
+    private boolean checkCollisions(int x, int y) {
+    	playerBoundary.setPosition(x, y);
+
+        for (Entity e : Sandbox.getEntities()) {
+            if (e != this && isColliding(e)) {
+            	playerBoundary.setPosition(positionX, positionY);
+                return true;
+            }
+        }
+    	playerBoundary.setPosition(positionX, positionY);
+        return false;
+    }
+
     @Override
     public void move(int steps, Direction direction) {
 
         steps *= GameLoop.getDeltaTime();
-        for (Entity e : Sandbox.getEntities()) {
-            if (e != this && isColliding(e)) {
-                System.out.println("Colliding with " + e.toString());
-                die();
-                return;
-            }
-        }
 
         if (steps == 0) {
             setCurrentSprite(playerAnimations.getPlayerIdleSprite());
@@ -112,24 +118,32 @@ public class Player implements MovingEntity, KillableEntity {
         } else {
             switch (direction) {
                 case UP:
-                    positionY -= steps;
-                    setCurrentSprite(playerAnimations.getMoveUpSprite());
-                    currentDirection = Direction.UP;
+                	if(!checkCollisions(positionX, positionY - steps)) {
+	                    positionY -= steps;
+	                    setCurrentSprite(playerAnimations.getMoveUpSprite());
+	                    currentDirection = Direction.UP;
+                	}
                     break;
                 case DOWN:
-                    setCurrentSprite(playerAnimations.getMoveDownSprite());
-                    currentDirection = Direction.DOWN;
-                    positionY += steps;
+                	if(!checkCollisions(positionX, positionY + steps)) {
+                		positionY += steps;
+	                    setCurrentSprite(playerAnimations.getMoveDownSprite());
+	                    currentDirection = Direction.DOWN;
+                	}
                     break;
                 case LEFT:
-                    setCurrentSprite(playerAnimations.getMoveLeftSprite());
-                    currentDirection = Direction.LEFT;
-                    positionX -= steps;
+                	if(!checkCollisions(positionX - steps, positionY)) {
+                		positionX -= steps;
+	                    setCurrentSprite(playerAnimations.getMoveLeftSprite());
+	                    currentDirection = Direction.LEFT;
+                	}
                     break;
                 case RIGHT:
-                    setCurrentSprite(playerAnimations.getMoveRightSprite());
-                    currentDirection = Direction.RIGHT;
-                    positionX += steps;
+                	if(!checkCollisions(positionX + steps, positionY)) {
+                		 positionX += steps;
+	                    setCurrentSprite(playerAnimations.getMoveRightSprite());
+	                    currentDirection = Direction.RIGHT;
+                	}
                     break;
                 default:
                     setCurrentSprite(playerAnimations.getPlayerIdleSprite());
