@@ -63,5 +63,10 @@ public class BlackBomb implements StaticEntity {
     public RectBoundedBox getBoundingBox() {
         return entityBoundary;
     }
+
+    @Override
+    public boolean isPlayerCollisionFriendly() {
+        return true;
+    }
     
 }

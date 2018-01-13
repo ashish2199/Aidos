@@ -98,8 +98,13 @@ public class Player implements MovingEntity, KillableEntity {
     	playerBoundary.setPosition(x, y);
 
         for (Entity e : Sandbox.getEntities()) {
-            if (e != this && isColliding(e)) {
+            if (e != this && isColliding(e) && !e.isPlayerCollisionFriendly()) {
             	playerBoundary.setPosition(positionX, positionY);
+                /*
+                System.out.println("Player x="+getPositionX()+" y="
+                        +getPositionY()+" colliding with x="+e.getPositionX()
+                        +" y="+e.getPositionY());
+                */
                 return true;
             }
         }
@@ -179,5 +184,10 @@ public class Player implements MovingEntity, KillableEntity {
     public RectBoundedBox getBoundingBox() {
         playerBoundary.setPosition(positionX, positionY);
         return playerBoundary;
+    }
+
+    @Override
+    public boolean isPlayerCollisionFriendly() {
+        return true;
     }
 }

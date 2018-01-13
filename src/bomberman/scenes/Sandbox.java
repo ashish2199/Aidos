@@ -71,7 +71,7 @@ public class Sandbox {
         //Initialize Objects
         Player p = new Player();
         setPlayer(p);
-        addEntityToGame(new BlackBomb(50, 50));
+        
         //load map
         loadMap();
 

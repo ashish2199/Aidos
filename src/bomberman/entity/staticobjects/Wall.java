@@ -66,10 +66,15 @@ public class Wall implements StaticEntity {
         return positionY;
     }
 
-	@Override
-	public RectBoundedBox getBoundingBox()
-	{
-		return entityBoundary;
-	}
+    @Override
+    public RectBoundedBox getBoundingBox()
+    {
+            return entityBoundary;
+    }
+
+    @Override
+    public boolean isPlayerCollisionFriendly() {
+        return false;
+    }
 
 }
