@@ -17,5 +17,5 @@ public interface Entity {
     void removeFromScene();
     int getPositionX();
     int getPositionY();
-	RectBoundedBox getBoundingBox();
+    RectBoundedBox getBoundingBox();
 }
