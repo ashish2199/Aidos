@@ -6,41 +6,34 @@
 package bomberman.entity.staticobjects;
 
 import bomberman.Renderer;
+import bomberman.animations.BombAnimations;
 import bomberman.animations.Sprite;
 import bomberman.entity.Entity;
 import bomberman.entity.StaticEntity;
 import bomberman.entity.boundedbox.RectBoundedBox;
-import javafx.scene.paint.Color;
 
 /**
  *
- * @author kdost
+ * @author Ashish
  */
-public class Wall implements StaticEntity {
+public class BlackBomb implements StaticEntity {
     public int positionX = 0;
     public int positionY = 0;
     private int height;
     private int width;
-    private Color wallColor;
     private Sprite sprite;
     RectBoundedBox entityBoundary;
-
-
-    public Wall (int x, int y) {
-    	positionX = x;
+    BombAnimations bomb_animations;
+    public BlackBomb(int x, int y) {
+        positionX = x;
     	positionY = y;
-
     	width = 16;
     	height = 16;
-
-    	sprite = new Sprite(this, 16, 0, 348, 123, 1, 16, 16, 2, false);
-    	entityBoundary = new RectBoundedBox(positionX, positionY, width, height);
+        bomb_animations=new BombAnimations(this);
+        sprite=bomb_animations.getBlackBomb();
+        entityBoundary = new RectBoundedBox(positionX, positionY, width, height);
     }
-
-    public void changeColor(Color color) {
-        wallColor = color;
-    }
-
+    
     @Override
     public boolean isColliding(Entity b) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -67,14 +60,13 @@ public class Wall implements StaticEntity {
     }
 
     @Override
-    public RectBoundedBox getBoundingBox()
-    {
-            return entityBoundary;
+    public RectBoundedBox getBoundingBox() {
+        return entityBoundary;
     }
 
     @Override
     public boolean isPlayerCollisionFriendly() {
-        return false;
+        return true;
     }
-
+    
 }

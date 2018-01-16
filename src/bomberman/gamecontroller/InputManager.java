@@ -8,8 +8,12 @@ package bomberman.gamecontroller;
 import java.util.List;
 
 import bomberman.constants.Direction;
+import bomberman.entity.Entity;
 import bomberman.entity.player.Player;
+import bomberman.entity.staticobjects.BlackBomb;
 import bomberman.scenes.Sandbox;
+import java.util.Iterator;
+import java.util.Vector;
 import javafx.scene.input.KeyCode;
 /**
  *
@@ -20,6 +24,7 @@ public class InputManager {
     public static void handlePlayerMovements(){
         List keyboardInputs = EventHandler.getInputList();
         Player player = Sandbox.getPlayer();
+        //System.err.println(""+keyboardInputs);
         if(keyboardInputs.contains(KeyCode.UP) || keyboardInputs.contains(KeyCode.W)){
             player.move(5,Direction.UP);
         }
@@ -43,6 +48,22 @@ public class InputManager {
           )
         {
             player.move(0, Direction.DOWN);
+        }
+        
+        //Drop bomb
+        if(keyboardInputs.contains(KeyCode.SPACE)){
+            Vector<Entity> entities = Sandbox.getEntities();
+            Iterator<Entity> it = entities.iterator();
+            //remove the current bomb
+            while (it.hasNext()) {
+                Entity entity = it.next();
+                if(entity instanceof BlackBomb){
+                    // not removig directly from list to prevent ConcurrentModification
+                    it.remove();
+                    
+                }
+            }
+            Sandbox.addEntityToGame(new BlackBomb(player.getPositionX(), player.getPositionY()));
         }
     }
 
