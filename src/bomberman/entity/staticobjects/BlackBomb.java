@@ -11,6 +11,7 @@ import bomberman.animations.Sprite;
 import bomberman.entity.Entity;
 import bomberman.entity.StaticEntity;
 import bomberman.entity.boundedbox.RectBoundedBox;
+import java.util.Date;
 
 /**
  *
@@ -24,6 +25,18 @@ public class BlackBomb implements StaticEntity {
     private Sprite sprite;
     RectBoundedBox entityBoundary;
     BombAnimations bomb_animations;
+    Date addedDate;
+    int timerDurationInMillis = 2000; 
+    STATE bombState;
+    
+    enum STATE
+    {
+        INACTIVE,   //INACTIVE when bomb's timer hasnt yet started
+        ACTIVE,     //Active when bomb's timer has started and it will explode soon
+        EXPLODING,  //when bomb is exploding
+        DEAD;   //when the bomb has already exploded
+    }
+    
     public BlackBomb(int x, int y) {
         positionX = x;
     	positionY = y;
@@ -32,6 +45,29 @@ public class BlackBomb implements StaticEntity {
         bomb_animations=new BombAnimations(this);
         sprite=bomb_animations.getBlackBomb();
         entityBoundary = new RectBoundedBox(positionX, positionY, width, height);
+        addedDate=new Date();
+        bombState=STATE.ACTIVE;
+    }
+    
+    public boolean isAlive(){
+        STATE s = checkBombState();
+        if(s==STATE.DEAD){
+            return false;
+        }
+        else{
+            if(s==STATE.ACTIVE||s==STATE.INACTIVE){
+                return true;
+            }
+            return true;
+        }
+    }
+    
+    public STATE checkBombState(){
+        if(new Date().getTime()>timerDurationInMillis+addedDate.getTime()){
+            return STATE.DEAD;
+        }else{
+            return STATE.ACTIVE;
+        }
     }
     
     @Override

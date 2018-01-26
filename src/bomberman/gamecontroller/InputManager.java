@@ -51,20 +51,9 @@ public class InputManager {
         }
         
         //Drop bomb
-        if(keyboardInputs.contains(KeyCode.SPACE)){
-            Vector<Entity> entities = Sandbox.getEntities();
-            Iterator<Entity> it = entities.iterator();
-            //remove the current bomb
-            while (it.hasNext()) {
-                Entity entity = it.next();
-                if(entity instanceof BlackBomb){
-                    // not removig directly from list to prevent ConcurrentModification
-                    it.remove();
-                    
-                }
-            }
+        if(keyboardInputs.contains(KeyCode.SPACE)){           
             Sandbox.addEntityToGame(new BlackBomb(player.getPositionX(), player.getPositionY()));
-        }
+        }        
     }
 
 }
