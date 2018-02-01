@@ -2,8 +2,11 @@ package bomberman;
 
 import bomberman.constants.GlobalConstants;
 import bomberman.entity.Entity;
+import bomberman.entity.staticobjects.BlackBomb;
 import bomberman.gamecontroller.InputManager;
 import bomberman.scenes.Sandbox;
+import java.util.Iterator;
+import java.util.Vector;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -39,6 +42,19 @@ public class GameLoop {
 
     public static void updateGame() {
         InputManager.handlePlayerMovements();
+        Vector<Entity> entities = Sandbox.getEntities();
+        Iterator<Entity> it = entities.iterator();
+        //remove the current bomb
+        while (it.hasNext()) {
+            Entity entity = it.next();
+            if(entity instanceof BlackBomb){
+                boolean alive = ((BlackBomb) entity).isAlive();
+                if(!alive){
+                    // not removig directly from list to prevent ConcurrentModification
+                    it.remove();
+                }
+            }
+        }
     }
 
     public static void renderGame() {
