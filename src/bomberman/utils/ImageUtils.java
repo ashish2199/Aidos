@@ -1,30 +1,17 @@
 package bomberman.utils;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import javafx.scene.image.Image;
-
-import java.io.File;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 
 public class ImageUtils {
-    public static Image loadImage(String path) {
-        File file = new File(path);
-        System.out.println("Loading Sprite sheet " + file.exists());
-        String imagePath = file.getAbsolutePath();
-        System.out.println("Before Imagepath " + imagePath);
-        if (File.separatorChar == '\\') {
-            // From Windows to Linux/Mac
-            imagePath=imagePath.replace('/', File.separatorChar);
-            imagePath = imagePath.replace("\\", "\\\\");
-        } else {
-            // From Linux/Mac to Windows
-            imagePath=imagePath.replace('\\', File.separatorChar);
-
-        }
-        imagePath="file:"+imagePath;
-        System.out.println("After Imagepath " + imagePath);
-
-        return new Image(imagePath);
+    // Lets Java do the os binding
+    public static Image loadImage(Path path) {
+        String basepath = System.getProperty("user.dir");
+        Path imagePath = Paths.get("file:", basepath, path.toString());
+        return new Image(imagePath.toString());
     }
     public static Image crop(Image img,int x,int y,int w,int h){
         PixelReader reader = img.getPixelReader();

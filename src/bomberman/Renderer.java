@@ -5,6 +5,8 @@ import bomberman.scenes.Sandbox;
 import bomberman.utils.ImageUtils;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Renderer {
 
@@ -28,10 +30,12 @@ public class Renderer {
      */
     static Image img;
     static {
-        img = ImageUtils.loadImage("src/Resources/img/sprites_without_border.png");
+        // Let java do the binding for the os
+        Path path = Paths.get("src", "Resources", "img", "sprites_without_border.png");
+        img = ImageUtils.loadImage(path);
     }
     public static void init() {
-        
+
     }
     public static Image getSpiteSheet(){
         return img;
