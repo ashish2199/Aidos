@@ -26,3 +26,7 @@ When in doubt open a Issue, We will respond.
 ## Authors
 * **Ashish Padalkar** - *Initial work* - [ashish2199](https://github.com/ashish2199)
 * **Corey Lovett-Hendrey** - *For helping with rendering, animations and input* - [CoreyHendrey](https://github.com/CoreyHendrey)
+
+## Acknowledgments
+
+* Thanks to all those who have contributed to the project by helping with the code and provide feedback to design descisions.
