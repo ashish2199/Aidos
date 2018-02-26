@@ -22,7 +22,7 @@ import javafx.scene.input.KeyCode;
 public class InputManager {
 
     public static void handlePlayerMovements(){
-        List keyboardInputs = EventHandler.getInputList();
+        List<KeyCode> keyboardInputs = EventHandler.getInputList();
         Player player = Sandbox.getPlayer();
         //System.err.println(""+keyboardInputs);
         if(keyboardInputs.contains(KeyCode.UP) || keyboardInputs.contains(KeyCode.W)){
