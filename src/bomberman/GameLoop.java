@@ -21,17 +21,17 @@ public class GameLoop {
         return currentGameTime;
     }
 
-    public static void start(GraphicsContext gc) {
+    public static void start(final GraphicsContext gc) {
         GameState.gameStatus=GlobalConstants.GameStatus.Running;
         new AnimationTimer() {
             public void handle(long currentNanoTime) {
             	oldGameTime = currentGameTime;
             	currentGameTime = (currentNanoTime - startNanoTime) / 1000000000.0;
             	deltaTime = currentGameTime - oldGameTime;
-                gc.clearRect(0, 0, GlobalConstants.CANVAS_WIDTH, GlobalConstants.CANVAS_WIDTH);
-                //TODO This will have to be something like, currentScene.getEntities()
-                updateGame();
-                renderGame();
+            gc.clearRect(0, 0, GlobalConstants.CANVAS_WIDTH, GlobalConstants.CANVAS_WIDTH);
+            //TODO This will have to be something like, currentScene.getEntities()
+            updateGame();
+            renderGame();
             }
         }.start();
     }
@@ -50,7 +50,7 @@ public class GameLoop {
             if(entity instanceof BlackBomb){
                 boolean alive = ((BlackBomb) entity).isAlive();
                 if(!alive){
-                    // not removig directly from list to prevent ConcurrentModification
+                    // not removing directly from list to prevent ConcurrentModification
                     it.remove();
                 }
             }
