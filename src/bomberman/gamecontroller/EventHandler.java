@@ -19,7 +19,7 @@ import javafx.scene.input.KeyEvent;
 public class EventHandler {
     public static char lastKeyPress;
     public static char lastKeyReleased;
-    public static ArrayList<KeyCode> inputList = new ArrayList<KeyCode>();
+    public static List<KeyCode> inputList = new ArrayList<KeyCode>();
 
     public static void attachEventHandlers(Scene s){
         keyReleaseHanlder krh = new keyReleaseHanlder();
@@ -36,7 +36,7 @@ public class EventHandler {
         }
     }
     
-    public static List getInputList(){
+    public static List<KeyCode> getInputList(){
         return inputList;
     }
 }
