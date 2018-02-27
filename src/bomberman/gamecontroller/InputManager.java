@@ -15,45 +15,43 @@ import bomberman.scenes.Sandbox;
 import java.util.Iterator;
 import java.util.Vector;
 import javafx.scene.input.KeyCode;
+
 /**
  *
  * @author Ashish
  */
 public class InputManager {
 
-    public static void handlePlayerMovements(){
-        List<KeyCode> keyboardInputs = EventHandler.getInputList();
-        Player player = Sandbox.getPlayer();
-        //System.err.println(""+keyboardInputs);
-        if(keyboardInputs.contains(KeyCode.UP) || keyboardInputs.contains(KeyCode.W)){
-            player.move(5,Direction.UP);
-        }
-        if(keyboardInputs.contains(KeyCode.DOWN) || keyboardInputs.contains(KeyCode.S)){
-            player.move(5,Direction.DOWN);
-        }
-        if(keyboardInputs.contains(KeyCode.LEFT) || keyboardInputs.contains(KeyCode.A)){
-            player.move(5,Direction.LEFT);
-        }
-        if(keyboardInputs.contains(KeyCode.RIGHT) || keyboardInputs.contains(KeyCode.D)){
-            player.move(5,Direction.RIGHT);
-        }
-        if( !keyboardInputs.contains(KeyCode.LEFT) &&
-            !keyboardInputs.contains(KeyCode.RIGHT) &&
-            !keyboardInputs.contains(KeyCode.UP) &&
-            !keyboardInputs.contains(KeyCode.DOWN) &&
-            !keyboardInputs.contains(KeyCode.W) &&
-            !keyboardInputs.contains(KeyCode.A) &&
-            !keyboardInputs.contains(KeyCode.S) &&
-            !keyboardInputs.contains(KeyCode.D)
-          )
-        {
-            player.move(0, Direction.DOWN);
-        }
-        
-        //Drop bomb
-        if(keyboardInputs.contains(KeyCode.SPACE)){           
-            Sandbox.addEntityToGame(new BlackBomb(player.getPositionX(), player.getPositionY()));
-        }        
-    }
-
+	public static void handlePlayerMovements() {
+		List<KeyCode> keyboardInputs = EventHandler.getInputList();
+		Player player = Sandbox.getPlayer();
+		if (keyboardInputs.isEmpty()) {
+			player.move(0, Direction.DOWN);
+		} else {
+			switch (keyboardInputs.get(0)) {
+			case UP:
+			case W:
+				player.move(5, Direction.UP);
+				break;
+			case DOWN:
+			case S:
+				player.move(5, Direction.DOWN);
+				break;
+			case LEFT:
+			case A:
+				player.move(5, Direction.LEFT);
+				break;
+			case RIGHT:
+			case D:
+				player.move(5, Direction.RIGHT);
+				break;
+			case SPACE:
+				Sandbox.addEntityToGame(new BlackBomb(player.getPositionX(), player.getPositionY()));
+				break;
+			default:
+				player.move(0, Direction.DOWN);
+				break;
+			}
+		}
+	}
 }
