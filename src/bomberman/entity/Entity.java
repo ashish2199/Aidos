@@ -12,6 +12,7 @@ import bomberman.entity.boundedbox.RectBoundedBox;
  * @author Ashish
  */
 public interface Entity {
+	boolean isAlive();
     boolean isColliding(Entity b);
     boolean isPlayerCollisionFriendly();
     void draw();

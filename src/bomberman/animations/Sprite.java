@@ -6,8 +6,7 @@ import java.util.List;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 
-public class Sprite
-{
+public class Sprite {
 	/**
 	 *
 	 * @author CoreyHendrey
@@ -22,14 +21,13 @@ public class Sprite
 	public int actualSize;
 	public boolean resersePlay;
 
-        public Image[] spriteImages;
-        public boolean hasValidSpriteImages;
-        
-        public Entity entityReference;
-        
-	public Sprite(Entity e, int actualSize, double playSpeed, int spriteLocationOnSheetX, int spriteLocationOnSheetY, int numberOfFrames, double width, double height,
-			int scale, boolean leftToRight)
-	{
+	public Image[] spriteImages;
+	public boolean hasValidSpriteImages;
+
+	public Entity entityReference;
+
+	public Sprite(Entity e, int actualSize, double playSpeed, int spriteLocationOnSheetX, int spriteLocationOnSheetY,
+			int numberOfFrames, double width, double height, int scale, boolean leftToRight) {
 		super();
 		this.actualSize = actualSize;
 		this.playSpeed = playSpeed;
@@ -40,7 +38,7 @@ public class Sprite
 		this.height = height;
 		this.scale = scale;
 		resersePlay = leftToRight;
-                this.entityReference=e;
+		this.entityReference = e;
 	}
 
 	public int getXPosition() {
@@ -51,29 +49,29 @@ public class Sprite
 		return entityReference.getPositionY();
 	}
 
+	public Sprite(Entity e, int actualSize, double playSpeed, Image spriteSheet, List<Rectangle> specifications,
+			double width, double height, int scale, boolean leftToRight) {
+		super();
+		this.actualSize = actualSize;
+		this.playSpeed = playSpeed;
+		this.numberOfFrames = specifications.size();
+		this.width = width;
+		this.height = height;
+		this.scale = scale;
+		resersePlay = leftToRight;
+		this.entityReference = e;
+		hasValidSpriteImages = true;
+		spriteImages = new Image[specifications.size()];
+		for (int i = 0; i < specifications.size(); i++) {
+			Rectangle specification = specifications.get(i);
+			int x = (int) specification.getX();
+			int y = (int) specification.getY();
+			int w = (int) specification.getWidth();
+			int h = (int) specification.getHeight();
 
-    public Sprite(Entity e,int actualSize,double playSpeed,Image spriteSheet,List<Rectangle> specifications,double width, double height,int scale, boolean leftToRight){
-        super();
-        this.actualSize = actualSize;
-        this.playSpeed = playSpeed;
-        this.numberOfFrames=specifications.size();
-        this.width = width;
-        this.height = height;
-        this.scale = scale;
-        resersePlay = leftToRight;
-        this.entityReference=e;
-        hasValidSpriteImages=true;
-        spriteImages=new Image[specifications.size()];
-        for (int i = 0; i < specifications.size(); i++) {
-            Rectangle specification = specifications.get(i);
-            int x=(int)specification.getX();
-            int y=(int)specification.getY();
-            int w=(int)specification.getWidth();
-            int h=(int)specification.getHeight();
+			// To DO Check dimensions provided are not going out of spritesheet dimensions\
 
-            //To DO Check dimensions provided are not going out of spritesheet dimensions\
-
-            spriteImages[i]=ImageUtils.crop(spriteSheet, x, y, w, h);
-        }
-    }
+			spriteImages[i] = ImageUtils.crop(spriteSheet, x, y, w, h);
+		}
+	}
 }

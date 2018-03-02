@@ -10,5 +10,7 @@ package bomberman.entity;
  * @author kdost
  */
 public interface StaticEntity extends Entity {
-    
+	default boolean isAlive() {
+		return true;
+	}
 }

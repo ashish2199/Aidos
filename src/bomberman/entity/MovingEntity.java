@@ -12,8 +12,7 @@ import bomberman.constants.Direction;
  * @author kdost
  */
 public interface MovingEntity extends Entity {
-
-
+	
     public void move(int steps, Direction direction);
 
 }

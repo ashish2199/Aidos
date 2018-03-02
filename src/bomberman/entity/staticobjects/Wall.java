@@ -77,4 +77,9 @@ public class Wall implements StaticEntity {
         return false;
     }
 
+	@Override
+	public boolean isAlive() {
+		return true;
+	}
+
 }

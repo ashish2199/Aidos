@@ -8,12 +8,9 @@ package bomberman.gamecontroller;
 import java.util.List;
 
 import bomberman.constants.Direction;
-import bomberman.entity.Entity;
 import bomberman.entity.player.Player;
 import bomberman.entity.staticobjects.BlackBomb;
 import bomberman.scenes.Sandbox;
-import java.util.Iterator;
-import java.util.Vector;
 import javafx.scene.input.KeyCode;
 
 /**

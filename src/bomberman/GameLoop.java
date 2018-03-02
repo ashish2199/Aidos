@@ -44,16 +44,12 @@ public class GameLoop {
         InputManager.handlePlayerMovements();
         Vector<Entity> entities = Sandbox.getEntities();
         Iterator<Entity> it = entities.iterator();
-        //remove the current bomb
         while (it.hasNext()) {
             Entity entity = it.next();
-            if(entity instanceof BlackBomb){
-                boolean alive = ((BlackBomb) entity).isAlive();
-                if(!alive){
-                    // not removing directly from list to prevent ConcurrentModification
-                    it.remove();
-                }
-            }
+            if (!entity.isAlive()) {
+            		entity.removeFromScene();
+            		it.remove();  // not removing directly from list to prevent ConcurrentModification
+            } 
         }
     }
 

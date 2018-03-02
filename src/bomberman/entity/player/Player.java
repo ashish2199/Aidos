@@ -14,180 +14,173 @@ import bomberman.scenes.Sandbox;
 
 public class Player implements MovingEntity, KillableEntity {
 
-    private int health;
-    private boolean isAlive;
-    RectBoundedBox playerBoundary;
+	private int health;
+	private boolean isAlive;
+	RectBoundedBox playerBoundary;
 
-    Sprite currentSprite;
-    PlayerAnimations playerAnimations;
+	Sprite currentSprite;
+	PlayerAnimations playerAnimations;
 
-    Direction currentDirection;
+	Direction currentDirection;
 
-    public int positionX = 0;
-    public int positionY = 0;
+	public int positionX = 0;
+	public int positionY = 0;
 
-    String name;
+	String name;
 
-    public Player() {
-        init(64, 64);
-    }
+	public Player() {
+		init(64, 64);
+	}
 
-    public Player(int posX, int posY) {
-        init(posX, posY);
-        health = 100;
-        isAlive = true;
-    }
+	private void init(int x, int y) {
+		name = "Player";
+		playerAnimations = new PlayerAnimations(this);
+		positionX = x;
+		positionY = y;
+		playerBoundary = new RectBoundedBox(positionX, positionY, GlobalConstants.PLAYER_WIDTH,
+				GlobalConstants.PLAYER_HEIGHT);
+		currentSprite = playerAnimations.getPlayerIdleSprite();
+		health = 100;
+		isAlive = true;
+	}
 
-    private void init(int x, int y) {
-        name = "Player";
+	public void move(Direction direction) {
+		move(1, direction);
+	}
 
-        playerAnimations = new PlayerAnimations(this);
+	private void setCurrentSprite(Sprite s) {
+		if (s != null) {
+			currentSprite = s;
+		} else {
+			System.out.println("Sprite missing!");
+		}
+	}
 
-        positionX = x;
-        positionY = y;
+	public int getHealth() {
+		return health;
+	}
 
-        playerBoundary = new RectBoundedBox(positionX, positionY, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
+	public boolean isAlive() {
+		return isAlive;
+	}
 
-        currentSprite = playerAnimations.getPlayerIdleSprite();
-    }
+	public String toString() {
+		return name;
+	}
 
-    public void move(Direction direction) {
-        move(1, direction);
-    }
+	@Override
+	public boolean isColliding(Entity b) {
+		// playerBoundary.setPosition(positionX, positionY);
+		RectBoundedBox otherEntityBoundary = (RectBoundedBox) b.getBoundingBox();
+		return playerBoundary.checkCollision(otherEntityBoundary);
+	}
 
-    private void setCurrentSprite(Sprite s) {
-        if (s != null) {
-            currentSprite = s;
-        } else {
-            System.out.println("Sprite missing!");
-        }
-    }
+	@Override
+	public void draw() {
+		if (currentSprite != null) {
+			Renderer.playAnimation(currentSprite);
+		}
+	}
 
-    public int getHealth() {
-        return health;
-    }
+	public void die() {
+		setCurrentSprite(playerAnimations.getPlayerDying());
+	}
 
-    public boolean isAlive() {
-        return isAlive;
-    }
+	private boolean checkCollisions(int x, int y) {
+		playerBoundary.setPosition(x, y);
 
-    public String toString() {
-        return name;
-    }
+		for (Entity e : Sandbox.getEntities()) {
+			if (e != this && isColliding(e) && !e.isPlayerCollisionFriendly()) {
+				playerBoundary.setPosition(positionX, positionY);
 
-    @Override
-    public boolean isColliding(Entity b) {
-       // playerBoundary.setPosition(positionX, positionY);
-        RectBoundedBox otherEntityBoundary = (RectBoundedBox) b.getBoundingBox();
-        return playerBoundary.checkCollision(otherEntityBoundary);
-    }
+				// System.out.println("Player x=" + getPositionX() + " y=" + getPositionY() + "
+				// colliding with x="
+				// + e.getPositionX() + " y=" + e.getPositionY());
 
-    @Override
-    public void draw() {
-        if (currentSprite != null) {
-            Renderer.playAnimation(currentSprite);
-        }
-    }
+				return true;
+			}
+		}
+		playerBoundary.setPosition(positionX, positionY);
+		return false;
+	}
 
-    @Override
-    public void die() {
-        setCurrentSprite(playerAnimations.getPlayerDying());
-    }
+	@Override
+	public void move(int steps, Direction direction) {
 
-    private boolean checkCollisions(int x, int y) {
-    	playerBoundary.setPosition(x, y);
+		steps *= GameLoop.getDeltaTime();
 
-        for (Entity e : Sandbox.getEntities()) {
-            if (e != this && isColliding(e) && !e.isPlayerCollisionFriendly()) {
-            	playerBoundary.setPosition(positionX, positionY);
-                /*
-                System.out.println("Player x="+getPositionX()+" y="
-                        +getPositionY()+" colliding with x="+e.getPositionX()
-                        +" y="+e.getPositionY());
-                */
-                return true;
-            }
-        }
-    	playerBoundary.setPosition(positionX, positionY);
-        return false;
-    }
+		if (steps == 0) {
+			setCurrentSprite(playerAnimations.getPlayerIdleSprite());
+			return;
+		} else {
+			switch (direction) {
+			case UP:
+				if (!checkCollisions(positionX, positionY - steps)) {
+					positionY -= steps;
+					setCurrentSprite(playerAnimations.getMoveUpSprite());
+					currentDirection = Direction.UP;
+				}
+				break;
+			case DOWN:
+				if (!checkCollisions(positionX, positionY + steps)) {
+					positionY += steps;
+					setCurrentSprite(playerAnimations.getMoveDownSprite());
+					currentDirection = Direction.DOWN;
+				}
+				break;
+			case LEFT:
+				if (!checkCollisions(positionX - steps, positionY)) {
+					positionX -= steps;
+					setCurrentSprite(playerAnimations.getMoveLeftSprite());
+					currentDirection = Direction.LEFT;
+				}
+				break;
+			case RIGHT:
+				if (!checkCollisions(positionX + steps, positionY)) {
+					positionX += steps;
+					setCurrentSprite(playerAnimations.getMoveRightSprite());
+					currentDirection = Direction.RIGHT;
+				}
+				break;
+			default:
+				setCurrentSprite(playerAnimations.getPlayerIdleSprite());
+			}
+		}
+	}
 
-    @Override
-    public void move(int steps, Direction direction) {
+	@Override
+	public void reduceHealth(int damage) {
+		if (health - damage <= 0) {
+			isAlive = false;
+		} else {
+			health -= damage;
+		}
+	}
 
-        steps *= GameLoop.getDeltaTime();
+	public void removeFromScene() {
+//		throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
+//																		// Tools | Templates.
+		die();
+	}
 
-        if (steps == 0) {
-            setCurrentSprite(playerAnimations.getPlayerIdleSprite());
-            return;
-        } else {
-            switch (direction) {
-                case UP:
-                	if(!checkCollisions(positionX, positionY - steps)) {
-	                    positionY -= steps;
-	                    setCurrentSprite(playerAnimations.getMoveUpSprite());
-	                    currentDirection = Direction.UP;
-                	}
-                    break;
-                case DOWN:
-                	if(!checkCollisions(positionX, positionY + steps)) {
-                		positionY += steps;
-	                    setCurrentSprite(playerAnimations.getMoveDownSprite());
-	                    currentDirection = Direction.DOWN;
-                	}
-                    break;
-                case LEFT:
-                	if(!checkCollisions(positionX - steps, positionY)) {
-                		positionX -= steps;
-	                    setCurrentSprite(playerAnimations.getMoveLeftSprite());
-	                    currentDirection = Direction.LEFT;
-                	}
-                    break;
-                case RIGHT:
-                	if(!checkCollisions(positionX + steps, positionY)) {
-                		 positionX += steps;
-	                    setCurrentSprite(playerAnimations.getMoveRightSprite());
-	                    currentDirection = Direction.RIGHT;
-                	}
-                    break;
-                default:
-                    setCurrentSprite(playerAnimations.getPlayerIdleSprite());
-            }
-        }
-    }
+	@Override
+	public int getPositionX() {
+		return positionX;
+	}
 
-    @Override
-    public void reduceHealth(int damage) {
-        if (health - damage <= 0) {
-            die();
-        } else {
-            health -= damage;
-        }
-    }
+	@Override
+	public int getPositionY() {
+		return positionY;
+	}
 
-    @Override
-    public void removeFromScene() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	@Override
+	public RectBoundedBox getBoundingBox() {
+		playerBoundary.setPosition(positionX, positionY);
+		return playerBoundary;
+	}
 
-    @Override
-    public int getPositionX() {
-        return positionX;
-    }
-
-    @Override
-    public int getPositionY() {
-        return positionY;
-    }
-
-    @Override
-    public RectBoundedBox getBoundingBox() {
-        playerBoundary.setPosition(positionX, positionY);
-        return playerBoundary;
-    }
-
-    @Override
-    public boolean isPlayerCollisionFriendly() {
-        return true;
-    }
+	@Override
+	public boolean isPlayerCollisionFriendly() {
+		return true;
+	}
 }
