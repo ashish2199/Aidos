@@ -63,7 +63,7 @@ public class BlackBomb implements StaticEntity {
 		if (timePast < 0) {
 			s = STATE.ACTIVE;
 		}
-		else if (timePast < 100) {
+		else if (timePast < explodingTime) {
 			s = STATE.EXPLODING;
 		}
 		else {
