@@ -42,7 +42,18 @@ public class GameLoop {
 
     public static void updateGame() {
         InputManager.handlePlayerMovements();
-        Vector<Entity> entities = Sandbox.getEntities();
+        cleanUpEntities();
+    }
+
+    public static void renderGame() {
+        for (Entity e : Sandbox.getEntities()) {
+            e.draw();
+        }
+    }
+    
+    private static void cleanUpEntities() {
+    		// removes unwanted entities from the game
+	    	Vector<Entity> entities = Sandbox.getEntities();
         Iterator<Entity> it = entities.iterator();
         while (it.hasNext()) {
             Entity entity = it.next();
@@ -50,12 +61,6 @@ public class GameLoop {
             		entity.removeFromScene();
             		it.remove();  // not removing directly from list to prevent ConcurrentModification
             } 
-        }
-    }
-
-    public static void renderGame() {
-        for (Entity e : Sandbox.getEntities()) {
-            e.draw();
         }
     }
 
