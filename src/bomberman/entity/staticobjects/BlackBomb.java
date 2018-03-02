@@ -52,8 +52,12 @@ public class BlackBomb implements StaticEntity {
 	public boolean isAlive() {
 		return checkBombState() != STATE.DEAD;
 	}
+	
+	public boolean isExploding() {
+		return checkBombState() == STATE.EXPLODING;
+	}
 
-	public STATE checkBombState() {
+	private STATE checkBombState() {
 		long timePast = new Date().getTime() - (timerDurationInMillis + addedDate.getTime());
 		STATE s;
 		if (timePast < 0) {
