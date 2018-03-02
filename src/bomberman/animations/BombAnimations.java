@@ -5,13 +5,9 @@
  */
 package bomberman.animations;
 
-import bomberman.Renderer;
-import bomberman.constants.GlobalConstants;
+import bomberman.animations.sprites.Sprite;
+import bomberman.animations.sprites.SpriteSpecification;
 import bomberman.entity.Entity;
-import java.util.ArrayList;
-import java.util.List;
-import javafx.scene.image.Image;
-import javafx.scene.shape.Rectangle;
 
 /**
  *
@@ -20,26 +16,20 @@ import javafx.scene.shape.Rectangle;
 public class BombAnimations implements Animations{
     Sprite blackBomb;
     double playSpeed;
-
+    
+    public BombAnimations(Entity e) {
+        blackBomb = new Sprite(e,SpriteSpecification.BOMB);
+    }
+    
+    public Sprite getSprite() {
+    		return getBlackBomb();
+    }
+    
     public Sprite getBlackBomb() {
         return blackBomb;
     }
 
     public void setBlackBomb(Sprite blackBomb) {
         this.blackBomb = blackBomb;
-    }
-    public BombAnimations(Entity e) {
-        Image img = Renderer.getSpiteSheet();
-        playSpeed=0.3;
-        
-        List<Rectangle> specs=new ArrayList<>();
-        specs.add(new Rectangle(181, 93,17,16));
-        specs.add(new Rectangle(211, 93,16,16));
-        specs.add(new Rectangle(240, 93,18,17));
-        blackBomb = new Sprite(e,30,playSpeed,img, specs,GlobalConstants.PLAYER_WIDTH+2, GlobalConstants.PLAYER_HEIGHT+2, 2, false);
-    }
-    
-    public Sprite getSprite() {
-    		return getBlackBomb();
     }
 }

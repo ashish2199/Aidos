@@ -16,7 +16,6 @@ import bomberman.GameLoop;
 import bomberman.Renderer;
 import bomberman.entity.Entity;
 import bomberman.entity.player.Player;
-import bomberman.entity.staticobjects.BlackBomb;
 import bomberman.entity.staticobjects.Wall;
 import bomberman.gamecontroller.EventHandler;
 import javafx.scene.Group;

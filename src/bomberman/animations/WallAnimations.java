@@ -1,5 +1,7 @@
 package bomberman.animations;
 
+import bomberman.animations.sprites.Sprite;
+import bomberman.animations.sprites.SpriteSpecification;
 import bomberman.entity.Entity;
 
 public class WallAnimations implements Animations {
@@ -7,7 +9,7 @@ public class WallAnimations implements Animations {
 	Sprite s;
 
 	public WallAnimations(Entity e) {
-		s = new Sprite(e, 16, 0, 348, 123, 1, 16, 16, 2, false);
+		s = new Sprite(e, SpriteSpecification.WALL);
 	}
 
 	public Sprite getSprite() {

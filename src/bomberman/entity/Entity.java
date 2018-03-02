@@ -7,7 +7,7 @@ package bomberman.entity;
 
 import bomberman.Renderer;
 import bomberman.animations.Animations;
-import bomberman.animations.Sprite;
+import bomberman.animations.sprites.Sprite;
 import bomberman.entity.boundedbox.RectBoundedBox;
 
 /**
