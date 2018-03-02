@@ -17,7 +17,7 @@ import javafx.scene.shape.Rectangle;
  *
  * @author Ashish
  */
-public class BombAnimations {
+public class BombAnimations implements Animations{
     Sprite blackBomb;
     double playSpeed;
 
@@ -37,5 +37,9 @@ public class BombAnimations {
         specs.add(new Rectangle(211, 93,16,16));
         specs.add(new Rectangle(240, 93,18,17));
         blackBomb = new Sprite(e,30,playSpeed,img, specs,GlobalConstants.PLAYER_WIDTH+2, GlobalConstants.PLAYER_HEIGHT+2, 2, false);
+    }
+    
+    public Sprite getSprite() {
+    		return getBlackBomb();
     }
 }

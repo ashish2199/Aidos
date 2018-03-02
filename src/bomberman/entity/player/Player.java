@@ -1,107 +1,24 @@
 package bomberman.entity.player;
 
 import bomberman.GameLoop;
-import bomberman.Renderer;
 import bomberman.animations.PlayerAnimations;
-import bomberman.animations.Sprite;
 import bomberman.constants.Direction;
 import bomberman.constants.GlobalConstants;
 import bomberman.entity.Entity;
 import bomberman.entity.KillableEntity;
-import bomberman.entity.MovingEntity;
-import bomberman.entity.boundedbox.RectBoundedBox;
-import bomberman.scenes.Sandbox;
 
-public class Player implements MovingEntity, KillableEntity {
-
-	private int health;
-	private boolean isAlive;
-	RectBoundedBox playerBoundary;
-
-	Sprite currentSprite;
-	PlayerAnimations playerAnimations;
-
-	Direction currentDirection;
-
-	public int positionX = 0;
-	public int positionY = 0;
-
-	String name;
+public class Player extends KillableEntity {
 
 	public Player() {
-		init(64, 64);
-	}
-
-	private void init(int x, int y) {
-		name = "Player";
-		playerAnimations = new PlayerAnimations(this);
-		positionX = x;
-		positionY = y;
-		playerBoundary = new RectBoundedBox(positionX, positionY, GlobalConstants.PLAYER_WIDTH,
-				GlobalConstants.PLAYER_HEIGHT);
-		currentSprite = playerAnimations.getPlayerIdleSprite();
-		health = 100;
-		isAlive = true;
+		super(64, 64);
 	}
 
 	public void move(Direction direction) {
 		move(1, direction);
 	}
 
-	private void setCurrentSprite(Sprite s) {
-		if (s != null) {
-			currentSprite = s;
-		} else {
-			System.out.println("Sprite missing!");
-		}
-	}
-
-	public int getHealth() {
-		return health;
-	}
-
-	public boolean isAlive() {
-		return isAlive;
-	}
-
-	public String toString() {
-		return name;
-	}
-
-	@Override
-	public boolean isColliding(Entity b) {
-		// playerBoundary.setPosition(positionX, positionY);
-		RectBoundedBox otherEntityBoundary = (RectBoundedBox) b.getBoundingBox();
-		return playerBoundary.checkCollision(otherEntityBoundary);
-	}
-
-	@Override
-	public void draw() {
-		if (currentSprite != null) {
-			Renderer.playAnimation(currentSprite);
-		}
-	}
-
 	public void die() {
-		setCurrentSprite(playerAnimations.getPlayerDying());
-	}
-
-	private boolean checkCollisions(int x, int y) {
-		playerBoundary.setPosition(x, y);
-
-		for (Entity e : Sandbox.getEntities()) {
-			if (e != this && isColliding(e) && !e.isPlayerCollisionFriendly()) {
-				playerBoundary.setPosition(positionX, positionY);
-
-				// System.out.println("Player x=" + getPositionX() + " y=" + getPositionY() + "
-				// colliding with x="
-				// + e.getPositionX() + " y=" + e.getPositionY());
-
-				return true;
-			}
-		}
-		playerBoundary.setPosition(positionX, positionY);
-		return false;
+		setCurrentSprite(((PlayerAnimations) animations).getPlayerDying());
 	}
 
 	@Override
@@ -110,50 +27,41 @@ public class Player implements MovingEntity, KillableEntity {
 		steps *= GameLoop.getDeltaTime();
 
 		if (steps == 0) {
-			setCurrentSprite(playerAnimations.getPlayerIdleSprite());
+			setCurrentSprite(((PlayerAnimations) animations).getPlayerIdleSprite());
 			return;
 		} else {
 			switch (direction) {
 			case UP:
 				if (!checkCollisions(positionX, positionY - steps)) {
 					positionY -= steps;
-					setCurrentSprite(playerAnimations.getMoveUpSprite());
+					setCurrentSprite(((PlayerAnimations) animations).getMoveUpSprite());
 					currentDirection = Direction.UP;
 				}
 				break;
 			case DOWN:
 				if (!checkCollisions(positionX, positionY + steps)) {
 					positionY += steps;
-					setCurrentSprite(playerAnimations.getMoveDownSprite());
+					setCurrentSprite(((PlayerAnimations) animations).getMoveDownSprite());
 					currentDirection = Direction.DOWN;
 				}
 				break;
 			case LEFT:
 				if (!checkCollisions(positionX - steps, positionY)) {
 					positionX -= steps;
-					setCurrentSprite(playerAnimations.getMoveLeftSprite());
+					setCurrentSprite(((PlayerAnimations) animations).getMoveLeftSprite());
 					currentDirection = Direction.LEFT;
 				}
 				break;
 			case RIGHT:
 				if (!checkCollisions(positionX + steps, positionY)) {
 					positionX += steps;
-					setCurrentSprite(playerAnimations.getMoveRightSprite());
+					setCurrentSprite(((PlayerAnimations) animations).getMoveRightSprite());
 					currentDirection = Direction.RIGHT;
 				}
 				break;
 			default:
-				setCurrentSprite(playerAnimations.getPlayerIdleSprite());
+				setCurrentSprite(((PlayerAnimations) animations).getPlayerIdleSprite());
 			}
-		}
-	}
-
-	@Override
-	public void reduceHealth(int damage) {
-		if (health - damage <= 0) {
-			isAlive = false;
-		} else {
-			health -= damage;
 		}
 	}
 
@@ -163,24 +71,27 @@ public class Player implements MovingEntity, KillableEntity {
 		die();
 	}
 
-	@Override
-	public int getPositionX() {
-		return positionX;
-	}
-
-	@Override
-	public int getPositionY() {
-		return positionY;
-	}
-
-	@Override
-	public RectBoundedBox getBoundingBox() {
-		playerBoundary.setPosition(positionX, positionY);
-		return playerBoundary;
-	}
-
-	@Override
 	public boolean isPlayerCollisionFriendly() {
 		return true;
+	}
+
+	protected void setAnimations(Entity e) {
+		animations = new PlayerAnimations(e);
+	}
+
+	protected int entityWidth() {
+		return GlobalConstants.PLAYER_WIDTH;
+	}
+
+	protected int entityHeight() {
+		return GlobalConstants.PLAYER_HEIGHT;
+	}
+	
+	public int setHealth() {
+		return 100;
+	}
+
+	protected String setName() {
+		return "Player";
 	}
 }

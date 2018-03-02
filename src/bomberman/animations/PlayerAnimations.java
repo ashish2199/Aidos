@@ -16,7 +16,7 @@ import javafx.scene.shape.Rectangle;
 /**
  * @author Ashish
  */
-public class PlayerAnimations {
+public class PlayerAnimations implements Animations{
 
     Sprite moveRight;
     Sprite moveLeft;
@@ -65,5 +65,9 @@ public class PlayerAnimations {
     }
     public Sprite getPlayerDying(){
         return die;
+    }
+    
+    public Sprite getSprite() {
+    		return getPlayerIdleSprite();
     }
 }

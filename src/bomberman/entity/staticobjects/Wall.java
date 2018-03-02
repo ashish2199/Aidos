@@ -5,8 +5,7 @@
  */
 package bomberman.entity.staticobjects;
 
-import bomberman.Renderer;
-import bomberman.animations.Sprite;
+import bomberman.animations.WallAnimations;
 import bomberman.entity.Entity;
 import bomberman.entity.StaticEntity;
 import bomberman.entity.boundedbox.RectBoundedBox;
@@ -16,25 +15,16 @@ import javafx.scene.paint.Color;
  *
  * @author kdost
  */
-public class Wall implements StaticEntity {
-    public int positionX = 0;
-    public int positionY = 0;
-    private int height;
-    private int width;
-    private Color wallColor;
-    private Sprite sprite;
+public class Wall extends StaticEntity {
+	
+	private final int wallWidth = 16;
+	private final int wallHeight = 16;
+	private Color wallColor;
     RectBoundedBox entityBoundary;
 
 
     public Wall (int x, int y) {
-    	positionX = x;
-    	positionY = y;
-
-    	width = 16;
-    	height = 16;
-
-    	sprite = new Sprite(this, 16, 0, 348, 123, 1, 16, 16, 2, false);
-    	entityBoundary = new RectBoundedBox(positionX, positionY, width, height);
+    		super(x, y);
     }
 
     public void changeColor(Color color) {
@@ -47,39 +37,32 @@ public class Wall implements StaticEntity {
     }
 
     @Override
-    public void draw() {
-        Renderer.playAnimation(sprite);
-    }
-
-    @Override
     public void removeFromScene() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    @Override
-    public int getPositionX() {
-        return positionX;
-    }
-
-    @Override
-    public int getPositionY() {
-        return positionY;
-    }
-
-    @Override
-    public RectBoundedBox getBoundingBox()
-    {
-            return entityBoundary;
-    }
-
-    @Override
     public boolean isPlayerCollisionFriendly() {
         return false;
     }
 
-	@Override
 	public boolean isAlive() {
 		return true;
+	}
+
+	protected void setAnimations(Entity e) {
+		animations = new WallAnimations(e);
+	}
+
+	protected int entityWidth() {
+		return wallWidth;
+	}
+
+	protected int entityHeight() {
+		return wallHeight;
+	}
+
+	protected String setName() {
+		return "Wall";
 	}
 
 }

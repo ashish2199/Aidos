@@ -9,8 +9,9 @@ package bomberman.entity;
  *
  * @author kdost
  */
-public interface StaticEntity extends Entity {
-	default boolean isAlive() {
-		return true;
+public abstract class StaticEntity extends Entity {
+	protected StaticEntity(int x, int y) {
+		super(x, y);
 	}
+
 }
