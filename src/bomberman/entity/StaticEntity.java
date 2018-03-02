@@ -13,5 +13,10 @@ public abstract class StaticEntity extends Entity {
 	protected StaticEntity(int x, int y) {
 		super(x, y);
 	}
+	
+	public boolean isAlive() {
+		// assuming that static entity defaults to alive
+		return true;
+	}
 
 }

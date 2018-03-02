@@ -73,14 +73,12 @@ public abstract class Entity {
 		entityBoundary.setPosition(positionX, positionY);
 		return entityBoundary;
 	}
-	
-	public boolean isAlive() {
-		return isAlive;
-	}
 
 	public abstract boolean isPlayerCollisionFriendly();
 
 	public abstract void removeFromScene();
+	
+	public abstract boolean isAlive();
 
 	protected abstract void setAnimations(Entity e);
 

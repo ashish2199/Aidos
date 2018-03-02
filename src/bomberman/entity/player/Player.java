@@ -94,4 +94,5 @@ public class Player extends KillableEntity {
 	protected String setName() {
 		return "Player";
 	}
+
 }

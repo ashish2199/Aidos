@@ -12,10 +12,12 @@ package bomberman.entity;
 public abstract class KillableEntity extends MovingEntity {
 
 	private int health;
+	private boolean isAlive;
 
 	protected KillableEntity(int x, int y) {
 		super(x, y);
 		health = getHealth();
+		isAlive = true;
 	}
 
 	public void reduceHealth(int damage) {
@@ -28,6 +30,10 @@ public abstract class KillableEntity extends MovingEntity {
 
 	public int getHealth() {
 		return health;
+	}
+	
+	public boolean isAlive() {
+		return isAlive;
 	}
 
 	public abstract void die();
