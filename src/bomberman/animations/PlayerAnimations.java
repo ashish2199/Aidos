@@ -12,7 +12,7 @@ import bomberman.entity.Entity;
 /**
  * @author Ashish
  */
-public class PlayerAnimations implements Animations{
+public class PlayerAnimations implements Animations {
 
 	Sprite moveRight;
 	Sprite moveLeft;

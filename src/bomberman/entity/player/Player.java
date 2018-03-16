@@ -19,6 +19,7 @@ public class Player extends KillableEntity {
 
 	public void die() {
 		setCurrentSprite(((PlayerAnimations) animations).getPlayerDying());
+		dead = true;
 	}
 
 	@Override
@@ -53,12 +54,11 @@ public class Player extends KillableEntity {
 				}
 				break;
 			case RIGHT:
-				die();
-//				if (!checkCollisions(positionX + steps, positionY)) {
-//					positionX += steps;
-//					setCurrentSprite(((PlayerAnimations) animations).getMoveRightSprite());
-//					currentDirection = Direction.RIGHT;
-//				}
+				 if (!checkCollisions(positionX + steps, positionY)) {
+				 positionX += steps;
+				 setCurrentSprite(((PlayerAnimations) animations).getMoveRightSprite());
+				 currentDirection = Direction.RIGHT;
+				 }
 				break;
 			default:
 				setCurrentSprite(((PlayerAnimations) animations).getPlayerIdleSprite());
@@ -67,9 +67,9 @@ public class Player extends KillableEntity {
 	}
 
 	public void removeFromScene() {
-//		throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods, choose
-//																		// Tools | Templates.
-		die();
+		// throw new UnsupportedOperationException("Not supported yet."); // To change
+		// body of generated methods, choose
+		// // Tools | Templates.
 	}
 
 	public boolean isPlayerCollisionFriendly() {
@@ -87,7 +87,7 @@ public class Player extends KillableEntity {
 	protected int entityHeight() {
 		return GlobalConstants.PLAYER_HEIGHT;
 	}
-	
+
 	public int setHealth() {
 		return 100;
 	}

@@ -27,6 +27,8 @@ public class Renderer {
 	 *
 	 */
 	static Image img;
+	static int deathIndex; // TODO find a way for sequential increment of Sprite index without this
+							// variable
 	static {
 		img = ImageUtils.loadImage("src/Resources/img/sprites_without_border.png");
 	}
@@ -45,22 +47,27 @@ public class Renderer {
 		playAnimation(sprite, gc, time, sprite.hasValidImage());
 	}
 
-	private static void playAnimation(Sprite sprite, GraphicsContext gc, double time, boolean hasValidImage)  {
-		int index = findCurrentFrame(time, sprite.getFrames(), sprite.getPlaySpeed());
+	private static void playAnimation(Sprite sprite, GraphicsContext gc, double time, boolean hasValidImage) {
+		int index = findCurrentFrame(time, sprite, sprite.getFrames(), sprite.getPlaySpeed(), sprite.loopPlay());
 		Image[] imgs = sprite.getSpriteImages();
 		double w = sprite.getWidth() * sprite.getScale();
 		double h = sprite.getHeight() * sprite.getScale();
 		if (hasValidImage) {
 			gc.drawImage(imgs[index], sprite.getXPosition(), sprite.getYPosition(), w, h);
-		}
-		else {
-			int newSpriteSheetX = sprite.getReversePlay() ? sprite.getX() + index * sprite.getSize() : sprite.getX() ;
-			int newSpriteSheetY = sprite.getReversePlay() ? sprite.getY()  : sprite.getY()  + index * sprite.getSize();
-			gc.drawImage(img, newSpriteSheetX, newSpriteSheetY, sprite.getWidth(), sprite.getHeight(), sprite.getXPosition(), sprite.getYPosition(), w, h);;
+		} else {
+			int newSpriteSheetX = sprite.leftToRight() ? sprite.getX() + index * sprite.getSize() : sprite.getX();
+			int newSpriteSheetY = sprite.leftToRight() ? sprite.getY() : sprite.getY() + index * sprite.getSize();
+			gc.drawImage(img, newSpriteSheetX, newSpriteSheetY, sprite.getWidth(), sprite.getHeight(),
+					sprite.getXPosition(), sprite.getYPosition(), w, h);
+			;
 		}
 	}
 
-	private static int findCurrentFrame(double time, int totalFrames, double speed) {
-		return (int) (time % (totalFrames * speed) / speed);
+	private static int findCurrentFrame(double time, Sprite sprite, int totalFrames, double speed, boolean loopPlay) {
+		if (loopPlay) {
+			return (int) ((time % (totalFrames * speed)) / speed);
+		} else {
+			return Math.min(deathIndex++, sprite.getFrames() - 1);
+		}
 	}
 }

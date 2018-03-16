@@ -61,8 +61,8 @@ public class Sprite {
 		return specs.getSize();
 	}
 	
-	public boolean getReversePlay() {
-		return specs.getReversePlay();
+	public boolean leftToRight() {
+		return specs.leftToRight();
 	}
 	
 	public boolean hasValidImage() {

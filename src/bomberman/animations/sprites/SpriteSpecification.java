@@ -16,7 +16,7 @@ public enum SpriteSpecification {
 	PLAYERUP(30, 0.1, 60, 0, 3, GlobalConstants.PLAYER_WIDTH - 1.5, GlobalConstants.PLAYER_HEIGHT, 2, false), 
 	PLAYERIDLE(30,0.1, 118, 0, 1, GlobalConstants.PLAYER_WIDTH + 2, GlobalConstants.PLAYER_HEIGHT, 2, false), 
 	PLAYERRIGHT(30, 0.1, 90, 0, 3, GlobalConstants.PLAYER_WIDTH,GlobalConstants.PLAYER_HEIGHT, 2, false), 
-	PLAYERDIE(30, 0.1, getDieSpecs(), GlobalConstants.PLAYER_WIDTH + 2, GlobalConstants.PLAYER_HEIGHT + 2, 2, false, false), 
+	PLAYERDIE(30, 0.3, getDieSpecs(), GlobalConstants.PLAYER_WIDTH + 2, GlobalConstants.PLAYER_HEIGHT + 2, 2, false, false), 
 	WALL(16, 0, 348, 123, 1, 16, 16, 2, false), 
 	BOMB(30, 0.3, getBombSpecs(), GlobalConstants.PLAYER_WIDTH + 2, GlobalConstants.PLAYER_HEIGHT + 2, 2, false);
 
@@ -28,7 +28,7 @@ public enum SpriteSpecification {
 	private double height;
 	private int scale;
 	private int actualSize;
-	private boolean reversePlay;
+	private boolean leftToRight;
 	private Image[] spriteImages;
 	private boolean hasValidSpriteImages;
 	private boolean loopPlay;
@@ -105,8 +105,8 @@ public enum SpriteSpecification {
 		return actualSize;
 	}
 
-	public boolean getReversePlay() {
-		return reversePlay;
+	public boolean leftToRight() {
+		return leftToRight;
 	}
 
 	public boolean hasValidImage() {
@@ -124,7 +124,7 @@ public enum SpriteSpecification {
 		this.width = width;
 		this.height = height;
 		this.scale = scale;
-		reversePlay = leftToRight;
+		this.leftToRight = leftToRight;
 		this.numberOfFrames = numberOfFrames;
 	}
 
@@ -139,12 +139,13 @@ public enum SpriteSpecification {
 	private static List<Rectangle> getDieSpecs() {
 		List<Rectangle> specs = new ArrayList<>();
 		specs.add(new Rectangle(149, 0, 20, 21));
-		specs.add(new Rectangle(179, 1, 19, 20));
-		specs.add(new Rectangle(118, 30, 21, 21));
+		specs.add(new Rectangle(179, 0, 19, 20));
+		specs.add(new Rectangle(119, 30, 21, 21));
 		specs.add(new Rectangle(149, 30, 20, 21));
 		specs.add(new Rectangle(179, 30, 19, 21));
 		specs.add(new Rectangle(118, 60, 21, 21));
 		specs.add(new Rectangle(147, 60, 23, 22));
+		specs.add(new Rectangle(179, 60, 23, 22));
 		return specs;
 	}
 
