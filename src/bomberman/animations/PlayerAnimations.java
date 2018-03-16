@@ -29,6 +29,7 @@ public class PlayerAnimations implements Animations{
 		moveUp = new Sprite(e, SpriteSpecification.PLAYERUP);
 		moveRight = new Sprite(e, SpriteSpecification.PLAYERRIGHT);
 		idle = new Sprite(e, SpriteSpecification.PLAYERIDLE);
+		die = new Sprite(e, SpriteSpecification.PLAYERDIE);
 	}
 
 	public Sprite getMoveRightSprite() {

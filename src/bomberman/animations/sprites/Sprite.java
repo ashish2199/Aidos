@@ -68,4 +68,8 @@ public class Sprite {
 	public boolean hasValidImage() {
 		return specs.hasValidImage();
 	}
+	
+	public boolean loopPlay() {
+		return specs.loopPlay();
+	}
 }

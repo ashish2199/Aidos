@@ -53,11 +53,12 @@ public class Player extends KillableEntity {
 				}
 				break;
 			case RIGHT:
-				if (!checkCollisions(positionX + steps, positionY)) {
-					positionX += steps;
-					setCurrentSprite(((PlayerAnimations) animations).getMoveRightSprite());
-					currentDirection = Direction.RIGHT;
-				}
+				die();
+//				if (!checkCollisions(positionX + steps, positionY)) {
+//					positionX += steps;
+//					setCurrentSprite(((PlayerAnimations) animations).getMoveRightSprite());
+//					currentDirection = Direction.RIGHT;
+//				}
 				break;
 			default:
 				setCurrentSprite(((PlayerAnimations) animations).getPlayerIdleSprite());

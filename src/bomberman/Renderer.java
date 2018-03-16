@@ -8,71 +8,59 @@ import javafx.scene.image.Image;
 
 public class Renderer {
 
-    /**
-     *
-     * @author CoreyHendrey
-     *
-     * gc is GraphicsContext on which we draw the sprite time is the current
-     * time duration that we need to sync up to, ie the time duration of the
-     * tick from the gameloop
-     *
-     * This works by first finding the top left pixel of the animation that is
-     * playing, with spriteLocationOnSheet(X/Y). It then figures out which from
-     * we are up to using findCurrentFrame().
-     *
-     * It then draws the frame at x, y using the height and width.
-     *
-     * It uses 'actualSize' to find the next sprite, because of padding on the
-     * width and height.
-     *
-     */
-    static Image img;
-    static {
-        img = ImageUtils.loadImage("src/Resources/img/sprites_without_border.png");
-    }
-    public static void init() {
-        
-    }
-    public static Image getSpiteSheet(){
-        return img;
-    }
-    public static void playAnimation(Sprite sprite) {
-        double time = GameLoop.getCurrentGameTime();
-        GraphicsContext gc = Sandbox.getGraphicsContext();
-        if (sprite.hasValidImage()) {
-            playAnimation(sprite.getSpriteImages(), sprite.getPlaySpeed(), sprite.getXPosition(), sprite.getYPosition(), sprite.getWidth()*sprite.getScale(), sprite.getHeight()*sprite.getScale());
-        } else {
-            playAnimation(gc, time, sprite.getSize(), sprite.getX(), sprite.getY(), sprite.getFrames(), sprite.getXPosition(), sprite.getYPosition(), sprite.getWidth(), sprite.getHeight(), sprite.getScale(), sprite.getReversePlay(), sprite.getPlaySpeed());
-        }
-    }
+	/**
+	 *
+	 * @author CoreyHendrey
+	 *
+	 *         gc is GraphicsContext on which we draw the sprite time is the current
+	 *         time duration that we need to sync up to, ie the time duration of the
+	 *         tick from the gameloop
+	 *
+	 *         This works by first finding the top left pixel of the animation that
+	 *         is playing, with spriteLocationOnSheet(X/Y). It then figures out
+	 *         which from we are up to using findCurrentFrame().
+	 *
+	 *         It then draws the frame at x, y using the height and width.
+	 *
+	 *         It uses 'actualSize' to find the next sprite, because of padding on
+	 *         the width and height.
+	 *
+	 */
+	static Image img;
+	static {
+		img = ImageUtils.loadImage("src/Resources/img/sprites_without_border.png");
+	}
 
-    public static void playAnimation(Image[] imgs, double speed, int x, int y, double w, double h) {
-        double time = GameLoop.getCurrentGameTime();
-        GraphicsContext gc = Sandbox.getGraphicsContext();
-        int numberOfFrames = imgs.length;
-        int index = findCurrentFrame(time, numberOfFrames, speed);
-        //System.out.println("index= "+index+" x="+x+" y="+y+" w="+w+" h="+h+" no of frames="+imgs.length+" speed="+speed+" time="+time);
-        gc.drawImage(imgs[index], x, y, w, h);
-    }
+	public static void init() {
 
-    public static void playAnimation(GraphicsContext gc, double time, int actualSize, int startingPointX, int startingPointY, int numberOfFrames, int x, int y, double width, double height, double scale, boolean reversePlay, double playSpeed) {
+	}
 
-        double speed = playSpeed >= 0 ? playSpeed : 0.3;
+	public static Image getSpiteSheet() {
+		return img;
+	}
 
-        // index reporesents the index of image to be drawn from the set of images representing frames of animation
-        int index = findCurrentFrame(time, numberOfFrames, speed);
+	public static void playAnimation(Sprite sprite) {
+		double time = GameLoop.getCurrentGameTime();
+		GraphicsContext gc = Sandbox.getGraphicsContext();
+		playAnimation(sprite, gc, time, sprite.hasValidImage());
+	}
 
-        // newX represents the X coardinate of image in the spritesheet image to be drawn on screen
-        int newSpriteSheetX = reversePlay ? startingPointX + index * actualSize : startingPointX;
-        // newY represents the X coardinate of image in the spritesheet image to be drawn on screen
-        int newSpriteSheetY = reversePlay ? startingPointY : startingPointY + index * actualSize;
-        //System.out.println("Time, Total Frames" + time + ", " + numberOfFrames);
-        //System.out.println("index=" + index + " newSpriteSheetX=" + newSpriteSheetX + " newSpriteSheetY=" + newSpriteSheetY + " width=" + width + " height=" + height + " x=" + x + " y=" + y + " width=" + width * scale + " height=" + height * scale);
-        //img,             sx,              sy,     w,     h,  dx, dy,        dw,             dh
-        gc.drawImage(img, newSpriteSheetX, newSpriteSheetY, width, height, x, y, width * scale, height * scale);
-    }
+	private static void playAnimation(Sprite sprite, GraphicsContext gc, double time, boolean hasValidImage)  {
+		int index = findCurrentFrame(time, sprite.getFrames(), sprite.getPlaySpeed());
+		Image[] imgs = sprite.getSpriteImages();
+		double w = sprite.getWidth() * sprite.getScale();
+		double h = sprite.getHeight() * sprite.getScale();
+		if (hasValidImage) {
+			gc.drawImage(imgs[index], sprite.getXPosition(), sprite.getYPosition(), w, h);
+		}
+		else {
+			int newSpriteSheetX = sprite.getReversePlay() ? sprite.getX() + index * sprite.getSize() : sprite.getX() ;
+			int newSpriteSheetY = sprite.getReversePlay() ? sprite.getY()  : sprite.getY()  + index * sprite.getSize();
+			gc.drawImage(img, newSpriteSheetX, newSpriteSheetY, sprite.getWidth(), sprite.getHeight(), sprite.getXPosition(), sprite.getYPosition(), w, h);;
+		}
+	}
 
-    private static int findCurrentFrame(double time, int totalFrames, double speed) {
-        return (int) (time % (totalFrames * speed) / speed);
-    }
+	private static int findCurrentFrame(double time, int totalFrames, double speed) {
+		return (int) (time % (totalFrames * speed) / speed);
+	}
 }
