@@ -12,9 +12,14 @@ import bomberman.entity.Entity;
 /**
  * @author Ashish
  */
-public class PlayerAnimations implements Animations {
+public class PlayerAnimations implements Animations{
 
-	Sprite moveRight, moveLeft, moveUp, moveDown, idle, die;
+	Sprite moveRight;
+	Sprite moveLeft;
+	Sprite moveUp;
+	Sprite moveDown;
+	Sprite idle;
+	Sprite die;
 	double playSpeed;
 
 	public PlayerAnimations(Entity e) {
@@ -24,7 +29,6 @@ public class PlayerAnimations implements Animations {
 		moveUp = new Sprite(e, SpriteSpecification.PLAYERUP);
 		moveRight = new Sprite(e, SpriteSpecification.PLAYERRIGHT);
 		idle = new Sprite(e, SpriteSpecification.PLAYERIDLE);
-		die = new Sprite(e, SpriteSpecification.PLAYERDIE);
 	}
 
 	public Sprite getMoveRightSprite() {
@@ -54,4 +58,5 @@ public class PlayerAnimations implements Animations {
 	public Sprite getSprite() {
 		return getPlayerIdleSprite();
 	}
+
 }
