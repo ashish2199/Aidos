@@ -13,10 +13,16 @@ import java.util.Collection;
 import java.util.Vector;
 
 import bomberman.entity.Entity;
+import bomberman.entity.KillableEntity;
 import bomberman.entity.factory.EntityFactory;
-import bomberman.entity.killableentity.KillableEntity;
-import bomberman.entity.killableentity.player.Player;
+import bomberman.entity.player.Player;
 import bomberman.utils.Tiling;
+
+/**
+ * Configuration class for the Sandbox, used to load the different maps 
+ * @author tialim
+ *
+ */
 
 public class MapLoader {
 
@@ -30,7 +36,7 @@ public class MapLoader {
 	String parentPath = "src/resources/scenes/";
 
 	public MapLoader() {
-		entities = new Vector<Entity>();
+		entities = new Vector<Entity>();	// vector used for synchronization, opening a possibility of running multi-player on different threads
 		killableEntities = new Vector<KillableEntity>();
 		loadMap("Level1.txt");
 	}

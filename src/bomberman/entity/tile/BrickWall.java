@@ -1,8 +1,9 @@
-package bomberman.entity.killableentity;
+package bomberman.entity.tile;
 
 import bomberman.Sandbox;
 import bomberman.constants.EntityDimensions;
 import bomberman.entity.Entity;
+import bomberman.entity.KillableEntity;
 import bomberman.entity.configurations.animations.KillableEntityAnimations;
 import bomberman.entity.configurations.animations.sprites.SpriteSpecification;
 import bomberman.entity.configurations.boundedbox.CollidableType;

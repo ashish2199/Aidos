@@ -1,13 +1,13 @@
-package bomberman.entity.killableentity.player;
+package bomberman.entity.player;
 
 import bomberman.Sandbox;
 import bomberman.constants.EntityDimensions;
 import bomberman.constants.GlobalConstants;
 import bomberman.entity.Entity;
+import bomberman.entity.MovingEntity;
 import bomberman.entity.configurations.animations.PlayerAnimations;
 import bomberman.entity.configurations.boundedbox.CollidableType;
 import bomberman.entity.configurations.boundedbox.RectBoundedBox;
-import bomberman.entity.configurations.movements.MovingEntity;
 import bomberman.gamecontroller.InputManager;
 
 public class Player extends MovingEntity {

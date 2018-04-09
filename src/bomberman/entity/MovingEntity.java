@@ -3,17 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bomberman.entity.configurations.movements;
+package bomberman.entity;
 
 import static bomberman.constants.Direction.*;
 
 import bomberman.Sandbox;
 import bomberman.constants.Direction;
-import bomberman.entity.Entity;
-import bomberman.entity.killableentity.KillableEntity;
+import bomberman.entity.configurations.movements.MovementStrategy;
 
 /**
- *
+ * @author tialim
  * @author kdost
  */
 public abstract class MovingEntity extends KillableEntity {
@@ -39,7 +38,6 @@ public abstract class MovingEntity extends KillableEntity {
 
 	protected boolean checkCollisions(int x, int y, Sandbox sb) {
 		entityBoundary.setPosition(x, y);
-
 		for (Entity e : sb) {
 			if (!e.equals(this) && isColliding(e) && !e.isPlayerCollisionFriendly()) {
 				entityBoundary.setPosition(positionX, positionY);
@@ -49,8 +47,6 @@ public abstract class MovingEntity extends KillableEntity {
 		entityBoundary.setPosition(positionX, positionY);
 		return false;
 	}
-
-	// public abstract void move(int steps, Direction direction);
 
 	protected void move(Sandbox sb) {
 		if (!dead) {

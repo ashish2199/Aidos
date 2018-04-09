@@ -1,8 +1,8 @@
-package bomberman.entity.killableentity.enemy;
+package bomberman.entity.enemy;
 
 import bomberman.Sandbox;
+import bomberman.entity.MovingEntity;
 import bomberman.entity.configurations.boundedbox.CollidableType;
-import bomberman.entity.configurations.movements.MovingEntity;
 
 public abstract class Enemy extends MovingEntity{
 

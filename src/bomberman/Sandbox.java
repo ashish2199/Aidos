@@ -12,9 +12,9 @@ import java.util.Vector;
 import java.util.function.Predicate;
 
 import bomberman.entity.Entity;
+import bomberman.entity.KillableEntity;
 import bomberman.entity.factory.EntityFactory;
-import bomberman.entity.killableentity.KillableEntity;
-import bomberman.entity.killableentity.player.Player;
+import bomberman.entity.player.Player;
 import bomberman.gamecontroller.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;

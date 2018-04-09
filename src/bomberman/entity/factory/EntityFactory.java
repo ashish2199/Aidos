@@ -2,12 +2,12 @@ package bomberman.entity.factory;
 
 import bomberman.entity.Entity;
 import bomberman.entity.bomb.BlackBomb;
-import bomberman.entity.killableentity.BrickWall;
-import bomberman.entity.killableentity.enemy.Ballom;
-import bomberman.entity.killableentity.enemy.Bear;
-import bomberman.entity.killableentity.enemy.Doria;
-import bomberman.entity.killableentity.player.Player;
-import bomberman.entity.staticentity.Wall;
+import bomberman.entity.enemy.Ballom;
+import bomberman.entity.enemy.Bear;
+import bomberman.entity.enemy.Doria;
+import bomberman.entity.player.Player;
+import bomberman.entity.tile.BrickWall;
+import bomberman.entity.tile.Wall;
 
 
 public enum EntityFactory {

@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bomberman.entity.staticentity;
+package bomberman.entity;
 
 import bomberman.Sandbox;
-import bomberman.entity.Entity;
 
 /**
  * @author tialim

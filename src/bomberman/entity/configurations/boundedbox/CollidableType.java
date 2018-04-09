@@ -1,5 +1,14 @@
 package bomberman.entity.configurations.boundedbox;
 
+/**
+ * Different entities hold different collidable types.
+ * If IMPERMEABLE, the entity's position cannot overlap with any other entity's position, including explosions. Used for standard walls.
+ * If EXPLODABLE, the entity's position cannot overlap with any entity other than an explosion. Used for brick walls.
+ * If PENETRABLE, then entity's position can overlap with any other entity's position.
+ * @author tialim
+ *
+ */
+
 public enum CollidableType {
 	
 	IMPERMEABLE(false, false), EXPLODABLE(false, true), PENETRABLE(true, true);

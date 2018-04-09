@@ -14,7 +14,8 @@ import bomberman.entity.configurations.movements.MovementStrategy;
 import javafx.scene.input.KeyCode;
 
 /**
- *
+ * Responsible for taking inputs from the keyboard and translating the KeyCode instruction into the context of the game
+ * @author tialim
  * @author Ashish
  */
 public class InputManager implements MovementStrategy {

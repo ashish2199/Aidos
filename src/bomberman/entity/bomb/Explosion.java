@@ -2,6 +2,10 @@ package bomberman.entity.bomb;
 
 import java.util.Date;
 
+/**
+ * @author tialim
+ */
+
 import bomberman.Sandbox;
 import bomberman.constants.EntityDimensions;
 import bomberman.entity.Entity;
@@ -20,11 +24,12 @@ public class Explosion extends Entity {
 	}
 
 	public boolean isPersistant() {
-		// // TODO make variable
 		return timePast() < EXPLOSION_DURATION;
 	}
 
 	public void update(Sandbox sb) {
+		// explosion is only "dangerous" during exploding phase
+		// ie when the animation is represented by a growing explosion, not when it is fading off
 		if (timePast() < EXPLOSION_DURATION / 2) {
 			sb.killCollidingEntities(this);
 		}

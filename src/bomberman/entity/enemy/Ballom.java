@@ -1,4 +1,4 @@
-package bomberman.entity.killableentity.enemy;
+package bomberman.entity.enemy;
 
 import bomberman.constants.EntityDimensions;
 import bomberman.entity.Entity;

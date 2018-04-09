@@ -23,7 +23,6 @@ import java.util.Date;
  */
 public class BlackBomb extends Entity {
 	private Date addedDate;
-	private final int timerDurationInMillis = 2000;
 	private boolean hasExploded;
 
 	enum STATE {
@@ -40,7 +39,7 @@ public class BlackBomb extends Entity {
 	}
 
 	public void update(Sandbox sb) {
-		if (!hasExploded && isExploding()) {
+		if (!hasExploded && timeToExplode()) {
 			hasExploded = true;
 			explode(sb);
 		}
@@ -49,27 +48,15 @@ public class BlackBomb extends Entity {
 	public boolean isPersistant() {
 		return !hasExploded;
 	}
-
-	public boolean isExploding() {
-		return checkBombState() == STATE.EXPLODING;
-	}
-
-	private STATE checkBombState() {
-		long timePast = new Date().getTime() - (timerDurationInMillis + addedDate.getTime());
-		STATE s;
-		if (timePast < 0) {
-			s = STATE.ACTIVE;
-		} else if (timePast < GlobalConstants.BOMB_EXPLODING_TIME) {
-			s = STATE.EXPLODING;
-		} else {
-			s = STATE.DEAD;
-		}
-		return s;
+	
+	private boolean timeToExplode() {
+		long timePast = new Date().getTime() - addedDate.getTime();
+		return timePast > GlobalConstants.BOMB_EXPLODING_TIME;
 	}
 
 	private void explode(Sandbox sb) {
-		for (Direction d: Direction.values()) {
-			ExplosionChain.addExplosionChain(positionX, positionY, d, sb);
+		for (Direction direction: Direction.values()) {
+			ExplosionChain.addExplosionChain(positionX, positionY, direction, sb);
 		}
 	}
 
@@ -81,10 +68,8 @@ public class BlackBomb extends Entity {
 		return "Bomb  " + ID;
 	}
 
-	@Override
 	protected EntityDimensions setED() {
 		return EntityDimensions.BOMBD;
-//		return EntityDimensions.EXPLOSIOND;
 	}
 
 	protected void setCollidableType() {

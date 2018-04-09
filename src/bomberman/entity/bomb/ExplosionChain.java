@@ -9,6 +9,12 @@ import bomberman.constants.GlobalConstants;
 import bomberman.entity.Entity;
 import bomberman.utils.Tiling;
 
+/**
+ * Holds a series of explosions, and the specific direction in which the explosion is emanating from the bomb
+ * @author tialim
+ *
+ */
+
 public class ExplosionChain {
 
 	private static int x, y, radius;
@@ -52,6 +58,7 @@ public class ExplosionChain {
 	}
 
 	private static boolean testEncounter(Entity exp, Predicate<Entity> pred1) {
+		// this method will test if the explosion has encountered (ie has intersected) with any entity matching the predicate
 		Predicate<Entity> pred2 = e -> (!e.equals(exp) && exp.isColliding(e) && pred1.test(e));
 		return sb.getEntities().stream().anyMatch(pred2);
 	}

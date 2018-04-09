@@ -3,16 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bomberman.entity.killableentity;
+package bomberman.entity;
 
 import bomberman.GameLoop;
 import bomberman.constants.GlobalConstants;
-import bomberman.entity.Entity;
 import bomberman.entity.configurations.animations.KillableEntityAnimations;
 import bomberman.entity.configurations.animations.sprites.Sprite;
 
 /**
- *
+ * @author tialim
  * @author kdost
  */
 public abstract class KillableEntity extends Entity {
