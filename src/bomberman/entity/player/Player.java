@@ -14,7 +14,8 @@ public class Player extends MovingEntity {
 
 	public Player(int x, int y) {
 		super(x, y);
-		entityBoundary = new RectBoundedBox(positionX, positionY, (int)ed.gameW - 10, (int)ed.gameH - 10);
+		entityBoundary = new RectBoundedBox(positionX, positionY, (int)ed.gameW - 10, (int)ed.gameH - 5);
+		// this makes it easier to move player around the map 
 		//TODO find a way to remove this
 	}
 	
