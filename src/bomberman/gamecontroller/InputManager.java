@@ -7,48 +7,66 @@ package bomberman.gamecontroller;
 
 import java.util.List;
 
+import static bomberman.constants.Direction.*;
+
 import bomberman.constants.Direction;
-import bomberman.entity.player.Player;
-import bomberman.entity.staticobjects.BlackBomb;
-import bomberman.scenes.Sandbox;
+import bomberman.entity.movements.MovementStrategy;
 import javafx.scene.input.KeyCode;
 
 /**
  *
  * @author Ashish
  */
-public class InputManager {
+public class InputManager implements MovementStrategy {
 
-	public static void handlePlayerMovements() {
+	Direction direction;
+	boolean placeBomb;
+
+	public InputManager() {
+		direction = IDLE;
+		placeBomb = false;
+	}
+
+	public void handlePlayerMovements() {
 		List<KeyCode> keyboardInputs = EventHandler.getInputList();
-		Player player = Sandbox.getPlayer();
 		if (keyboardInputs.isEmpty()) {
-			player.move(0, Direction.DOWN);
+			direction = IDLE;
 		} else {
 			switch (keyboardInputs.get(0)) {
 			case UP:
 			case W:
-				player.move(5, Direction.UP);
+				direction = UP;
 				break;
 			case DOWN:
 			case S:
-				player.move(5, Direction.DOWN);
+				direction = DOWN;
 				break;
 			case LEFT:
 			case A:
-				player.move(5, Direction.LEFT);
+				direction = LEFT;
 				break;
 			case RIGHT:
 			case D:
-				player.move(5, Direction.RIGHT);
+				direction = RIGHT;
 				break;
 			case SPACE:
-				Sandbox.addEntityToGame(new BlackBomb(player.getPositionX(), player.getPositionY()));
+				placeBomb = true;
 				break;
 			default:
-				player.move(0, Direction.DOWN);
+				direction = IDLE;
 				break;
 			}
 		}
+	}
+
+	public Direction getDirection() {
+		handlePlayerMovements();
+		return direction;
+	}
+
+	public boolean placeBomb() {
+		placeBomb = false;
+		handlePlayerMovements();
+		return placeBomb;
 	}
 }

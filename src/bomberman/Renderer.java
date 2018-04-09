@@ -1,7 +1,6 @@
 package bomberman;
 
 import bomberman.animations.sprites.Sprite;
-import bomberman.scenes.Sandbox;
 import bomberman.utils.ImageUtils;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -26,48 +25,37 @@ public class Renderer {
 	 *         the width and height.
 	 *
 	 */
-	static Image img;
-	static int deathIndex; // TODO find a way for sequential increment of Sprite index without this
-							// variable
+	static Image img1, img2;
 	static {
-		img = ImageUtils.loadImage("src/Resources/img/sprites_without_border.png");
+		img1 = ImageUtils.loadImage("src/Resources/img/sprites_without_border.png");
+		img2 = ImageUtils.loadImage("src/Resources/img/sprite2.png");
 	}
 
 	public static void init() {
 
 	}
 
-	public static Image getSpiteSheet() {
-		return img;
+	public static Image getSpriteSheet(int index) {
+		return (index == 1) ? img1: img2;
 	}
 
-	public static void playAnimation(Sprite sprite) {
+	public static void playAnimation(Sprite sprite, GraphicsContext gc) {
 		double time = GameLoop.getCurrentGameTime();
-		GraphicsContext gc = Sandbox.getGraphicsContext();
 		playAnimation(sprite, gc, time, sprite.hasValidImage());
 	}
 
 	private static void playAnimation(Sprite sprite, GraphicsContext gc, double time, boolean hasValidImage) {
-		int index = findCurrentFrame(time, sprite, sprite.getFrames(), sprite.getPlaySpeed(), sprite.loopPlay());
+		int index = sprite.getFrame(time);
 		Image[] imgs = sprite.getSpriteImages();
-		double w = sprite.getWidth() * sprite.getScale();
-		double h = sprite.getHeight() * sprite.getScale();
+		double w = sprite.ED().gameW;
+		double h = sprite.ED().gameH;
 		if (hasValidImage) {
 			gc.drawImage(imgs[index], sprite.getXPosition(), sprite.getYPosition(), w, h);
 		} else {
 			int newSpriteSheetX = sprite.leftToRight() ? sprite.getX() + index * sprite.getSize() : sprite.getX();
 			int newSpriteSheetY = sprite.leftToRight() ? sprite.getY() : sprite.getY() + index * sprite.getSize();
-			gc.drawImage(img, newSpriteSheetX, newSpriteSheetY, sprite.getWidth(), sprite.getHeight(),
-					sprite.getXPosition(), sprite.getYPosition(), w, h);
-			;
-		}
-	}
-
-	private static int findCurrentFrame(double time, Sprite sprite, int totalFrames, double speed, boolean loopPlay) {
-		if (loopPlay) {
-			return (int) ((time % (totalFrames * speed)) / speed);
-		} else {
-			return Math.min(deathIndex++, sprite.getFrames() - 1);
+			gc.drawImage(img1, newSpriteSheetX, newSpriteSheetY, sprite.ED().width, sprite.ED().height, sprite.getXPosition(),
+					sprite.getYPosition(), w, h);
 		}
 	}
 }

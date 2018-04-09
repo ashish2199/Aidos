@@ -6,8 +6,11 @@
 package bomberman.entity;
 
 import bomberman.Renderer;
+import bomberman.Sandbox;
 import bomberman.animations.Animations;
 import bomberman.animations.sprites.Sprite;
+import bomberman.constants.EntityDimensions;
+import bomberman.entity.boundedbox.CollidableType;
 import bomberman.entity.boundedbox.RectBoundedBox;
 
 /**
@@ -15,26 +18,29 @@ import bomberman.entity.boundedbox.RectBoundedBox;
  * @author Ashish
  */
 public abstract class Entity {
+	protected static int IDGenerator = 0;
+	protected int ID;
 	protected int positionX;
 	protected int positionY;
-	private int height;
-	private int width;
+	protected boolean isPersistant;
+	protected EntityDimensions ed;
 	protected RectBoundedBox entityBoundary;
 	protected Sprite sprite;
 	protected Animations animations;
-	protected boolean isAlive;
 	protected String name;
+	protected CollidableType collidableType;
 
 	protected Entity(int x, int y) {
 		positionX = x;
 		positionY = y;
-		width = entityWidth();
-		height = entityHeight();
+		ed = setED();
 		setAnimations(this);
 		sprite = animations.getSprite();
-		entityBoundary = new RectBoundedBox(positionX, positionY, width, height);
-		isAlive = true;
+		entityBoundary = new RectBoundedBox(positionX, positionY, (int)ed.gameW, (int)ed.gameH);
+		isPersistant = true;
 		name = setName();
+		ID = IDGenerator++;
+		setCollidableType();
 	}
 
 	public boolean isColliding(Entity b) {
@@ -42,9 +48,9 @@ public abstract class Entity {
 		return entityBoundary.checkCollision(otherEntityBoundary);
 	}
 
-	public void draw() {
+	public void draw(Sandbox sb) {
 		if (sprite != null) {
-			Renderer.playAnimation(sprite);
+			Renderer.playAnimation(sprite, sb.getGraphicsContext());
 		}
 	}
 
@@ -60,6 +66,14 @@ public abstract class Entity {
 		String s = "Entity: " + name + "\t Location: " + "(" + positionX + ", " + positionY + ").";
 		return s;
 	}
+	
+	public boolean isKillable() {
+		return false;
+	}
+	
+	public boolean equals(Entity other) {
+		return ID == other.ID;
+	}
 
 	protected void setCurrentSprite(Sprite s) {
 		if (s != null) {
@@ -74,18 +88,29 @@ public abstract class Entity {
 		return entityBoundary;
 	}
 
-	public abstract boolean isPlayerCollisionFriendly();
-
-	public abstract void removeFromScene();
+	public boolean isPlayerCollisionFriendly() {
+		return collidableType.isPlayerCollidable();
+	}
 	
-	public abstract boolean isAlive();
+	public boolean isExplodable() {
+		return collidableType.isExplodable();
+	}
+	
+	public boolean isImpermeable() {
+		return collidableType.isImpermeable();
+	}
+	
+	public abstract boolean isPersistant();
 
 	protected abstract void setAnimations(Entity e);
-
-	protected abstract int entityWidth();
-
-	protected abstract int entityHeight();
+	
+	protected abstract void setCollidableType();
+	
+	public abstract void update(Sandbox sb);
 
 	protected abstract String setName();
+	
+	protected abstract EntityDimensions setED();
+	
 
 }

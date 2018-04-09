@@ -1,5 +1,6 @@
 package bomberman.animations.sprites;
 
+import bomberman.constants.EntityDimensions;
 import bomberman.entity.Entity;
 import javafx.scene.image.Image;
 
@@ -9,12 +10,16 @@ public class Sprite {
 	 * @author CoreyHendrey
 	 */
 
-	public Entity entityReference;
-	SpriteSpecification specs;
+	private Entity entityReference;
+	private SpriteSpecification specs;
+	private double frameCounterHelper;
+	private int frameCounter;
 
 	public Sprite(Entity e, SpriteSpecification ss) {
 		entityReference = e;
 		specs = ss;
+		frameCounterHelper = 0;
+		frameCounter = 0;
 	}
 
 	public int getXPosition() {
@@ -29,10 +34,6 @@ public class Sprite {
 		return specs.getSpriteImages();
 	}
 
-	public double getPlaySpeed() {
-		return specs.getPlaySpeed();
-	}
-
 	public int getX() {
 		return specs.getX();
 	}
@@ -41,35 +42,34 @@ public class Sprite {
 		return specs.getY();
 	}
 
-	public int getFrames() {
-		return specs.getFrames();
+	public int getFrame(double time) {
+		int totalFrames = specs.getNoOfFrames();
+		double speed = specs.getPlaySpeed();
+		return (specs.loopPlay()) ? (int) ((time % (totalFrames * speed)) / speed) : nextFrame();
 	}
 
-	public double getWidth() {
-		return specs.getWidth();
-	}
-
-	public double getHeight() {
-		return specs.getHeight();
-	}
-
-	public int getScale() {
-		return specs.getScale();
+	public EntityDimensions ED() {
+		return specs.ED();
 	}
 
 	public int getSize() {
 		return specs.getSize();
 	}
-	
+
 	public boolean leftToRight() {
 		return specs.leftToRight();
 	}
-	
+
 	public boolean hasValidImage() {
 		return specs.hasValidImage();
 	}
-	
-	public boolean loopPlay() {
-		return specs.loopPlay();
+
+	private int nextFrame() {
+		// if there is a next frame, return its index, otherwise return the last frame's
+		// index
+		int maxFrame = specs.getNoOfFrames() - 1;
+		frameCounterHelper += specs.getPlaySpeed();
+		frameCounter = (int)(frameCounterHelper);
+		return (frameCounter <= maxFrame) ? frameCounter : maxFrame;
 	}
 }

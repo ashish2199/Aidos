@@ -12,24 +12,16 @@ import bomberman.entity.Entity;
 /**
  * @author Ashish
  */
-public class PlayerAnimations implements Animations {
+public class PlayerAnimations extends KillableEntityAnimations {
 
-	Sprite moveRight;
-	Sprite moveLeft;
-	Sprite moveUp;
-	Sprite moveDown;
-	Sprite idle;
-	Sprite die;
-	double playSpeed;
+	private Sprite moveRight, moveLeft, moveUp, moveDown;
 
 	public PlayerAnimations(Entity e) {
-		playSpeed = 0.1;
+		super(e, SpriteSpecification.PLAYERIDLE, SpriteSpecification.PLAYERDIE);
 		moveDown = new Sprite(e, SpriteSpecification.PLAYERDOWN);
 		moveLeft = new Sprite(e, SpriteSpecification.PLAYERLEFT);
 		moveUp = new Sprite(e, SpriteSpecification.PLAYERUP);
 		moveRight = new Sprite(e, SpriteSpecification.PLAYERRIGHT);
-		idle = new Sprite(e, SpriteSpecification.PLAYERIDLE);
-		die = new Sprite(e, SpriteSpecification.PLAYERDIE);
 	}
 
 	public Sprite getMoveRightSprite() {
@@ -48,16 +40,8 @@ public class PlayerAnimations implements Animations {
 		return moveDown;
 	}
 
-	public Sprite getPlayerIdleSprite() {
-		return idle;
-	}
-
-	public Sprite getPlayerDying() {
-		return die;
-	}
-
 	public Sprite getSprite() {
-		return getPlayerIdleSprite();
+		return idle;
 	}
 
 }

@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bomberman.entity;
+package bomberman.entity.staticobjects;
+
+import bomberman.Sandbox;
+import bomberman.entity.Entity;
 
 /**
  *
@@ -14,9 +17,11 @@ public abstract class StaticEntity extends Entity {
 		super(x, y);
 	}
 	
-	public boolean isAlive() {
+	public boolean isPersistant() {
 		// assuming that static entity defaults to alive
 		return true;
 	}
+	
+	public void update(Sandbox sb) {};
 
 }

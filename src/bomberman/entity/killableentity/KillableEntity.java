@@ -3,31 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bomberman.entity;
+package bomberman.entity.killableentity;
 
+import bomberman.GameLoop;
+import bomberman.animations.KillableEntityAnimations;
 import bomberman.animations.sprites.Sprite;
+import bomberman.constants.GlobalConstants;
+import bomberman.entity.Entity;
 
 /**
  *
  * @author kdost
  */
-public abstract class KillableEntity extends MovingEntity {
+public abstract class KillableEntity extends Entity {
 
 	private int health;
-	private boolean isAlive;
-	protected boolean dead = false;
+	protected boolean dead;
+	protected double timeDying; // TODO implement so that removed after timeDying is 0
 	// TODO find a way to combine dead and isAlive
 
 	protected KillableEntity(int x, int y) {
 		super(x, y);
 		health = getHealth();
-		isAlive = true;
 		dead = false;
 	}
 
 	public void reduceHealth(int damage) {
 		if (health - damage <= 0) {
-			isAlive = false;
+			die();
 		} else {
 			health -= damage;
 		}
@@ -37,11 +40,19 @@ public abstract class KillableEntity extends MovingEntity {
 		return health;
 	}
 
-	public boolean isAlive() {
-		return isAlive;
-	}
-
+	public boolean isPersistant() {
+		if (dead) {
+			return (GameLoop.getCurrentGameTime() - timeDying < GlobalConstants.PERSISTANCE_TIME);
+		}
+		return true;
+	} 
+	
 	@Override
+	public boolean isKillable() {
+		return true;
+	}
+	
+
 	protected void setCurrentSprite(Sprite s) {
 		if (!dead && s != null) {
 			sprite = s;
@@ -49,8 +60,12 @@ public abstract class KillableEntity extends MovingEntity {
 			System.out.println("Sprite missing!");
 		}
 	}
-
-	public abstract void die();
+	
+	public void die() {
+		setCurrentSprite(((KillableEntityAnimations) animations).getDyingSprite());
+		dead = true;
+		timeDying = GameLoop.getCurrentGameTime();
+	}
 
 	public abstract int setHealth();
 

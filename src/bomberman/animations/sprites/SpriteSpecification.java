@@ -4,51 +4,57 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bomberman.Renderer;
-import bomberman.constants.GlobalConstants;
+import bomberman.constants.EntityDimensions;
+
+import static bomberman.constants.EntityDimensions.*;
 import bomberman.utils.ImageUtils;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 
 public enum SpriteSpecification {
-
-	PLAYERDOWN(30, 0.1, 0, 0, 3, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT, 2, false), 
-	PLAYERLEFT(30, 0.1, 30, 0, 3, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT, 2, false), 
-	PLAYERUP(30, 0.1, 60, 0, 3, GlobalConstants.PLAYER_WIDTH - 1.5, GlobalConstants.PLAYER_HEIGHT, 2, false), 
-	PLAYERIDLE(30,0.1, 118, 0, 1, GlobalConstants.PLAYER_WIDTH + 2, GlobalConstants.PLAYER_HEIGHT, 2, false), 
-	PLAYERRIGHT(30, 0.1, 90, 0, 3, GlobalConstants.PLAYER_WIDTH,GlobalConstants.PLAYER_HEIGHT, 2, false), 
-	PLAYERDIE(30, 0.3, getDieSpecs(), GlobalConstants.PLAYER_WIDTH + 2, GlobalConstants.PLAYER_HEIGHT + 2, 2, false, false), 
-	WALL(16, 0, 348, 123, 1, 16, 16, 2, false), 
-	BOMB(30, 0.3, getBombSpecs(), GlobalConstants.PLAYER_WIDTH + 2, GlobalConstants.PLAYER_HEIGHT + 2, 2, false);
+	// TODO make playSpeed global final constants
+	
+	//PLAYER
+	PLAYERDOWN(30, 0.1, 0, 0, 3, false, true, PLAYERDOWND), 
+	PLAYERLEFT(30, 0.1, 30, 0, 3, false, true,PLAYERLEFTD), 
+	PLAYERUP(30, 0.1, 60, 0, 3, false, true, PLAYERUPD), 
+	PLAYERIDLE(30, 0.1, 118, 0, 1, false, true, PLAYERIDLED), 
+	PLAYERRIGHT(30, 0.1, 90, 0, 3, false, true, PLAYERRIGHTD), 
+	PLAYERDIE(0.25, getDieSpecs(), false, PLAYERDIED, 1), 
+	
+	//ENEMIES
+	BALLOOM(30, 0.2, 0, 123, 4, true, true, BALLOMD), 
+	BALLOOMDIE(30, 0.2, 30, 153, 6, true, false, BALLOMD), 
+	DORIA(0.2, getDoriaSpecs(), true, DORIAD, 1),
+	DORIADIE(0.1, getDoriaDieSpecs(), false, DORIAD, 1),
+	BEAR(0.2, getBearSpecs(), true, DORIAD, 2),
+	BEARDIE(0.1, getBearDieSpecs(), false, DORIAD, 2),
+	
+	// ETC
+	WALL(16, 0, 348, 123, 1, false, true, WALLD), 
+	BOMB(0.3, getBombSpecs(), true, BOMBD, 2), 
+	EXPLOSION(0.3, getExplosionSpecs(), false, EXPLOSIOND, 2), 
+	BRICKWALL(0, getBrickWallSpecs(), false, WALLD, 2);
 
 	private double playSpeed;
-	private int spriteLocationOnSheetX;
-	private int spriteLocationOnSheetY;
-	private int numberOfFrames;
-	private double width;
-	private double height;
-	private int scale;
-	private int actualSize;
-	private boolean leftToRight;
+	private int spriteLocationOnSheetX, spriteLocationOnSheetY, numberOfFrames, actualSize;
+	private boolean leftToRight, hasValidSpriteImages, loopPlay;
+	private EntityDimensions ed;
 	private Image[] spriteImages;
-	private boolean hasValidSpriteImages;
-	private boolean loopPlay;
 
 	SpriteSpecification(int actualSize, double playSpeed, int spriteLocationOnSheetX, int spriteLocationOnSheetY,
-			int numberOfFrames, double width, double height, int scale, boolean leftToRight, boolean loopPlay) {
-		spriteInit(actualSize, playSpeed, width, height, scale, leftToRight, numberOfFrames);
+			int numberOfFrames, boolean leftToRight, boolean loopPlay, EntityDimensions ed) {
+		spriteInit(actualSize, playSpeed, leftToRight, numberOfFrames, ed, loopPlay);
 		this.spriteLocationOnSheetX = spriteLocationOnSheetX;
 		this.spriteLocationOnSheetY = spriteLocationOnSheetY;
-		this.loopPlay = loopPlay;
 	}
-	
 
-	SpriteSpecification(int actualSize, double playSpeed, List<Rectangle> specifications, double width, double height,
-			int scale, boolean leftToRight, boolean loopPlay) {
-		spriteInit(actualSize, playSpeed, width, height, scale, leftToRight, specifications.size());
-		final Image spriteSheet = Renderer.getSpiteSheet();
+	SpriteSpecification(double playSpeed, List<Rectangle> specifications, boolean loopPlay, EntityDimensions ed,
+			int imageIndex) {
+		spriteInit(0, playSpeed, false, specifications.size(), ed, loopPlay);
+		Image spriteSheet = Renderer.getSpriteSheet(imageIndex);
 		hasValidSpriteImages = true;
 		spriteImages = new Image[specifications.size()];
-		this.loopPlay = loopPlay;
 		for (int i = 0; i < specifications.size(); i++) {
 			Rectangle specification = specifications.get(i);
 			int x = (int) specification.getX();
@@ -58,17 +64,7 @@ public enum SpriteSpecification {
 			spriteImages[i] = ImageUtils.crop(spriteSheet, x, y, w, h);
 		}
 	}
-	
-	SpriteSpecification(int actualSize, double playSpeed, List<Rectangle> specifications, double width, double height,
-			int scale, boolean leftToRight) {
-		this(actualSize, playSpeed, specifications, width, height, scale, leftToRight, true);
-	}
-	
-	SpriteSpecification(int actualSize, double playSpeed, int spriteLocationOnSheetX, int spriteLocationOnSheetY,
-			int numberOfFrames, double width, double height, int scale, boolean leftToRight) {
-		this(actualSize, playSpeed, spriteLocationOnSheetX, spriteLocationOnSheetY, numberOfFrames, width, height, scale, leftToRight, true);
-	}
-	
+
 	public Image[] getSpriteImages() {
 		return spriteImages;
 	}
@@ -85,20 +81,12 @@ public enum SpriteSpecification {
 		return spriteLocationOnSheetY;
 	}
 
-	public int getFrames() {
+	public int getNoOfFrames() {
 		return numberOfFrames;
 	}
 
-	public double getWidth() {
-		return width;
-	}
-
-	public double getHeight() {
-		return height;
-	}
-
-	public int getScale() {
-		return scale;
+	public EntityDimensions ED() {
+		return ed;
 	}
 
 	public int getSize() {
@@ -112,27 +100,26 @@ public enum SpriteSpecification {
 	public boolean hasValidImage() {
 		return hasValidSpriteImages;
 	}
-	
+
 	public boolean loopPlay() {
 		return loopPlay;
 	}
 
-	private void spriteInit(int actualSize, double playSpeed, double width, double height, int scale,
-			boolean leftToRight, int numberOfFrames) {
+	private void spriteInit(int actualSize, double playSpeed, boolean leftToRight, int numberOfFrames,
+			EntityDimensions ed, boolean loopPlay) {
+		this.ed = ed;
 		this.actualSize = actualSize;
 		this.playSpeed = playSpeed;
-		this.width = width;
-		this.height = height;
-		this.scale = scale;
 		this.leftToRight = leftToRight;
 		this.numberOfFrames = numberOfFrames;
+		this.loopPlay = loopPlay;
 	}
 
 	private static List<Rectangle> getBombSpecs() {
 		List<Rectangle> specs = new ArrayList<>();
-		specs.add(new Rectangle(181, 93, 17, 16));
-		specs.add(new Rectangle(211, 93, 16, 16));
-		specs.add(new Rectangle(240, 93, 18, 17));
+		specs.add(new Rectangle(140,204, 16, 16));
+		specs.add(new Rectangle(164, 204, 16, 16));
+		specs.add(new Rectangle(188, 204, 16, 16));
 		return specs;
 	}
 
@@ -149,4 +136,53 @@ public enum SpriteSpecification {
 		return specs;
 	}
 
+	private static List<Rectangle> getExplosionSpecs() {
+		List<Rectangle> specs = new ArrayList<>();
+		specs.add(new Rectangle(37, 445, 80, 80));
+		specs.add(new Rectangle(127, 445, 80, 80));
+		specs.add(new Rectangle(34, 556, 80, 80));
+		specs.add(new Rectangle(133, 557, 80, 80));
+		specs.add(new Rectangle(34, 556, 80, 80));
+		specs.add(new Rectangle(127, 445, 80, 80));
+		specs.add(new Rectangle(37, 445, 80, 80));
+		return specs;
+	}
+	
+	private static List<Rectangle> getBrickWallSpecs() {
+		List<Rectangle> specs = new ArrayList<>();
+		specs.add(new Rectangle(78, 205, 16, 16));
+		return specs;
+	}
+	
+	private static List<Rectangle> getBearSpecs() {
+		List<Rectangle> specs = new ArrayList<>();
+		specs.add(new Rectangle(143, 310, 16, 16));
+		specs.add(new Rectangle(169, 310, 16, 16));
+		specs.add(new Rectangle(195, 310, 16, 16));
+		return specs;
+	}
+	
+	private static List<Rectangle> getBearDieSpecs() {
+		List<Rectangle> specs = new ArrayList<>();
+		specs.add(new Rectangle(221, 311, 16, 16));
+		specs.add(new Rectangle(221, 311, 16, 16));
+		specs.add(new Rectangle(221, 311, 16, 16));
+		return specs;
+	}
+	
+	
+	private static List<Rectangle> getDoriaSpecs() {
+		List<Rectangle> specs = new ArrayList<>();
+		specs.add(new Rectangle(121, 123, 16, 16));
+		specs.add(new Rectangle(151, 123, 16, 16));
+		specs.add(new Rectangle(181, 123, 16, 16));
+		return specs;
+	}
+	
+	private static List<Rectangle> getDoriaDieSpecs() {
+		List<Rectangle> specs = new ArrayList<>();
+		specs.add(new Rectangle(211, 123, 16, 16));
+		specs.add(new Rectangle(241, 123, 16, 16));
+		return specs;
+	}
 }

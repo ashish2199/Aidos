@@ -10,5 +10,5 @@ package bomberman.constants;
  * @author kdost
  */
 public enum Direction {
-    UP, DOWN, LEFT, RIGHT
+    UP, DOWN, LEFT, RIGHT, IDLE
 }
