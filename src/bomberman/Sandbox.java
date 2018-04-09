@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.Vector;
 import java.util.function.Predicate;
 
+import bomberman.constants.GlobalConstants;
 import bomberman.entity.Entity;
 import bomberman.entity.KillableEntity;
 import bomberman.entity.factory.EntityFactory;
@@ -180,13 +181,13 @@ public class Sandbox implements Iterable<Entity> {
 	
 	private void init() {
 		root = new Group();
-		s = new Scene(root, sceneW, sceneH);
+		s = new Scene(root, sceneW, sceneH, GlobalConstants.BACKGROUND_COLOR);
 		c = new Canvas(sceneW, sceneH);
 		root.getChildren().add(c);
 		gc = c.getGraphicsContext2D();
 		gc.setStroke(Color.BLUE);
 		gc.setLineWidth(2);
-		gc.setFill(Color.BLUE);
+		gc.setFill(Color.RED);
 		Renderer.init();
 		GameLoop.start(gc, this);
 		EventHandler.attachEventHandlers(s);

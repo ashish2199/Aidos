@@ -19,7 +19,7 @@ public class GlobalConstants {
 											// will automatically adjust the dimensions in the game.
 	public static String GAME_NAME = "BomberMan";
 	public static String GAME_VERSION = "  v 0.1";
-	public static Color BACKGROUND_COLOR = Color.WHITE;
+	public static Color BACKGROUND_COLOR = Color.LIMEGREEN;
 
 	public static enum GameStatus {
 		Running, Paused, GameOver
