@@ -1,11 +1,11 @@
 package bomberman.entity.killableentity.enemy;
 
-import bomberman.animations.KillableEntityAnimations;
-import bomberman.animations.sprites.SpriteSpecification;
 import bomberman.constants.EntityDimensions;
 import bomberman.entity.Entity;
-import bomberman.entity.boundedbox.CollidableType;
-import bomberman.entity.movements.RandomMovements;
+import bomberman.entity.configurations.animations.KillableEntityAnimations;
+import bomberman.entity.configurations.animations.sprites.SpriteSpecification;
+import bomberman.entity.configurations.boundedbox.CollidableType;
+import bomberman.entity.configurations.movements.RandomMovements;
 
 public class Ballom extends Enemy {
 

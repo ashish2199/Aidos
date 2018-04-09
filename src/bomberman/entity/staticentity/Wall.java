@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bomberman.entity.staticobjects;
+package bomberman.entity.staticentity;
 
-import bomberman.animations.SingleSpriteAnimations;
-import bomberman.animations.sprites.SpriteSpecification;
 import bomberman.constants.EntityDimensions;
 import bomberman.entity.Entity;
-import bomberman.entity.boundedbox.CollidableType;
-import bomberman.entity.boundedbox.RectBoundedBox;
+import bomberman.entity.configurations.animations.SingleSpriteAnimations;
+import bomberman.entity.configurations.animations.sprites.SpriteSpecification;
+import bomberman.entity.configurations.boundedbox.CollidableType;
+import bomberman.entity.configurations.boundedbox.RectBoundedBox;
 import javafx.scene.paint.Color;
 
 /**
@@ -28,10 +28,6 @@ public class Wall extends StaticEntity {
 
 	public void changeColor(Color color) {
 		// wallColor = color;
-	}
-
-	public boolean isPersistant() {
-		return true;
 	}
 
 	protected void setAnimations(Entity e) {

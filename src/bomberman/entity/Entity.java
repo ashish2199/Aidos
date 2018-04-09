@@ -7,24 +7,23 @@ package bomberman.entity;
 
 import bomberman.Renderer;
 import bomberman.Sandbox;
-import bomberman.animations.Animations;
-import bomberman.animations.sprites.Sprite;
 import bomberman.constants.EntityDimensions;
-import bomberman.entity.boundedbox.CollidableType;
-import bomberman.entity.boundedbox.RectBoundedBox;
+import bomberman.entity.configurations.animations.Animations;
+import bomberman.entity.configurations.animations.sprites.Sprite;
+import bomberman.entity.configurations.boundedbox.CollidableType;
+import bomberman.entity.configurations.boundedbox.RectBoundedBox;
 
 /**
- *
+ * Superclass for all entity types in the game. Hold all the objects necessary to configure the specific behavior of each entity.
+ * @author tialim
  * @author Ashish
  */
 public abstract class Entity {
-	protected static int IDGenerator = 0;
-	protected int ID;
-	protected int positionX;
-	protected int positionY;
-	protected boolean isPersistant;
-	protected EntityDimensions ed;
-	protected RectBoundedBox entityBoundary;
+	protected static int IDGenerator = 0;	// used to identify each entity, particularly for the equals() method
+	protected int ID, positionX, positionY;	// the (x,y) coordinates in pixels of the entity in the game
+	protected boolean isPersistant;	// true if the entity should still remain in the game.
+	protected EntityDimensions ed;	
+	protected RectBoundedBox entityBoundary;	
 	protected Sprite sprite;
 	protected Animations animations;
 	protected String name;
@@ -42,18 +41,7 @@ public abstract class Entity {
 		ID = IDGenerator++;
 		setCollidableType();
 	}
-
-	public boolean isColliding(Entity b) {
-		RectBoundedBox otherEntityBoundary = (RectBoundedBox) b.getBoundingBox();
-		return entityBoundary.checkCollision(otherEntityBoundary);
-	}
-
-	public void draw(Sandbox sb) {
-		if (sprite != null) {
-			Renderer.playAnimation(sprite, sb.getGraphicsContext());
-		}
-	}
-
+	
 	public int getPositionX() {
 		return positionX;
 	}
@@ -66,11 +54,18 @@ public abstract class Entity {
 		String s = "Entity: " + name + "\t Location: " + "(" + positionX + ", " + positionY + ").";
 		return s;
 	}
-	
-	public boolean isKillable() {
-		return false;
+
+	public boolean isColliding(Entity b) {
+		RectBoundedBox otherEntityBoundary = (RectBoundedBox) b.getBoundingBox();
+		return entityBoundary.checkCollision(otherEntityBoundary);
 	}
-	
+
+	public void draw(Sandbox sb) {
+		if (sprite != null) {
+			Renderer.playAnimation(sprite, sb.getGraphicsContext());
+		}
+	}
+
 	public boolean equals(Entity other) {
 		return ID == other.ID;
 	}

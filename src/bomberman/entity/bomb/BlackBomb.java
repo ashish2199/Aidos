@@ -6,19 +6,19 @@
 package bomberman.entity.bomb;
 
 import bomberman.Sandbox;
-import bomberman.animations.SingleSpriteAnimations;
-import bomberman.animations.sprites.SpriteSpecification;
 import bomberman.constants.Direction;
 import bomberman.constants.EntityDimensions;
 import bomberman.constants.GlobalConstants;
 import bomberman.entity.Entity;
-import bomberman.entity.boundedbox.CollidableType;
+import bomberman.entity.configurations.animations.SingleSpriteAnimations;
+import bomberman.entity.configurations.animations.sprites.SpriteSpecification;
+import bomberman.entity.configurations.boundedbox.CollidableType;
 import bomberman.utils.Tiling;
 
 import java.util.Date;
 
 /**
- *
+ * @author tialim
  * @author Ashish
  */
 public class BlackBomb extends Entity {

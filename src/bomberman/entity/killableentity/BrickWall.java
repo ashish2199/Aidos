@@ -1,11 +1,11 @@
 package bomberman.entity.killableentity;
 
 import bomberman.Sandbox;
-import bomberman.animations.KillableEntityAnimations;
-import bomberman.animations.sprites.SpriteSpecification;
 import bomberman.constants.EntityDimensions;
 import bomberman.entity.Entity;
-import bomberman.entity.boundedbox.CollidableType;
+import bomberman.entity.configurations.animations.KillableEntityAnimations;
+import bomberman.entity.configurations.animations.sprites.SpriteSpecification;
+import bomberman.entity.configurations.boundedbox.CollidableType;
 import bomberman.utils.Tiling;
 
 public class BrickWall extends KillableEntity {

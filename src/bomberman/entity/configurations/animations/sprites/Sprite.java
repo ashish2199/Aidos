@@ -1,4 +1,4 @@
-package bomberman.animations.sprites;
+package bomberman.entity.configurations.animations.sprites;
 
 import bomberman.constants.EntityDimensions;
 import bomberman.entity.Entity;
@@ -6,20 +6,22 @@ import javafx.scene.image.Image;
 
 public class Sprite {
 	/**
-	 *
+	 * Holds the specific collection of cropped images and necessary dimensions used
+	 * by the Renderer to animate each entity
 	 * @author CoreyHendrey
+	 * @author tialim
 	 */
 
 	private Entity entityReference;
 	private SpriteSpecification specs;
 	private double frameCounterHelper;
-	private int frameCounter;
+	private int frameCounter; //
 
 	public Sprite(Entity e, SpriteSpecification ss) {
 		entityReference = e;
 		specs = ss;
 		frameCounterHelper = 0;
-		frameCounter = 0;
+		frameCounter = 0;	// an index pointing to the specific frame that should be played at any time
 	}
 
 	public int getXPosition() {
@@ -69,7 +71,7 @@ public class Sprite {
 		// index
 		int maxFrame = specs.getNoOfFrames() - 1;
 		frameCounterHelper += specs.getPlaySpeed();
-		frameCounter = (int)(frameCounterHelper);
+		frameCounter = (int) (frameCounterHelper);
 		return (frameCounter <= maxFrame) ? frameCounter : maxFrame;
 	}
 }

@@ -3,13 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bomberman.animations;
+package bomberman.entity.configurations.animations;
 
-import bomberman.animations.sprites.Sprite;
-import bomberman.animations.sprites.SpriteSpecification;
 import bomberman.entity.Entity;
+import bomberman.entity.configurations.animations.sprites.Sprite;
+import bomberman.entity.configurations.animations.sprites.SpriteSpecification;
 
 /**
+ * Specific class created for Player Animations since the player uniquely holds several sprites,
+ * one for each direction of motion.
+ * @author tialim
  * @author Ashish
  */
 public class PlayerAnimations extends KillableEntityAnimations {

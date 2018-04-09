@@ -1,4 +1,4 @@
-package bomberman.entity.boundedbox;
+package bomberman.entity.configurations.boundedbox;
 
 import javafx.geometry.Rectangle2D;
 

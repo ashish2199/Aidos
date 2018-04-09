@@ -1,7 +1,5 @@
 package bomberman;
 
-import java.io.File;
-
 import javafx.scene.Scene;
 
 public class GameHandler {

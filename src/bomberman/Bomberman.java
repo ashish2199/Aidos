@@ -15,7 +15,7 @@ public class Bomberman extends Application {
         primaryStage.setScene(s);
         primaryStage.show();
     }
-
+    
     public static void main(String[] args) {
         launch(args);
     }

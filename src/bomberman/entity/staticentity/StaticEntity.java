@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bomberman.entity.staticobjects;
+package bomberman.entity.staticentity;
 
 import bomberman.Sandbox;
 import bomberman.entity.Entity;
 
 /**
- *
+ * @author tialim
  * @author kdost
  */
 public abstract class StaticEntity extends Entity {
@@ -18,7 +18,7 @@ public abstract class StaticEntity extends Entity {
 	}
 	
 	public boolean isPersistant() {
-		// assuming that static entity defaults to alive
+		// assuming that static entity always remains on the scene
 		return true;
 	}
 	

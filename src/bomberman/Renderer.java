@@ -1,6 +1,6 @@
 package bomberman;
 
-import bomberman.animations.sprites.Sprite;
+import bomberman.entity.configurations.animations.sprites.Sprite;
 import bomberman.utils.ImageUtils;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;

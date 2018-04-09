@@ -1,4 +1,4 @@
-package bomberman.animations.sprites;
+package bomberman.entity.configurations.animations.sprites;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +11,16 @@ import bomberman.utils.ImageUtils;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 
+/**
+ * Caches the specific parameters for each sprite for easier retrieval by the Sprite class
+ * @author tialim
+ */
+
+
 public enum SpriteSpecification {
 	// TODO make playSpeed global final constants
 	
-	//PLAYER
+	//PLAYER animations
 	PLAYERDOWN(30, 0.1, 0, 0, 3, false, true, PLAYERDOWND), 
 	PLAYERLEFT(30, 0.1, 30, 0, 3, false, true,PLAYERLEFTD), 
 	PLAYERUP(30, 0.1, 60, 0, 3, false, true, PLAYERUPD), 
@@ -30,17 +36,21 @@ public enum SpriteSpecification {
 	BEAR(0.2, getBearSpecs(), true, DORIAD, 2),
 	BEARDIE(0.1, getBearDieSpecs(), false, DORIAD, 2),
 	
-	// ETC
+	// MISC ENTITY animations
 	WALL(16, 0, 348, 123, 1, false, true, WALLD), 
 	BOMB(0.3, getBombSpecs(), true, BOMBD, 2), 
 	EXPLOSION(0.3, getExplosionSpecs(), false, EXPLOSIOND, 2), 
 	BRICKWALL(0, getBrickWallSpecs(), false, WALLD, 2);
 
-	private double playSpeed;
+	private double playSpeed;	// the rate at which the frames changes 
 	private int spriteLocationOnSheetX, spriteLocationOnSheetY, numberOfFrames, actualSize;
-	private boolean leftToRight, hasValidSpriteImages, loopPlay;
+	/*
+	 * leftToRight is true if the sprite crops are laid out horizontally on the sprite image file, 
+	 * loopPlay is true if the animation continuously loops through the frames instead of terminate
+	 */
+	private boolean leftToRight, hasValidSpriteImages, loopPlay;	
 	private EntityDimensions ed;
-	private Image[] spriteImages;
+	private Image[] spriteImages;	// Array that holds the all the frames belonging to the sprite
 
 	SpriteSpecification(int actualSize, double playSpeed, int spriteLocationOnSheetX, int spriteLocationOnSheetY,
 			int numberOfFrames, boolean leftToRight, boolean loopPlay, EntityDimensions ed) {

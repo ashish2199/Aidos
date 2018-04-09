@@ -6,10 +6,10 @@
 package bomberman.entity.killableentity;
 
 import bomberman.GameLoop;
-import bomberman.animations.KillableEntityAnimations;
-import bomberman.animations.sprites.Sprite;
 import bomberman.constants.GlobalConstants;
 import bomberman.entity.Entity;
+import bomberman.entity.configurations.animations.KillableEntityAnimations;
+import bomberman.entity.configurations.animations.sprites.Sprite;
 
 /**
  *
@@ -46,12 +46,6 @@ public abstract class KillableEntity extends Entity {
 		}
 		return true;
 	} 
-	
-	@Override
-	public boolean isKillable() {
-		return true;
-	}
-	
 
 	protected void setCurrentSprite(Sprite s) {
 		if (!dead && s != null) {

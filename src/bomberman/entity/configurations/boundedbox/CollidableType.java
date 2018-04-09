@@ -1,4 +1,4 @@
-package bomberman.entity.boundedbox;
+package bomberman.entity.configurations.boundedbox;
 
 public enum CollidableType {
 	

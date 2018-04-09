@@ -1,4 +1,4 @@
-package bomberman.entity.factories;
+package bomberman.entity.factory;
 
 import bomberman.entity.Entity;
 import bomberman.entity.bomb.BlackBomb;
@@ -7,7 +7,8 @@ import bomberman.entity.killableentity.enemy.Ballom;
 import bomberman.entity.killableentity.enemy.Bear;
 import bomberman.entity.killableentity.enemy.Doria;
 import bomberman.entity.killableentity.player.Player;
-import bomberman.entity.staticobjects.Wall;
+import bomberman.entity.staticentity.Wall;
+
 
 public enum EntityFactory {
 	INSTANCE;

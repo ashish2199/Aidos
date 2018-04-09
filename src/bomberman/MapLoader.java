@@ -13,7 +13,7 @@ import java.util.Collection;
 import java.util.Vector;
 
 import bomberman.entity.Entity;
-import bomberman.entity.factories.EntityFactory;
+import bomberman.entity.factory.EntityFactory;
 import bomberman.entity.killableentity.KillableEntity;
 import bomberman.entity.killableentity.player.Player;
 import bomberman.utils.Tiling;
@@ -27,7 +27,7 @@ public class MapLoader {
 	private Collection<Entity> entities;
 	private Collection<KillableEntity> killableEntities;
 	File file;
-	String parentPath = "src/bomberman/scenes/";
+	String parentPath = "src/resources/scenes/";
 
 	public MapLoader() {
 		entities = new Vector<Entity>();

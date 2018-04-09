@@ -2,6 +2,12 @@ package bomberman.constants;
 
 import static bomberman.constants.GlobalConstants.GRID_SIZE;
 
+/**
+ * Caches the specific dimensions of each entity in the game. Used to set the dimensions for the bounding box,
+ * and makes it simpler to adjust the dimensions of the game. 
+ * @author Tia Lim
+ */
+
 public enum EntityDimensions {
 	
 	//PLAYER

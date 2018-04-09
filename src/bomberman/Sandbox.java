@@ -12,7 +12,7 @@ import java.util.Vector;
 import java.util.function.Predicate;
 
 import bomberman.entity.Entity;
-import bomberman.entity.factories.EntityFactory;
+import bomberman.entity.factory.EntityFactory;
 import bomberman.entity.killableentity.KillableEntity;
 import bomberman.entity.killableentity.player.Player;
 import bomberman.gamecontroller.EventHandler;
@@ -145,7 +145,7 @@ public class Sandbox implements Iterable<Entity> {
 		entities.forEach(e -> e.update(this));
 		entities.addAll(toBeAdded);
 		for (Entity e : toBeAdded) {
-			if (e.isKillable()) {
+			if (e instanceof KillableEntity) {
 				killableEntities.add((KillableEntity) e);
 			}
 		}
@@ -157,7 +157,7 @@ public class Sandbox implements Iterable<Entity> {
 	 */
 
 	private Collection<KillableEntity> getKillableEntitiesColliding(Entity e) {
-		Predicate<Entity> isNotKillable = entity -> !entity.isKillable();
+		Predicate<Entity> isNotKillable = entity -> !(entity instanceof KillableEntity);
 		Collection<Entity> temp = filterOutEntities(isNotKillable, getEntityColliding(e));
 		Collection<KillableEntity> result = new ArrayList<KillableEntity>();
 		for (Entity ent : temp) {

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bomberman.entity.movements;
+package bomberman.entity.configurations.movements;
 
 import static bomberman.constants.Direction.*;
 
