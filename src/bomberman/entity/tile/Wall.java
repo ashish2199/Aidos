@@ -40,8 +40,8 @@ public class Wall extends StaticEntity {
 	}
 
 	@Override
-	protected EntityDimensions setED() {
-		return EntityDimensions.WALLD;
+	protected void setED() {
+		ed = EntityDimensions.TILED;
 	}
 
 	protected void setCollidableType() {

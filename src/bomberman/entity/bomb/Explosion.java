@@ -43,8 +43,8 @@ public class Explosion extends Entity {
 		return "Explosion" + ID;
 	}
 
-	protected EntityDimensions setED() {
-		return EntityDimensions.EXPLOSIOND;
+	protected void setED() {
+		ed = EntityDimensions.EXPLOSIOND;
 	}
 
 	private long timePast() {

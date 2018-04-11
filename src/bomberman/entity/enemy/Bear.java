@@ -41,8 +41,8 @@ public class Bear extends Enemy {
 	}
 
 	@Override
-	protected EntityDimensions setED() {
-		return EntityDimensions.DORIAD;
+	protected void setED() {
+		ed = EntityDimensions.DORIAD;
 	}
 
 }

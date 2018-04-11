@@ -40,8 +40,8 @@ public class Ballom extends Enemy {
 	}
 
 	@Override
-	protected EntityDimensions setED() {
-		return EntityDimensions.BALLOMD;
+	protected void setED() {
+		ed = EntityDimensions.BALLOMD;
 	}
 
 }

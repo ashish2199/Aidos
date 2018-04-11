@@ -19,7 +19,7 @@ public enum EntityDimensions {
 	PLAYERDIED(20, 23),
 	
 	//MAP
-	WALLD(16, 16), 
+	TILED(16, 16), 
 	
 	//BOMB
 	BOMBD(16,16),

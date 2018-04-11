@@ -23,7 +23,6 @@ import bomberman.entity.configurations.boundedbox.RectBoundedBox;
 public abstract class Entity {
 	protected static int IDGenerator = 0; // used to identify each entity, particularly for the equals() method
 	protected int ID, positionX, positionY; // the (x,y) coordinates in pixels of the entity in the game
-	protected boolean isPersistant; // true if the entity should still remain in the game.
 	protected EntityDimensions ed;
 	protected RectBoundedBox entityBoundary;
 	protected Sprite sprite;
@@ -34,11 +33,10 @@ public abstract class Entity {
 	protected Entity(int x, int y) {
 		positionX = x;
 		positionY = y;
-		ed = setED();
+		setED();
 		setAnimations(this);
 		sprite = animations.getSprite();
 		entityBoundary = new RectBoundedBox(positionX, positionY, (int) ed.gameW, (int) ed.gameH);
-		isPersistant = true;
 		name = setName();
 		ID = IDGenerator++;
 		setCollidableType();
@@ -107,6 +105,6 @@ public abstract class Entity {
 
 	protected abstract String setName();
 
-	protected abstract EntityDimensions setED();
+	protected abstract void setED();
 
 }

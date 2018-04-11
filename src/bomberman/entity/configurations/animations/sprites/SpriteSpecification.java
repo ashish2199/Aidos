@@ -37,10 +37,10 @@ public enum SpriteSpecification {
 	BEARDIE(0.1, getBearDieSpecs(), false, DORIAD, 2),
 	
 	// MISC ENTITY animations
-	WALL(16, 0, 348, 123, 1, false, true, WALLD), 
+	WALL(16, 0, 348, 123, 1, false, true, TILED), 
 	BOMB(0.3, getBombSpecs(), true, BOMBD, 2), 
 	EXPLOSION(0.3, getExplosionSpecs(), false, EXPLOSIOND, 2), 
-	BRICKWALL(0, getBrickWallSpecs(), false, WALLD, 2);
+	BRICKWALL(0, getBrickWallSpecs(), false, TILED, 2);
 
 	private double playSpeed;	// the rate at which the frames changes 
 	private int spriteLocationOnSheetX, spriteLocationOnSheetY, numberOfFrames, actualSize;

@@ -33,8 +33,8 @@ public class BrickWall extends KillableEntity {
 		return "Brick Wall " + ID;
 	}
 
-	protected EntityDimensions setED() {
-		return EntityDimensions.WALLD;
+	protected void setED() {
+		ed = EntityDimensions.TILED;
 	}
 
 	protected void setCollidableType() {

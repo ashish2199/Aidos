@@ -33,8 +33,8 @@ public class Doria extends Enemy {
 		return "Doria" + ID;
 	}
 
-	protected EntityDimensions setED() {
-		return EntityDimensions.DORIAD;
+	protected void setED() {
+		ed = EntityDimensions.DORIAD;
 	}
 
 }

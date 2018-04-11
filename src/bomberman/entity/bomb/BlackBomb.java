@@ -68,8 +68,8 @@ public class BlackBomb extends Entity {
 		return "Bomb  " + ID;
 	}
 
-	protected EntityDimensions setED() {
-		return EntityDimensions.BOMBD;
+	protected void setED() {
+		ed = EntityDimensions.BOMBD;
 	}
 
 	protected void setCollidableType() {

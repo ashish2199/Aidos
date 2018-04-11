@@ -41,8 +41,8 @@ public class Player extends MovingEntity {
 	}
 
 	@Override
-	protected EntityDimensions setED() {
-		return EntityDimensions.PLAYERIDLED;
+	protected void setED() {
+		ed = EntityDimensions.PLAYERIDLED;
 	}
 
 	@Override
