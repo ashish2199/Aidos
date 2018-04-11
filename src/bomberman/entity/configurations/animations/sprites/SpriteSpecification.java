@@ -40,7 +40,8 @@ public enum SpriteSpecification {
 	WALL(16, 0, 348, 123, 1, false, true, TILED), 
 	BOMB(0.3, getBombSpecs(), true, BOMBD, 2), 
 	EXPLOSION(0.3, getExplosionSpecs(), false, EXPLOSIOND, 2), 
-	BRICKWALL(0, getBrickWallSpecs(), false, TILED, 2);
+	BRICKWALL(0, getBrickWallSpecs(), false, TILED, 2),
+	DOOR(0, getDoorSpecs(), false, TILED, 2);
 
 	private double playSpeed;	// the rate at which the frames changes 
 	private int spriteLocationOnSheetX, spriteLocationOnSheetY, numberOfFrames, actualSize;
@@ -177,6 +178,12 @@ public enum SpriteSpecification {
 		specs.add(new Rectangle(221, 311, 16, 16));
 		specs.add(new Rectangle(221, 311, 16, 16));
 		specs.add(new Rectangle(221, 311, 16, 16));
+		return specs;
+	}
+	
+	private static List<Rectangle> getDoorSpecs() {
+		List<Rectangle> specs = new ArrayList<>();
+		specs.add(new Rectangle(98, 205, 16, 16));
 		return specs;
 	}
 	
