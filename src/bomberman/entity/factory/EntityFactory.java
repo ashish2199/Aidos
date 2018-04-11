@@ -8,6 +8,7 @@ import bomberman.entity.enemy.Doria;
 import bomberman.entity.player.Player;
 import bomberman.entity.tile.BrickWall;
 import bomberman.entity.tile.Wall;
+import bomberman.entity.tile.HiddenDoor;
 
 
 public enum EntityFactory {
@@ -35,6 +36,9 @@ public enum EntityFactory {
 			break;
 		case 'O':
 			entity = new BlackBomb(x, y);
+			break;
+		case 'X':
+			entity = new HiddenDoor(x, y);
 			break;
 		default:
 			entity = new Ballom(x, y);
