@@ -1,9 +1,9 @@
 1 31 13
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 WP     ## #    #   #  # # #   W
-W W W W#W W W#W#W W W W#W#W#W W
+W WXWXW#W W W#W#W W W W#W#W#W W
 W   #     ###  #      #   # # W
-W W W W W W#W W W#W#W W W W W#W
+W W W WXW W#W W W#W#W W W W W#W
 W          W ##B #  #  E     BW
 W W W W W W W W W W#WBW#W W W W
 W#  #      #  #      #        W
