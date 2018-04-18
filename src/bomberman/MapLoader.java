@@ -34,15 +34,25 @@ public class MapLoader {
 	private Collection<KillableEntity> killableEntities;
 	File file;
 	String parentPath = "src/resources/scenes/";
-
+	
 	public MapLoader() {
+		this(1);
+	}
+
+	public MapLoader(int gameLevel) {
+		level = gameLevel-1;
 		entities = new Vector<Entity>();	// vector used for synchronization, opening a possibility of running multi-player on different threads
 		killableEntities = new Vector<KillableEntity>();
-		loadMap("Level1.txt");
+		loadNextMap();
 	}
 
 	Player getPlayer() {
 		return player;
+	}
+	
+	void setLevel(int gameLevel) {
+		level = gameLevel-1;
+		loadNextMap();
 	}
 
 	Collection<Entity> getEntities() {
@@ -59,6 +69,12 @@ public class MapLoader {
 
 	int getSceneHeight() {
 		return heightTile * GRID_SIZE;
+	}
+	
+	private void loadNextMap() {
+		entities.clear();
+		killableEntities.clear();
+		loadMap("Level" + ++level + ".txt");
 	}
 
 	private void addEntity(char entityType, int x, int y) {

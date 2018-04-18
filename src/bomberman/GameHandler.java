@@ -2,8 +2,6 @@ package bomberman;
 
 import bomberman.constants.GlobalConstants;
 import bomberman.window.WindowManager;
-//import bomberman.window.Window;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 
 /**
@@ -16,27 +14,22 @@ import javafx.scene.Scene;
 
 public class GameHandler {
 
+	MapLoader mapL = new MapLoader();
+	WindowManager w = new WindowManager();
 	Sandbox sb;
-	MapLoader mapL;
-	WindowManager w;
-	Group root;
-	Scene s;
 
 	public GameHandler() {
-		root = GlobalConstants.parent;
-		mapL = new MapLoader();
-		int sceneW = mapL.getSceneWidth();
-		int sceneH = mapL.getSceneHeight();
-		w = new WindowManager(sceneW, sceneH);
-		sb = new Sandbox(root, mapL.getEntities(), w.getGC());
-		GameLoop.start(sb.getGraphicsContext(), sb, sceneW, sceneH);
+		newGame();
 	}
 
 	public Scene getScene() {
 		return w.getScene();
 	}
-	//
-	// public void setUpScene() {
-	// mapL.loadMap();
-	// }
+
+	public void newGame() {
+		mapL.setLevel(1);
+		w.resetCanvas(mapL.getSceneWidth(), mapL.getSceneHeight());
+		sb = new Sandbox(GlobalConstants.parent, mapL.getEntities(), w.getGraphicsContext());
+		GameLoop.start(sb.getGraphicsContext(), sb, mapL.getSceneWidth(), mapL.getSceneWidth());
+	}
 }

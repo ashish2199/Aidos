@@ -19,14 +19,12 @@ public class WindowManager {
 	Scene s;
 	BorderPane b;
 	Canvas c;
-
-	public WindowManager(double width, double height) {
+	
+	public WindowManager() {
 		root = GlobalConstants.parent;
 		s = new Scene(root, GlobalConstants.BACKGROUND_COLOR);
 		b = new BorderPane();
-		c = new Canvas(width, height);
 		b.setTop(createToolBar());
-		b.setCenter(c);
 		root.getChildren()
 				.add(b);
 		EventHandler.attachEventHandlers(s);
@@ -37,8 +35,13 @@ public class WindowManager {
 		return s;
 	}
 	
-	public GraphicsContext getGC() {
+	public GraphicsContext getGraphicsContext() {
 		return c.getGraphicsContext2D();
+	}
+	
+	public void resetCanvas(double width, double height) {
+		c = new Canvas(width, height);
+		b.setCenter(c);
 	}
 
 	private MenuBar createMenuBar() {
