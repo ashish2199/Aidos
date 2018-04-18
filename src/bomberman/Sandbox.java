@@ -8,43 +8,31 @@ package bomberman;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.Observable;
 import java.util.Vector;
 import java.util.function.Predicate;
 
-import bomberman.constants.GlobalConstants;
 import bomberman.entity.Entity;
 import bomberman.entity.KillableEntity;
 import bomberman.entity.factory.EntityFactory;
 import bomberman.entity.player.Player;
-import bomberman.gamecontroller.EventHandler;
 import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-//import javafx.scene.paint.Color;
 
 /**
  *
  * @author Ashish
  */
 public class Sandbox implements Iterable<Entity> {
-	private Scene s;
-	private Group root;
-	private Canvas c;
 	private GraphicsContext gc; // temporarily stores the entities to be added to the game at each loop
 	private boolean sceneStarted;
 	private Collection<Player> players;
 	private Collection<Entity> toBeAdded, entities;
 	private Collection<KillableEntity> toBeKilled, killableEntities;
 	private EntityFactory factory;
-	private int sceneW, sceneH;
 
-	public Sandbox(Group r, Collection<Entity> ent, int sceneWidth, int sceneHeight) {
-		this.root = r;
+	public Sandbox(Group r, Collection<Entity> ent, GraphicsContext gc) {
+		this.gc = gc;
 		entities = ent;
-		sceneW = sceneWidth;
-		sceneH = sceneHeight;
 		killableEntities = new Vector<KillableEntity>();
 		players = new Vector<Player>();
 		toBeAdded = new ArrayList<Entity>();
@@ -61,38 +49,9 @@ public class Sandbox implements Iterable<Entity> {
 		return entities;
 	}
 
-	public Scene getScene() {
-		return s;
-	}
-
-	public void setScene(Scene scene) {
-		s = scene;
-	}
-
-	public int getSceneW() {
-		return sceneW;
-	}
-
-	public int getSceneH() {
-		return sceneH;
-	}
-
 	public GraphicsContext getGraphicsContext() {
 		return gc;
 	}
-
-	public Canvas getCanvas() {
-		return c;
-	}
-
-	public void setCanvas(Canvas canvas) {
-		c = canvas;
-	}
-
-	// public void setPlayer(Player p) {
-	// sandboxPlayer = p;
-	// addEntityToGame(p);
-	// }
 
 	public Collection<Player> getPlayers() {
 		return players;
@@ -184,18 +143,8 @@ public class Sandbox implements Iterable<Entity> {
 		return entities.iterator();
 	}
 
-	private void init() {
-		s = new Scene(root, GlobalConstants.BACKGROUND_COLOR);
-		c = new Canvas(sceneW, sceneH);
-		root.getChildren()
-				.add(c);
-		gc = c.getGraphicsContext2D();
-		EventHandler.attachEventHandlers(s);
-	}
-
 	private void setupScene() {
 		if (!sceneStarted) {
-			init();
 			processEntities();
 			sceneStarted = true;
 		}

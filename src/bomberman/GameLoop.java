@@ -18,14 +18,14 @@ public class GameLoop {
 		return currentGameTime;
 	}
 
-	public static void start(final GraphicsContext gc, Sandbox sb) {
+	public static void start(final GraphicsContext gc, Sandbox sb, double width, double height) {
 		GameState.gameStatus = GlobalConstants.GameStatus.Running;
 		new AnimationTimer() {
 			public void handle(long currentNanoTime) {
 				oldGameTime = currentGameTime;
 				currentGameTime = (currentNanoTime - startNanoTime) / 1000000000.0;
 				deltaTime = currentGameTime - oldGameTime;
-				gc.clearRect(0, 0, sb.getSceneW(), sb.getSceneH());
+				gc.clearRect(0, 0, width, height);
 				// TODO This will have to be something like, currentScene.getEntities()
 				updateGame(sb);
 				renderGame(sb);
