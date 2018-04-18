@@ -9,45 +9,56 @@ import javafx.scene.canvas.GraphicsContext;
 
 public class GameLoop {
 
-	static double currentGameTime;
-	static double oldGameTime;
-	static double deltaTime;
-	final static long startNanoTime = System.nanoTime();
-	private static boolean isStopped;
+	private static double currentGameTime, oldGameTime, deltaTime, width, height;
+	private final long startNanoTime = System.nanoTime();
+	private boolean isStopped;
+	private AnimationTimer animationT;
+	private GraphicsContext gc;
+	private Sandbox sb;
 
-	private static AnimationTimer animationT;
-
-	public static double getCurrentGameTime() {
-		return currentGameTime;
+	public GameLoop(GraphicsContext graphicC, Sandbox sandbox, double w, double h) {
+		init(graphicC, sandbox, w, h);
 	}
 
-	public static void start(final GraphicsContext gc, Sandbox sb, double width, double height) {
-		GameState.gameStatus = GlobalConstants.GameStatus.Running;
+	public void init(GraphicsContext graphicC, Sandbox sandbox, double w, double h) {
+		width = w;
+		height = h;
+		gc = graphicC;
+		sb = sandbox;
+		isStopped = true;
 		animationT = new AnimationTimer() {
 			public void handle(long currentNanoTime) {
 				oldGameTime = currentGameTime;
 				currentGameTime = (currentNanoTime - startNanoTime) / 1000000000.0;
 				deltaTime = currentGameTime - oldGameTime;
 				gc.clearRect(0, 0, width, height);
-				// TODO This will have to be something like, currentScene.getEntities()
 				updateGame(sb);
 				renderGame(sb);
 			}
 		};
-		animationT.start();
-		isStopped = false;
 	}
 
-	public static void stop() {
-		animationT.stop();
-		isStopped = true;
+	public static double getCurrentGameTime() {
+		return currentGameTime;
 	}
 
-	public static boolean isStopped() {
-		return isStopped;
+	public void start() {
+		if (isStopped) {
+			GameState.gameStatus = GlobalConstants.GameStatus.Running;
+			animationT.start();
+			isStopped = false;
+		}
 	}
 
-	public static double getDeltaTime() {
+	public void stop() {
+		if (!isStopped) {
+			GameState.gameStatus = GlobalConstants.GameStatus.Paused;
+			animationT.stop();
+			isStopped = true;
+		}
+	}
+
+	public double getDeltaTime() {
 		return deltaTime * 100;
 	}
 

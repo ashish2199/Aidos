@@ -17,6 +17,7 @@ public class GameHandler {
 	MapLoader mapL = new MapLoader();
 	WindowManager w = new WindowManager(this);
 	Sandbox sb;
+	GameLoop loop;
 
 	public GameHandler() {
 		newGame();
@@ -28,8 +29,19 @@ public class GameHandler {
 
 	public void newGame() {
 		mapL.setLevel(1);
-		w.resetCanvas(mapL.getSceneWidth(), mapL.getSceneHeight());
+		double sceneW = mapL.getSceneWidth();
+		double sceneH = mapL.getSceneHeight();
+		w.resetCanvas(sceneW, sceneH);
 		sb = new Sandbox(GlobalConstants.parent, mapL.getEntities(), w.getGraphicsContext());
-		GameLoop.start(sb.getGraphicsContext(), sb, mapL.getSceneWidth(), mapL.getSceneWidth());
+		loop = new GameLoop(w.getGraphicsContext(), sb, sceneW, sceneH);
+		loop.start();
+	}
+	
+	public void stopGame() {
+		loop.stop();
+	}
+	
+	public void resumeGame() {
+		loop.start();
 	}
 }

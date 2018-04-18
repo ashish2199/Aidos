@@ -60,7 +60,6 @@ public class WindowManager {
 		newGame.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				GameLoop.stop();
 				gameHandler.newGame();
 			}
 		});
@@ -69,22 +68,20 @@ public class WindowManager {
 		pauseGame.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				GameLoop.stop();
+				gameHandler.stopGame();
 			}
 		});
-//		
-//		MenuItem startGame = new MenuItem("Start Game");
-//		newGame.setOnAction(new EventHandler<ActionEvent>() {
-//			@Override
-//			public void handle(ActionEvent e) {
-//				if (GameLoop.isStopped()) {
-//				GameLoop.start();
-//				}
-//			}
-//		});
+		
+		MenuItem resumeGame = new MenuItem("Resume Game");
+		resumeGame.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				gameHandler.resumeGame();
+			}
+		});
 
 		menuFile.getItems()
-				.addAll(newGame, pauseGame, new CustomMenuItem(new Label("testing")));
+				.addAll(newGame, pauseGame, resumeGame, new CustomMenuItem(new Label("testing")));
 		menuBar.getMenus()
 				.add(menuFile);
 		return menuBar;
