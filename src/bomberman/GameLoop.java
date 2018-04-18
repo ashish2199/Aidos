@@ -13,6 +13,9 @@ public class GameLoop {
 	static double oldGameTime;
 	static double deltaTime;
 	final static long startNanoTime = System.nanoTime();
+	private static boolean isStopped;
+
+	private static AnimationTimer animationT;
 
 	public static double getCurrentGameTime() {
 		return currentGameTime;
@@ -20,7 +23,7 @@ public class GameLoop {
 
 	public static void start(final GraphicsContext gc, Sandbox sb, double width, double height) {
 		GameState.gameStatus = GlobalConstants.GameStatus.Running;
-		new AnimationTimer() {
+		animationT = new AnimationTimer() {
 			public void handle(long currentNanoTime) {
 				oldGameTime = currentGameTime;
 				currentGameTime = (currentNanoTime - startNanoTime) / 1000000000.0;
@@ -30,7 +33,18 @@ public class GameLoop {
 				updateGame(sb);
 				renderGame(sb);
 			}
-		}.start();
+		};
+		animationT.start();
+		isStopped = false;
+	}
+
+	public static void stop() {
+		animationT.stop();
+		isStopped = true;
+	}
+
+	public static boolean isStopped() {
+		return isStopped;
 	}
 
 	public static double getDeltaTime() {
@@ -44,7 +58,7 @@ public class GameLoop {
 	}
 
 	public static void renderGame(Sandbox sb) {
-		sb.forEach(e->e.draw(sb));
+		sb.forEach(e -> e.draw(sb));
 	}
 
 	private static void cleanUpEntities(Sandbox sb) {

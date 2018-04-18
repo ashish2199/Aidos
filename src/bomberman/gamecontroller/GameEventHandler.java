@@ -16,7 +16,7 @@ import javafx.scene.input.KeyEvent;
  *
  * @author ashish.padalkar
  */
-public class EventHandler {
+public class GameEventHandler {
     public static char lastKeyPress;
     public static char lastKeyReleased;
     public static List<KeyCode> inputList = new ArrayList<KeyCode>();
@@ -50,8 +50,8 @@ class keyReleaseHanlder implements javafx.event.EventHandler<KeyEvent>{
 
         KeyCode code = evt.getCode();
 
-        if ( EventHandler.inputList.contains(code) )
-        	EventHandler.inputList.remove( code );
+        if ( GameEventHandler.inputList.contains(code) )
+        	GameEventHandler.inputList.remove( code );
     }
 }
 class keyPressedHandler implements javafx.event.EventHandler<KeyEvent>{
@@ -61,7 +61,7 @@ class keyPressedHandler implements javafx.event.EventHandler<KeyEvent>{
         KeyCode code = evt.getCode();
         
         // only add once... prevent duplicates
-        if ( !EventHandler.inputList.contains(code) )
-        	EventHandler.inputList.add( code );
+        if ( !GameEventHandler.inputList.contains(code) )
+        	GameEventHandler.inputList.add( code );
     }
 }

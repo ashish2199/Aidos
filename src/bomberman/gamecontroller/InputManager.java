@@ -29,7 +29,7 @@ public class InputManager implements MovementStrategy {
 	}
 
 	public void handlePlayerMovements() {
-		List<KeyCode> keyboardInputs = EventHandler.getInputList();
+		List<KeyCode> keyboardInputs = GameEventHandler.getInputList();
 		if (keyboardInputs.isEmpty()) {
 			direction = IDLE;
 		} else {

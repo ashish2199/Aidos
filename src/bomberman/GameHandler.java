@@ -15,7 +15,7 @@ import javafx.scene.Scene;
 public class GameHandler {
 
 	MapLoader mapL = new MapLoader();
-	WindowManager w = new WindowManager();
+	WindowManager w = new WindowManager(this);
 	Sandbox sb;
 
 	public GameHandler() {
