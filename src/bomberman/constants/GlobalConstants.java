@@ -5,6 +5,7 @@
  */
 package bomberman.constants;
 
+import javafx.scene.Group;
 import javafx.scene.paint.Color;
 
 /**
@@ -14,7 +15,7 @@ import javafx.scene.paint.Color;
  * @author Tia Lim
  */
 public class GlobalConstants {
-
+	public static final Group parent = new Group();
 	public static final int GRID_SIZE = 42; // the length/width (in pixels) of the grid size of the game. Adjusting this
 											// will automatically adjust the dimensions in the game.
 	public static String GAME_NAME = "BomberMan";
@@ -27,7 +28,6 @@ public class GlobalConstants {
 
 	public static final int PLAYER_SPEED = 3;
 	public static final int BOMB_EXPLODING_TIME = 2000;	// number of milliseconds before a bomb placed explodes
-	public static final double PERSISTANCE_TIME = 0.5; // duration a killable entity should be kept in the game after
-														// dying
+	public static final double PERSISTANCE_TIME = 0.5; // duration a killable entity should be kept in the game after														// dying
 	public static final int EXPLOSION_RADIUS = 3;	// in terms the number of tiles from the bomb
 }

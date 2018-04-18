@@ -31,10 +31,6 @@ public class Renderer {
 		img2 = ImageUtils.loadImage("src/Resources/img/sprite2.png");
 	}
 
-	public static void init() {
-
-	}
-
 	public static Image getSpriteSheet(int index) {
 		return (index == 1) ? img1: img2;
 	}
