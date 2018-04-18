@@ -15,8 +15,13 @@ public class GameLoop {
 	private AnimationTimer animationT;
 	private GraphicsContext gc;
 	private Sandbox sb;
+	
+	public GameLoop () {
+		isStopped = true;
+	};
 
 	public GameLoop(GraphicsContext graphicC, Sandbox sandbox, double w, double h) {
+		isStopped = true;
 		init(graphicC, sandbox, w, h);
 	}
 
@@ -25,7 +30,6 @@ public class GameLoop {
 		height = h;
 		gc = graphicC;
 		sb = sandbox;
-		isStopped = true;
 		animationT = new AnimationTimer() {
 			public void handle(long currentNanoTime) {
 				oldGameTime = currentGameTime;

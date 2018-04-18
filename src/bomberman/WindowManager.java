@@ -1,7 +1,5 @@
-package bomberman.window;
+package bomberman;
 
-import bomberman.GameHandler;
-import bomberman.GameLoop;
 import bomberman.constants.GlobalConstants;
 import bomberman.gamecontroller.GameEventHandler;
 import javafx.event.ActionEvent;

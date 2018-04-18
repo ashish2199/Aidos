@@ -1,7 +1,6 @@
 package bomberman;
 
 import bomberman.constants.GlobalConstants;
-import bomberman.window.WindowManager;
 import javafx.scene.Scene;
 
 /**
@@ -17,7 +16,7 @@ public class GameHandler {
 	MapLoader mapL = new MapLoader();
 	WindowManager w = new WindowManager(this);
 	Sandbox sb;
-	GameLoop loop;
+	GameLoop loop = new GameLoop();
 
 	public GameHandler() {
 		newGame();
@@ -33,7 +32,7 @@ public class GameHandler {
 		double sceneH = mapL.getSceneHeight();
 		w.resetCanvas(sceneW, sceneH);
 		sb = new Sandbox(GlobalConstants.parent, mapL.getEntities(), w.getGraphicsContext());
-		loop = new GameLoop(w.getGraphicsContext(), sb, sceneW, sceneH);
+		loop.init(w.getGraphicsContext(), sb, sceneW, sceneH);
 		loop.start();
 	}
 	
