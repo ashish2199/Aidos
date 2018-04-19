@@ -6,17 +6,24 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.CustomMenuItem;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.Separator;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToolBar;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 
 public class WindowManager {
 	
@@ -26,6 +33,7 @@ public class WindowManager {
 	BorderPane b;
 	Canvas c;
 	StringProperty level = new SimpleStringProperty("");
+	StringProperty state = new SimpleStringProperty("");
 
 	public WindowManager(GameHandler gh) {
 		gameHandler = gh;
@@ -50,14 +58,12 @@ public class WindowManager {
 		c = new Canvas(width, height);
 		b.setCenter(c);
 		level.setValue("Level: " + gameHandler.getLevel());
+		state.setValue("Game Status: " + GameState.gameStatus);
 	}
-
-	private MenuBar createMenuBar() {
-		MenuBar menuBar = new MenuBar();
-		Menu menuFile = new Menu("File");
-		
+	
+	private HBox createMenuBar() {
 		// -------- create menu items --------
-		MenuItem newGame = new MenuItem("New Game");
+		Button newGame = new Button("New Game");
 		newGame.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
@@ -65,34 +71,28 @@ public class WindowManager {
 			}
 		});
 		
-		MenuItem pauseGame = new MenuItem("Pause Game");
-		pauseGame.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				gameHandler.stopGame();
-			}
+		ToggleButton pauseGame = new ToggleButton("Pause/Play");
+		pauseGame.setOnAction(event -> {
+		    if (pauseGame.isSelected()) {
+		    	gameHandler.stopGame();
+		    }else {
+		    	gameHandler.resumeGame();
+		    }
+		    state.setValue("Game Status: " + GameState.gameStatus);
 		});
 		
-		MenuItem resumeGame = new MenuItem("Resume Game");
-		resumeGame.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				gameHandler.resumeGame();
-			}
-		});
-		menuFile.getItems()
-				.addAll(newGame, pauseGame, resumeGame);
-		menuBar.getMenus()
-				.add(menuFile);
-		return menuBar;
+		return new HBox(newGame, pauseGame);
 	}
 
 	private ToolBar createToolBar() {
+		HBox hbox = new HBox(20);
 		Label levelStats = new Label("Level: 0");
+		Label gameState = new Label("gameState: -");
 		levelStats.textProperty().bind(level);
-		ToolBar toolBar = new ToolBar(createMenuBar());
-		toolBar.getItems()
-				.add(levelStats);
+		gameState.textProperty().bind(state);
+		hbox.setAlignment(Pos.CENTER_LEFT);
+		hbox.getChildren().addAll(createMenuBar(), levelStats, new Separator(Orientation.VERTICAL), gameState);
+		ToolBar toolBar = new ToolBar(hbox);
 		return toolBar;
 	}
 
