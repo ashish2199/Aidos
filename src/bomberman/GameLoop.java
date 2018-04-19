@@ -1,9 +1,6 @@
 package bomberman;
 
 import bomberman.constants.GlobalConstants;
-import bomberman.entity.Entity;
-
-import java.util.Iterator;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
 
@@ -69,22 +66,11 @@ public class GameLoop {
 	public static void updateGame(Sandbox sb) {
 		sb.updateEntities();
 		sb.killEntities();
-		cleanUpEntities(sb);
+		sb.cleanUpEntities();
 	}
 
 	public static void renderGame(Sandbox sb) {
 		sb.forEach(e -> e.draw(sb));
-	}
-
-	private static void cleanUpEntities(Sandbox sb) {
-		// removes unwanted entities from the game
-		Iterator<Entity> it = sb.iterator();
-		while (it.hasNext()) {
-			Entity entity = it.next();
-			if (!entity.isPersistant()) {
-				it.remove(); // not removing directly from list to prevent ConcurrentModification
-			}
-		}
 	}
 
 }

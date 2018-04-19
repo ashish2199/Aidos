@@ -1,7 +1,9 @@
 package bomberman;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 
 /**
  * Responsible for updating the sandbox and loading new maps as the player
@@ -11,12 +13,12 @@ import javafx.scene.layout.BorderPane;
  *
  */
 
-public class GameHandler {
+public class GameHandler implements Observer{
 
-	MapLoader mapL = new MapLoader();
-	WindowManager window = new WindowManager(this);
-	Sandbox sb;
-	GameLoop loop = new GameLoop();
+	private MapLoader mapL = new MapLoader();
+	private WindowManager window = new WindowManager(this);
+	private Sandbox sb;
+	private GameLoop loop = new GameLoop();
 
 	public GameHandler() {
 //		newGame();
@@ -35,10 +37,6 @@ public class GameHandler {
 		loop.stop();
 	}
 	
-	BorderPane getBorderPane() {
-		return window.getBorder();
-	}
-	
 	void resumeGame() {
 		loop.start();
 	}
@@ -53,9 +51,15 @@ public class GameHandler {
 		double sceneW = mapL.getSceneWidth();
 		double sceneH = mapL.getSceneHeight();
 		window.resetCanvas(sceneW, sceneH);
-		sb = new Sandbox(mapL.getEntities(), window.getGraphicsContext());
+		sb = new Sandbox(mapL.getEntities(), window.getGraphicsContext(), this);
 		loop.init(window.getGraphicsContext(), sb, sceneW, sceneH);
 		loop.start();
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		// TODO Auto-generated method stub
+		
 	}
 }
 

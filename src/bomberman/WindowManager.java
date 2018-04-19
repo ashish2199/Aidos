@@ -6,7 +6,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -31,10 +30,8 @@ public class WindowManager {
 	public WindowManager(GameHandler gh) {
 		gameHandler = gh;
 		s = new Scene(b, GlobalConstants.BACKGROUND_COLOR);
-		b.setTop(createToolBar());
-		b.setBackground(Background.EMPTY);
-		b.prefWidthProperty().bind(c.widthProperty());
-		b.prefHeightProperty().bind(c.heightProperty());
+		b.setTop(createToolBar()); 		
+		b.setBackground(Background.EMPTY);	// for scene background to show through
 		GameEventHandler.attachEventHandlers(s);
 	}
 
@@ -88,10 +85,6 @@ public class WindowManager {
 		hbox.getChildren().addAll(createMenuBar(), levelStats, new Separator(Orientation.VERTICAL), gameState);
 		ToolBar toolBar = new ToolBar(hbox);
 		return toolBar;
-	}
-	
-	public BorderPane getBorder() {
-		return b;
 	}
 
 }

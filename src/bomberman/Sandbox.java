@@ -8,6 +8,8 @@ package bomberman;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Vector;
 import java.util.function.Predicate;
 
@@ -21,7 +23,7 @@ import javafx.scene.canvas.GraphicsContext;
  *
  * @author Ashish
  */
-public class Sandbox implements Iterable<Entity> {
+public class Sandbox extends Observable implements Iterable<Entity> {
 	private GraphicsContext gc; // temporarily stores the entities to be added to the game at each loop
 	private boolean sceneStarted;
 	private Collection<Player> players;
@@ -29,7 +31,7 @@ public class Sandbox implements Iterable<Entity> {
 	private Collection<KillableEntity> toBeKilled, killableEntities;
 	private EntityFactory factory;
 
-	public Sandbox(Collection<Entity> ent, GraphicsContext gc) {
+	public Sandbox(Collection<Entity> ent, GraphicsContext gc, Observer o) {
 		this.gc = gc;
 		entities = ent;
 		killableEntities = new Vector<KillableEntity>();
@@ -38,6 +40,7 @@ public class Sandbox implements Iterable<Entity> {
 		toBeKilled = new ArrayList<KillableEntity>();
 		factory = EntityFactory.INSTANCE;
 		setupScene();
+		addObserver(o);
 	}
 
 	/*
@@ -114,6 +117,11 @@ public class Sandbox implements Iterable<Entity> {
 			}
 		}
 		toBeAdded.clear();
+	}
+	
+	void cleanUpEntities() {
+		// removes unwanted entities from the game
+		entities.removeIf(e -> !e.isPersistant());
 	}
 
 	/*
