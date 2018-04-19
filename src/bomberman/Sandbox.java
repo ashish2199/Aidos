@@ -138,7 +138,10 @@ public class Sandbox extends Observable implements Iterable<Entity> {
 	
 	private void cleanUpEntities() {
 		// removes unwanted entities from the game
-		entities.removeIf(e -> !e.isPersistant());
+		Predicate<Entity> notPersistant = e -> !e.isPersistant();
+		entities.removeIf(notPersistant);
+		killableEntities.removeIf(notPersistant);
+		players.removeIf(notPersistant);
 	}
 
 	/*

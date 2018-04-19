@@ -22,6 +22,7 @@ public class GameHandler implements Observer{
 	private int level;
 
 	public GameHandler() {
+		level = 1;
 		newGame();
 	}
 
