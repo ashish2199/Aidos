@@ -31,7 +31,7 @@ public class Sandbox extends Observable implements Iterable<Entity> {
 	private Collection<KillableEntity> toBeKilled, killableEntities;
 	private EntityFactory factory;
 
-	public Sandbox(Collection<Entity> ent, GraphicsContext gc, Observer o) {
+	public Sandbox(Observer gameHandler, Collection<Entity> ent, GraphicsContext gc) {
 		this.gc = gc;
 		entities = ent;
 		killableEntities = new Vector<KillableEntity>();
@@ -40,7 +40,7 @@ public class Sandbox extends Observable implements Iterable<Entity> {
 		toBeKilled = new ArrayList<KillableEntity>();
 		factory = EntityFactory.INSTANCE;
 		setupScene();
-		addObserver(o);
+		addObserver(gameHandler);
 	}
 
 	/*
@@ -100,14 +100,20 @@ public class Sandbox extends Observable implements Iterable<Entity> {
 	/*
 	 * ************ Gameloop Methods ************
 	 */
+	
+	void update() {
+		addEntities();
+		killEntities();
+		cleanUpEntities();
+	}
 
-	void killEntities() {
+	private void killEntities() {
 		// kills each entity that is on the kill list
 		toBeKilled.forEach(KillableEntity::die);
 		toBeKilled.clear();
 	}
 
-	void updateEntities() {
+	private void addEntities() {
 		// adds the necessary entities to the game, and updates the Sandbox entity list
 		entities.forEach(e -> e.update(this));
 		entities.addAll(toBeAdded);
@@ -119,7 +125,7 @@ public class Sandbox extends Observable implements Iterable<Entity> {
 		toBeAdded.clear();
 	}
 	
-	void cleanUpEntities() {
+	private void cleanUpEntities() {
 		// removes unwanted entities from the game
 		entities.removeIf(e -> !e.isPersistant());
 	}

@@ -19,10 +19,12 @@ public class GameHandler implements Observer{
 	private WindowManager window = new WindowManager(this);
 	private Sandbox sb;
 	private GameLoop loop = new GameLoop();
+	private int level;
 
 	public GameHandler() {
 //		newGame();
-		loadLevel(2);
+		level = 1;
+		loadLevel(level);
 	}
 
 	Scene getScene() {
@@ -31,6 +33,10 @@ public class GameHandler implements Observer{
 
 	void newGame() {
 		loadLevel(1);
+	}
+	
+	void nextLevel() {
+		loadLevel(++level);
 	}
 	
 	void stopGame() {
@@ -42,16 +48,16 @@ public class GameHandler implements Observer{
 	}
 	
 	int getLCurrentLevel() {
-		return mapL.getLevel();
+		return level;
 	}
 	
 	private void loadLevel(int level) {
 		loop.stop();
-		mapL.setLevel(level);
+		mapL.loadLevel(level);
 		double sceneW = mapL.getSceneWidth();
 		double sceneH = mapL.getSceneHeight();
 		window.resetCanvas(sceneW, sceneH);
-		sb = new Sandbox(mapL.getEntities(), window.getGraphicsContext(), this);
+		sb = new Sandbox(this, mapL.getEntities(), window.getGraphicsContext());
 		loop.init(window.getGraphicsContext(), sb, sceneW, sceneH);
 		loop.start();
 	}

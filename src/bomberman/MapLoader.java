@@ -29,7 +29,7 @@ public class MapLoader {
 	// File mapFile;
 	Player player;
 	private static final EntityFactory factory = EntityFactory.INSTANCE;
-	private int widthTile, heightTile, level;
+	private int widthTile, heightTile;
 	private Collection<Entity> entities;
 	private Collection<KillableEntity> killableEntities;
 	File file;
@@ -40,23 +40,13 @@ public class MapLoader {
 	}
 
 	public MapLoader(int gameLevel) {
-		level = gameLevel-1;
 		entities = new Vector<Entity>();	// vector used for synchronization, opening a possibility of running multi-player on different threads
 		killableEntities = new Vector<KillableEntity>();
-		loadNextMap();
+		loadLevel(gameLevel);
 	}
 
 	Player getPlayer() {
 		return player;
-	}
-	
-	void setLevel(int gameLevel) {
-		level = gameLevel-1;
-		loadNextMap();
-	}
-	
-	int getLevel() {
-		return level;
 	}
 
 	Collection<Entity> getEntities() {
@@ -75,10 +65,10 @@ public class MapLoader {
 		return heightTile * GRID_SIZE;
 	}
 	
-	private void loadNextMap() {
+	void loadLevel(int level) {
 		entities.clear();
 		killableEntities.clear();
-		loadMap("Level" + ++level + ".txt");
+		loadMap("Level" + level + ".txt");
 	}
 
 	private void addEntity(char entityType, int x, int y) {

@@ -33,7 +33,7 @@ public class GameLoop {
 				currentGameTime = (currentNanoTime - startNanoTime) / 1000000000.0;
 				deltaTime = currentGameTime - oldGameTime;
 				gc.clearRect(0, 0, width, height);
-				updateGame(sb);
+				sb.update();
 				renderGame(sb);
 			}
 		};
@@ -61,12 +61,6 @@ public class GameLoop {
 
 	public double getDeltaTime() {
 		return deltaTime * 100;
-	}
-
-	public static void updateGame(Sandbox sb) {
-		sb.updateEntities();
-		sb.killEntities();
-		sb.cleanUpEntities();
 	}
 
 	public static void renderGame(Sandbox sb) {
