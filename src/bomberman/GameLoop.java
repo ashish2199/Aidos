@@ -15,8 +15,8 @@ public class GameLoop {
 	private AnimationTimer animationT;
 	private GraphicsContext gc;
 	private Sandbox sb;
-	
-	public GameLoop () {
+
+	public GameLoop() {
 		isStopped = true;
 	};
 

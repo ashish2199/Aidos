@@ -64,14 +64,11 @@ public class WindowManager {
 	private HBox createMenuBar() {
 		// -------- create menu items --------
 		Button newGame = new Button("New Game");
-		newGame.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				gameHandler.newGame();
-			}
-		});
+		newGame.setFocusTraversable(false);
+		newGame.setOnAction(event -> gameHandler.newGame());
 		
 		ToggleButton pauseGame = new ToggleButton("Pause/Play");
+		pauseGame.setFocusTraversable(false);
 		pauseGame.setOnAction(event -> {
 		    if (pauseGame.isSelected()) {
 		    	gameHandler.stopGame();
