@@ -11,9 +11,9 @@ import bomberman.entity.tile.Wall;
 import bomberman.entity.tile.HiddenDoor;
 
 
-public enum EntityFactory {
-	INSTANCE;
-	public Entity create(char entityType, int x, int y) {
+public class EntityFactory {
+	
+	public static Entity create(char entityType, int x, int y) {
 		Entity entity;
 		switch (entityType) {
 		case 'B':

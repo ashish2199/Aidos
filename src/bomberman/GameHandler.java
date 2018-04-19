@@ -22,22 +22,18 @@ public class GameHandler implements Observer{
 	private int level;
 
 	public GameHandler() {
-//		newGame();
-		level = 1;
-		loadLevel(level);
+		newGame();
 	}
 
 	Scene getScene() {
 		return window.getScene();
 	}
-
-	void newGame() {
-		loadLevel(1);
-	}
 	
-	void nextLevel() {
+	private void nextLevel() {
 		loadLevel(++level);
 	}
+	
+	// -------- Methods for buttons and screen controls---------
 	
 	void stopGame() {
 		loop.stop();
@@ -47,9 +43,15 @@ public class GameHandler implements Observer{
 		loop.start();
 	}
 	
+	void newGame() {
+		loadLevel(1);
+	}
+	
 	int getLCurrentLevel() {
 		return level;
 	}
+	
+	// -------- Private Methods -----------
 	
 	private void loadLevel(int level) {
 		loop.stop();
@@ -62,10 +64,11 @@ public class GameHandler implements Observer{
 		loop.start();
 	}
 
-	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
+		if (sb.gameWon()) {
+			nextLevel();
+		}
 	}
+	
 }
 

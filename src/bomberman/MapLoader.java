@@ -28,7 +28,6 @@ public class MapLoader {
 
 	// File mapFile;
 	Player player;
-	private static final EntityFactory factory = EntityFactory.INSTANCE;
 	private int widthTile, heightTile;
 	private Collection<Entity> entities;
 	private Collection<KillableEntity> killableEntities;
@@ -73,7 +72,7 @@ public class MapLoader {
 
 	private void addEntity(char entityType, int x, int y) {
 		// adds new entity to the entity list
-		entities.add(factory.create(entityType, x, y));
+		entities.add(EntityFactory.create(entityType, x, y));
 	}
 
 	private void loadMap(String filePath) {

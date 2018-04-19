@@ -25,11 +25,10 @@ import javafx.scene.canvas.GraphicsContext;
  */
 public class Sandbox extends Observable implements Iterable<Entity> {
 	private GraphicsContext gc; // temporarily stores the entities to be added to the game at each loop
-	private boolean sceneStarted;
+	private boolean sceneStarted, gameWon;
 	private Collection<Player> players;
 	private Collection<Entity> toBeAdded, entities;
 	private Collection<KillableEntity> toBeKilled, killableEntities;
-	private EntityFactory factory;
 
 	public Sandbox(Observer gameHandler, Collection<Entity> ent, GraphicsContext gc) {
 		this.gc = gc;
@@ -38,7 +37,6 @@ public class Sandbox extends Observable implements Iterable<Entity> {
 		players = new Vector<Player>();
 		toBeAdded = new ArrayList<Entity>();
 		toBeKilled = new ArrayList<KillableEntity>();
-		factory = EntityFactory.INSTANCE;
 		setupScene();
 		addObserver(gameHandler);
 	}
@@ -57,6 +55,10 @@ public class Sandbox extends Observable implements Iterable<Entity> {
 
 	public Collection<Player> getPlayers() {
 		return players;
+	}
+	
+	public boolean gameWon() {
+		return gameWon;
 	}
 
 	/*
@@ -96,6 +98,11 @@ public class Sandbox extends Observable implements Iterable<Entity> {
 		Predicate<Entity> isNotColliding = other -> other.equals(e) || !other.isColliding(e);
 		return filterOutEntities(isNotColliding, entities);
 	}
+	
+	public void playerFoundDoor() {
+		setChanged();
+		gameWon = true;
+	}
 
 	/*
 	 * ************ Gameloop Methods ************
@@ -105,6 +112,10 @@ public class Sandbox extends Observable implements Iterable<Entity> {
 		addEntities();
 		killEntities();
 		cleanUpEntities();
+		
+		if (gameWon) {
+			notifyObservers();	// let gameHandler know that the game is won
+		}
 	}
 
 	private void killEntities() {
@@ -164,7 +175,7 @@ public class Sandbox extends Observable implements Iterable<Entity> {
 	}
 
 	private void addNewEntity(char entityType, int x, int y) {
-		addEntityToGame(factory.create(entityType, x, y));
+		addEntityToGame(EntityFactory.create(entityType, x, y));
 	}
 
 	private void processEntities() {

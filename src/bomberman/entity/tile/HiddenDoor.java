@@ -1,5 +1,7 @@
 package bomberman.entity.tile;
 
+import java.util.Collection;
+
 import bomberman.Sandbox;
 import bomberman.constants.EntityDimensions;
 import bomberman.entity.Entity;
@@ -7,6 +9,7 @@ import bomberman.entity.StaticEntity;
 import bomberman.entity.configurations.animations.SingleSpriteAnimations;
 import bomberman.entity.configurations.animations.sprites.SpriteSpecification;
 import bomberman.entity.configurations.boundedbox.CollidableType;
+import bomberman.entity.player.Player;
 
 public class HiddenDoor extends StaticEntity {
 	
@@ -30,6 +33,11 @@ public class HiddenDoor extends StaticEntity {
 		if (! brickWallAdded) {
 			sb.addEntityToGame(new BrickWall(positionX, positionY));
 			brickWallAdded = true;
+		}
+		// check if player is entering door
+		Collection<Entity> colliding = sb.getEntityColliding(this);
+		if (colliding.stream().anyMatch(e -> e instanceof Player)) {
+			sb.playerFoundDoor();
 		}
 	}
 
