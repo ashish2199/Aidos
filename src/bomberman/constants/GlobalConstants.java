@@ -5,7 +5,6 @@
  */
 package bomberman.constants;
 
-import javafx.scene.Group;
 import javafx.scene.paint.Color;
 
 /**
@@ -15,7 +14,6 @@ import javafx.scene.paint.Color;
  * @author Tia Lim
  */
 public class GlobalConstants {
-	public static final Group parent = new Group();
 	public static final int GRID_SIZE = 42; // the length/width (in pixels) of the grid size of the game. Adjusting this
 											// will automatically adjust the dimensions in the game.
 	public static String GAME_NAME = "BomberMan";

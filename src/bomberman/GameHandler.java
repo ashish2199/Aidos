@@ -1,7 +1,7 @@
 package bomberman;
 
-import bomberman.constants.GlobalConstants;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 
 /**
  * Responsible for updating the sandbox and loading new maps as the player
@@ -14,37 +14,48 @@ import javafx.scene.Scene;
 public class GameHandler {
 
 	MapLoader mapL = new MapLoader();
-	WindowManager w = new WindowManager(this);
+	WindowManager window = new WindowManager(this);
 	Sandbox sb;
 	GameLoop loop = new GameLoop();
 
 	public GameHandler() {
-		newGame();
+//		newGame();
+		loadLevel(2);
 	}
 
 	Scene getScene() {
-		return w.getScene();
+		return window.getScene();
 	}
 
 	void newGame() {
-		mapL.setLevel(1);
-		double sceneW = mapL.getSceneWidth();
-		double sceneH = mapL.getSceneHeight();
-		w.resetCanvas(sceneW, sceneH);
-		sb = new Sandbox(GlobalConstants.parent, mapL.getEntities(), w.getGraphicsContext());
-		loop.init(w.getGraphicsContext(), sb, sceneW, sceneH);
-		loop.start();
+		loadLevel(1);
 	}
 	
 	void stopGame() {
 		loop.stop();
 	}
 	
+	BorderPane getBorderPane() {
+		return window.getBorder();
+	}
+	
 	void resumeGame() {
 		loop.start();
 	}
 	
-	int getLevel() {
+	int getLCurrentLevel() {
 		return mapL.getLevel();
 	}
+	
+	private void loadLevel(int level) {
+		loop.stop();
+		mapL.setLevel(level);
+		double sceneW = mapL.getSceneWidth();
+		double sceneH = mapL.getSceneHeight();
+		window.resetCanvas(sceneW, sceneH);
+		sb = new Sandbox(mapL.getEntities(), window.getGraphicsContext());
+		loop.init(window.getGraphicsContext(), sb, sceneW, sceneH);
+		loop.start();
+	}
 }
+

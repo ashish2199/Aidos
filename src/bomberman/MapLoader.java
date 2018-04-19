@@ -105,9 +105,8 @@ public class MapLoader {
 			BufferedReader buf = new BufferedReader(new InputStreamReader(is));
 
 			String[] meta = buf.readLine().split(" ");
-			level = Integer.parseInt(meta[0]);
-			widthTile = Integer.parseInt(meta[1]);
-			heightTile = Integer.parseInt(meta[2]);
+			widthTile = Integer.parseInt(meta[0]);
+			heightTile = Integer.parseInt(meta[1]);
 			Tiling.tileHeight = heightTile;
 			Tiling.tileWidth = widthTile;
 

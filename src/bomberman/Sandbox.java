@@ -15,7 +15,6 @@ import bomberman.entity.Entity;
 import bomberman.entity.KillableEntity;
 import bomberman.entity.factory.EntityFactory;
 import bomberman.entity.player.Player;
-import javafx.scene.Group;
 import javafx.scene.canvas.GraphicsContext;
 
 /**
@@ -30,7 +29,7 @@ public class Sandbox implements Iterable<Entity> {
 	private Collection<KillableEntity> toBeKilled, killableEntities;
 	private EntityFactory factory;
 
-	public Sandbox(Group r, Collection<Entity> ent, GraphicsContext gc) {
+	public Sandbox(Collection<Entity> ent, GraphicsContext gc) {
 		this.gc = gc;
 		entities = ent;
 		killableEntities = new Vector<KillableEntity>();

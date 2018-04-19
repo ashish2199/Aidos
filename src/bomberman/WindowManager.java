@@ -15,27 +15,26 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToolBar;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
 public class WindowManager {
 	
 	GameHandler gameHandler;
-	Group root;
 	Scene s;
-	BorderPane b;
-	Canvas c;
+	BorderPane b = new BorderPane();
+	Canvas c = new Canvas();
 	StringProperty level = new SimpleStringProperty("");
 	StringProperty state = new SimpleStringProperty("");
 
 	public WindowManager(GameHandler gh) {
 		gameHandler = gh;
-		root = GlobalConstants.parent;
-		s = new Scene(root, GlobalConstants.BACKGROUND_COLOR);
-		b = new BorderPane();
+		s = new Scene(b, GlobalConstants.BACKGROUND_COLOR);
 		b.setTop(createToolBar());
-		root.getChildren()
-				.add(b);
+		b.setBackground(Background.EMPTY);
+		b.prefWidthProperty().bind(c.widthProperty());
+		b.prefHeightProperty().bind(c.heightProperty());
 		GameEventHandler.attachEventHandlers(s);
 	}
 
@@ -50,8 +49,13 @@ public class WindowManager {
 	public void resetCanvas(double width, double height) {
 		c = new Canvas(width, height);
 		b.setCenter(c);
-		level.setValue("Level: " + gameHandler.getLevel());
+		level.setValue("Level: " + gameHandler.getLCurrentLevel());
 		state.setValue("Game Status: " + GameState.gameStatus);
+		System.out.println(width + " ... " + height);
+		System.out.println(b.getWidth());
+		System.out.println(b.getHeight());
+		System.out.println(s.getWidth());
+		System.out.println(s.getHeight());
 	}
 	
 	private HBox createMenuBar() {
@@ -84,6 +88,10 @@ public class WindowManager {
 		hbox.getChildren().addAll(createMenuBar(), levelStats, new Separator(Orientation.VERTICAL), gameState);
 		ToolBar toolBar = new ToolBar(hbox);
 		return toolBar;
+	}
+	
+	public BorderPane getBorder() {
+		return b;
 	}
 
 }
