@@ -37,7 +37,7 @@ public class HiddenDoor extends StaticEntity {
 		// check if player is entering door
 		Collection<Entity> colliding = sb.getEntityColliding(this);
 		if (colliding.stream().anyMatch(e -> e instanceof Player)) {
-			sb.playerFoundDoor();
+			sb.playerOnDoor();
 		}
 	}
 

@@ -15,6 +15,7 @@ import java.util.function.Predicate;
 
 import bomberman.entity.Entity;
 import bomberman.entity.KillableEntity;
+import bomberman.entity.enemy.Enemy;
 import bomberman.entity.factory.EntityFactory;
 import bomberman.entity.player.Player;
 import javafx.scene.canvas.GraphicsContext;
@@ -56,7 +57,7 @@ public class Sandbox extends Observable implements Iterable<Entity> {
 	public Collection<Player> getPlayers() {
 		return players;
 	}
-	
+
 	public boolean gameWon() {
 		return gameWon;
 	}
@@ -98,23 +99,29 @@ public class Sandbox extends Observable implements Iterable<Entity> {
 		Predicate<Entity> isNotColliding = other -> other.equals(e) || !other.isColliding(e);
 		return filterOutEntities(isNotColliding, entities);
 	}
-	
-	public void playerFoundDoor() {
-		setChanged();
-		gameWon = true;
+
+	public void playerOnDoor() {
+		System.out.println("player on door");
+		killableEntities.forEach(System.out::println);
+		if (!killableEntities.stream()
+				.anyMatch(e -> e instanceof Enemy)) {	// if all enemies are killed
+			setChanged();
+			System.out.println("all dead");
+			gameWon = true;
+		}
 	}
 
 	/*
 	 * ************ Gameloop Methods ************
 	 */
-	
+
 	void update() {
 		addEntities();
 		killEntities();
 		cleanUpEntities();
-		
+
 		if (gameWon) {
-			notifyObservers();	// let gameHandler know that the game is won
+			notifyObservers(); // let gameHandler know that the game is won
 		}
 	}
 
@@ -135,7 +142,7 @@ public class Sandbox extends Observable implements Iterable<Entity> {
 		}
 		toBeAdded.clear();
 	}
-	
+
 	private void cleanUpEntities() {
 		// removes unwanted entities from the game
 		Predicate<Entity> notPersistant = e -> !e.isPersistant();

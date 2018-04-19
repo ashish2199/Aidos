@@ -2,6 +2,7 @@ package bomberman;
 
 import java.util.Observable;
 import java.util.Observer;
+import static bomberman.constants.GlobalConstants.NUM_LEVELS;
 
 import javafx.scene.Scene;
 
@@ -13,48 +14,50 @@ import javafx.scene.Scene;
  *
  */
 
-public class GameHandler implements Observer{
+public class GameHandler implements Observer {
 
 	private MapLoader mapL = new MapLoader();
 	private WindowManager window = new WindowManager(this);
 	private Sandbox sb;
 	private GameLoop loop = new GameLoop();
-	private int level;
+	private int level = 1;
 
 	public GameHandler() {
-		level = 1;
-		newGame();
+		 newGame();
 	}
 
 	Scene getScene() {
 		return window.getScene();
 	}
-	
+
 	private void nextLevel() {
-		loadLevel(++level);
+		if ((level) < NUM_LEVELS) {
+			loadLevel(++level);
+		}
 	}
-	
+
 	// -------- Methods for buttons and screen controls---------
-	
+
 	void stopGame() {
 		loop.stop();
 	}
-	
+
 	void resumeGame() {
 		loop.start();
 	}
-	
+
 	void newGame() {
 		loadLevel(1);
 	}
-	
+
 	int getLCurrentLevel() {
 		return level;
 	}
-	
+
 	// -------- Private Methods -----------
-	
-	private void loadLevel(int level) {
+
+	void loadLevel(int newLevel) {	//TODO change to private later; kept open for dev.
+		this.level = newLevel;
 		loop.stop();
 		mapL.loadLevel(level);
 		double sceneW = mapL.getSceneWidth();
@@ -67,9 +70,9 @@ public class GameHandler implements Observer{
 
 	public void update(Observable o, Object arg) {
 		if (sb.gameWon()) {
+			System.out.println("game won");
 			nextLevel();
 		}
 	}
-	
-}
 
+}

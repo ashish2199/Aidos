@@ -4,15 +4,15 @@ WP     ## #    #   #  # # #   W
 W W#W#W#W W W#W#W W W W#W#W#W W
 W   #     ###  #      #   # # W
 W W W WXW W#W W W#W#W W W W W#W
-W D        W ##B #  #  E     BW
-W W W### #  W W W W#WBW#W W W W
+W         BW ##  #  #         W
+W W W### #  W W W W#W W#W W W W
 W#  #      #  #      #        W
 W W W W W#W W W W#W#W W W W W W
 W#    ##  #       #           W
-W W#W W WXW W W W#W W E#  W W W
-W          W ##B #  #  E     BW
-W W W W # #WW W W W#WBW#W W W W
+W W#W W WXW W W W#W W  #  W W W
+W          W ##  #  #         W
+W W W W # #WW W W W#W W#W W W W
 W#    ##  #       #           W
-W W#W W WXW W W W#W W W W W W W
-W           #D  #  #          W
+W W#W W W W W W W#W W W W W W W
+W           #   #  #          W
 WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
