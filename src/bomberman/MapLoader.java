@@ -54,6 +54,10 @@ public class MapLoader {
 		level = gameLevel-1;
 		loadNextMap();
 	}
+	
+	int getLevel() {
+		return level;
+	}
 
 	Collection<Entity> getEntities() {
 		return entities;

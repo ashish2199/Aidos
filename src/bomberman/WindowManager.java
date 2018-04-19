@@ -2,6 +2,8 @@ package bomberman;
 
 import bomberman.constants.GlobalConstants;
 import bomberman.gamecontroller.GameEventHandler;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -23,6 +25,7 @@ public class WindowManager {
 	Scene s;
 	BorderPane b;
 	Canvas c;
+	StringProperty level = new SimpleStringProperty("");
 
 	public WindowManager(GameHandler gh) {
 		gameHandler = gh;
@@ -33,7 +36,6 @@ public class WindowManager {
 		root.getChildren()
 				.add(b);
 		GameEventHandler.attachEventHandlers(s);
-
 	}
 
 	public Scene getScene() {
@@ -47,6 +49,7 @@ public class WindowManager {
 	public void resetCanvas(double width, double height) {
 		c = new Canvas(width, height);
 		b.setCenter(c);
+		level.setValue("Level: " + gameHandler.getLevel());
 	}
 
 	private MenuBar createMenuBar() {
@@ -77,18 +80,19 @@ public class WindowManager {
 				gameHandler.resumeGame();
 			}
 		});
-
 		menuFile.getItems()
-				.addAll(newGame, pauseGame, resumeGame, new CustomMenuItem(new Label("testing")));
+				.addAll(newGame, pauseGame, resumeGame);
 		menuBar.getMenus()
 				.add(menuFile);
 		return menuBar;
 	}
 
 	private ToolBar createToolBar() {
+		Label levelStats = new Label("Level: 0");
+		levelStats.textProperty().bind(level);
 		ToolBar toolBar = new ToolBar(createMenuBar());
 		toolBar.getItems()
-				.add(new Label("HI"));
+				.add(levelStats);
 		return toolBar;
 	}
 

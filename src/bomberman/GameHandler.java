@@ -22,11 +22,11 @@ public class GameHandler {
 		newGame();
 	}
 
-	public Scene getScene() {
+	Scene getScene() {
 		return w.getScene();
 	}
 
-	public void newGame() {
+	void newGame() {
 		mapL.setLevel(1);
 		double sceneW = mapL.getSceneWidth();
 		double sceneH = mapL.getSceneHeight();
@@ -36,11 +36,15 @@ public class GameHandler {
 		loop.start();
 	}
 	
-	public void stopGame() {
+	void stopGame() {
 		loop.stop();
 	}
 	
-	public void resumeGame() {
+	void resumeGame() {
 		loop.start();
+	}
+	
+	int getLevel() {
+		return mapL.getLevel();
 	}
 }
