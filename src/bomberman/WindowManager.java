@@ -20,6 +20,14 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
+/**
+ * This class controls how the window is displayed, including how each new level
+ * is loaded onto the window, controls, buttons and text displays
+ * 
+ * @author tialim
+ *
+ */
+
 public class WindowManager {
 
 	GameHandler gameHandler;

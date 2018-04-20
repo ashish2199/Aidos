@@ -7,8 +7,9 @@ import static bomberman.constants.GlobalConstants.NUM_LEVELS;
 import javafx.scene.Scene;
 
 /**
- * Responsible for updating the sandbox and loading new maps as the player
- * advances through levels Holds player statistics such as points, lives, etc
+ * Manages the game at the highest level, and holds information such as the
+ * current level, etc. When a player has won a map, it is responsible for
+ * loading the second map onto the window.
  * 
  * @author tialim
  *
@@ -23,16 +24,16 @@ public class GameHandler implements Observer {
 	private int level = 1;
 
 	public GameHandler() {
-		 newGame();
+		newGame();
 	}
 
 	Scene getScene() {
 		return window.getScene();
 	}
-
-	private void nextLevel() {
-		if ((level) < NUM_LEVELS) {
-			loadLevel(++level);
+	
+	public void update(Observable o, Object arg) {
+		if (sb.gameWon()) {
+			nextLevel();
 		}
 	}
 
@@ -56,7 +57,13 @@ public class GameHandler implements Observer {
 
 	// -------- Private Methods -----------
 
-	void loadLevel(int newLevel) {	//TODO change to private later; kept open for dev.
+	private void nextLevel() {
+		if ((level) < NUM_LEVELS) {
+			loadLevel(++level);
+		}
+	}
+
+	void loadLevel(int newLevel) { // TODO change to private later; kept open for dev.
 		this.level = newLevel;
 		mapL.loadLevel(level);
 		double sceneW = mapL.getSceneWidth();
@@ -66,12 +73,6 @@ public class GameHandler implements Observer {
 		loop.stop();
 		loop.init(window.getGraphicsContext(), sb, sceneW, sceneH);
 		loop.start();
-	}
-
-	public void update(Observable o, Object arg) {
-		if (sb.gameWon()) {
-			nextLevel();
-		}
 	}
 
 }
