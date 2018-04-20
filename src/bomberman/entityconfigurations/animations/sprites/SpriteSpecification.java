@@ -29,7 +29,7 @@ public enum SpriteSpecification {
 	PLAYERDIE(0.25, getDieSpecs(), false, PLAYERDIED, 1), 
 	
 	//ENEMIES
-	BALLOOM(30, 0.2, 0, 123, 4, true, true, BALLOMD), 
+	BALLOOM(0.2, getBalloonSpecs(), true, TILED, 2), 
 	BALLOOMDIE(30, 0.2, 30, 153, 6, true, false, BALLOMD), 
 	DORIA(0.2, getDoriaSpecs(), true, DORIAD, 1),
 	DORIADIE(0.1, getDoriaDieSpecs(), false, DORIAD, 1),
@@ -124,6 +124,14 @@ public enum SpriteSpecification {
 		this.leftToRight = leftToRight;
 		this.numberOfFrames = numberOfFrames;
 		this.loopPlay = loopPlay;
+	}
+	
+	private static List<Rectangle> getBalloonSpecs() {
+		List<Rectangle> specs = new ArrayList<>();
+		specs.add(new Rectangle(29, 246, 16, 16));
+		specs.add(new Rectangle(52, 246, 16, 16));
+		specs.add(new Rectangle(76, 246, 16, 16));
+		return specs;
 	}
 
 	private static List<Rectangle> getBombSpecs() {
