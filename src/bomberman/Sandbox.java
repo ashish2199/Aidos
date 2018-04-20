@@ -101,12 +101,9 @@ public class Sandbox extends Observable implements Iterable<Entity> {
 	}
 
 	public void playerOnDoor() {
-		System.out.println("player on door");
-		killableEntities.forEach(System.out::println);
 		if (!killableEntities.stream()
 				.anyMatch(e -> e instanceof Enemy)) {	// if all enemies are killed
 			setChanged();
-			System.out.println("all dead");
 			gameWon = true;
 		}
 	}

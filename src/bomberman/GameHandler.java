@@ -70,7 +70,6 @@ public class GameHandler implements Observer {
 
 	public void update(Observable o, Object arg) {
 		if (sb.gameWon()) {
-			System.out.println("game won");
 			nextLevel();
 		}
 	}

@@ -19,7 +19,7 @@ public class GlobalConstants {
 	public static String GAME_NAME = "BomberMan";
 	public static String GAME_VERSION = "  v 0.1";
 	public static Color BACKGROUND_COLOR = Color.LIMEGREEN;
-	public static final int NUM_LEVELS = 2;
+	public static final int NUM_LEVELS = 3;
 
 	public static enum GameStatus {
 		Running, Paused, GameOver
