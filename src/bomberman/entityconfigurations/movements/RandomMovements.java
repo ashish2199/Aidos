@@ -1,4 +1,4 @@
-package bomberman.entity.configurations.movements;
+package bomberman.entityconfigurations.movements;
 
 import bomberman.constants.Direction;
 

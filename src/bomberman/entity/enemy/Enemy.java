@@ -2,7 +2,7 @@ package bomberman.entity.enemy;
 
 import bomberman.Sandbox;
 import bomberman.entity.MovingEntity;
-import bomberman.entity.configurations.boundedbox.CollidableType;
+import bomberman.entityconfigurations.boundedbox.CollidableType;
 
 public abstract class Enemy extends MovingEntity{
 

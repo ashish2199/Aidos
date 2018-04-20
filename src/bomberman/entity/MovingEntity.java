@@ -9,7 +9,7 @@ import static bomberman.constants.Direction.*;
 
 import bomberman.Sandbox;
 import bomberman.constants.Direction;
-import bomberman.entity.configurations.movements.MovementStrategy;
+import bomberman.entityconfigurations.movements.MovementStrategy;
 
 /**
  * @author tialim

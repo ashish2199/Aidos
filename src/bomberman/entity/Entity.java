@@ -8,10 +8,10 @@ package bomberman.entity;
 import bomberman.Renderer;
 import bomberman.Sandbox;
 import bomberman.constants.EntityDimensions;
-import bomberman.entity.configurations.animations.Animations;
-import bomberman.entity.configurations.animations.sprites.Sprite;
-import bomberman.entity.configurations.boundedbox.CollidableType;
-import bomberman.entity.configurations.boundedbox.RectBoundedBox;
+import bomberman.entityconfigurations.animations.Animations;
+import bomberman.entityconfigurations.animations.sprites.Sprite;
+import bomberman.entityconfigurations.boundedbox.CollidableType;
+import bomberman.entityconfigurations.boundedbox.RectBoundedBox;
 
 /**
  * Superclass for all entity types in the game. Hold all the objects necessary

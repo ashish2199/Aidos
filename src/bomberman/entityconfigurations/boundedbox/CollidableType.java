@@ -1,4 +1,4 @@
-package bomberman.entity.configurations.boundedbox;
+package bomberman.entityconfigurations.boundedbox;
 
 /**
  * Different entities hold different collidable types.

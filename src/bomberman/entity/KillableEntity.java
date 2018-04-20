@@ -7,8 +7,8 @@ package bomberman.entity;
 
 import bomberman.GameLoop;
 import bomberman.constants.GlobalConstants;
-import bomberman.entity.configurations.animations.KillableEntityAnimations;
-import bomberman.entity.configurations.animations.sprites.Sprite;
+import bomberman.entityconfigurations.animations.KillableEntityAnimations;
+import bomberman.entityconfigurations.animations.sprites.Sprite;
 
 /**
  * @author tialim

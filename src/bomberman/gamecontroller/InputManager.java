@@ -10,7 +10,7 @@ import java.util.List;
 import static bomberman.constants.Direction.*;
 
 import bomberman.constants.Direction;
-import bomberman.entity.configurations.movements.MovementStrategy;
+import bomberman.entityconfigurations.movements.MovementStrategy;
 import javafx.scene.input.KeyCode;
 
 /**

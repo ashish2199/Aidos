@@ -5,9 +5,9 @@ import bomberman.constants.EntityDimensions;
 import bomberman.constants.GlobalConstants;
 import bomberman.entity.Entity;
 import bomberman.entity.MovingEntity;
-import bomberman.entity.configurations.animations.PlayerAnimations;
-import bomberman.entity.configurations.boundedbox.CollidableType;
-import bomberman.entity.configurations.boundedbox.RectBoundedBox;
+import bomberman.entityconfigurations.animations.PlayerAnimations;
+import bomberman.entityconfigurations.boundedbox.CollidableType;
+import bomberman.entityconfigurations.boundedbox.RectBoundedBox;
 import bomberman.gamecontroller.InputManager;
 
 public class Player extends MovingEntity {

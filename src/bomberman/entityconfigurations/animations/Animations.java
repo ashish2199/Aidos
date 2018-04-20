@@ -1,6 +1,6 @@
-package bomberman.entity.configurations.animations;
+package bomberman.entityconfigurations.animations;
 
-import bomberman.entity.configurations.animations.sprites.Sprite;
+import bomberman.entityconfigurations.animations.sprites.Sprite;
 
 
 /**

@@ -8,10 +8,10 @@ package bomberman.entity.tile;
 import bomberman.constants.EntityDimensions;
 import bomberman.entity.Entity;
 import bomberman.entity.StaticEntity;
-import bomberman.entity.configurations.animations.SingleSpriteAnimations;
-import bomberman.entity.configurations.animations.sprites.SpriteSpecification;
-import bomberman.entity.configurations.boundedbox.CollidableType;
-import bomberman.entity.configurations.boundedbox.RectBoundedBox;
+import bomberman.entityconfigurations.animations.SingleSpriteAnimations;
+import bomberman.entityconfigurations.animations.sprites.SpriteSpecification;
+import bomberman.entityconfigurations.boundedbox.CollidableType;
+import bomberman.entityconfigurations.boundedbox.RectBoundedBox;
 import javafx.scene.paint.Color;
 
 /**

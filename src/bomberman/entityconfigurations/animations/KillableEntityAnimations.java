@@ -1,8 +1,8 @@
-package bomberman.entity.configurations.animations;
+package bomberman.entityconfigurations.animations;
 
 import bomberman.entity.Entity;
-import bomberman.entity.configurations.animations.sprites.Sprite;
-import bomberman.entity.configurations.animations.sprites.SpriteSpecification;
+import bomberman.entityconfigurations.animations.sprites.Sprite;
+import bomberman.entityconfigurations.animations.sprites.SpriteSpecification;
 
 /**
  * Animations for Killable Entities that have two sprites -- idle and dying

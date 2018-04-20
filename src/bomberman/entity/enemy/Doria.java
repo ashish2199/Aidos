@@ -2,9 +2,9 @@ package bomberman.entity.enemy;
 
 import bomberman.constants.EntityDimensions;
 import bomberman.entity.Entity;
-import bomberman.entity.configurations.animations.KillableEntityAnimations;
-import bomberman.entity.configurations.animations.sprites.SpriteSpecification;
-import bomberman.entity.configurations.movements.RandomMovements;
+import bomberman.entityconfigurations.animations.KillableEntityAnimations;
+import bomberman.entityconfigurations.animations.sprites.SpriteSpecification;
+import bomberman.entityconfigurations.movements.RandomMovements;
 
 public class Doria extends Enemy {
 

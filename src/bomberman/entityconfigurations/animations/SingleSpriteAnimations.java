@@ -1,8 +1,8 @@
-package bomberman.entity.configurations.animations;
+package bomberman.entityconfigurations.animations;
 
 import bomberman.entity.Entity;
-import bomberman.entity.configurations.animations.sprites.Sprite;
-import bomberman.entity.configurations.animations.sprites.SpriteSpecification;
+import bomberman.entityconfigurations.animations.sprites.Sprite;
+import bomberman.entityconfigurations.animations.sprites.SpriteSpecification;
 
 /**
  * For entities that have only one sprite

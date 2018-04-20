@@ -1,4 +1,4 @@
-package bomberman.entity.configurations.animations.sprites;
+package bomberman.entityconfigurations.animations.sprites;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package bomberman.entity.configurations.animations.sprites;
+package bomberman.entityconfigurations.animations.sprites;
 
 import bomberman.constants.EntityDimensions;
 import bomberman.entity.Entity;

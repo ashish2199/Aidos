@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bomberman.entity.configurations.animations;
+package bomberman.entityconfigurations.animations;
 
 import bomberman.entity.Entity;
-import bomberman.entity.configurations.animations.sprites.Sprite;
-import bomberman.entity.configurations.animations.sprites.SpriteSpecification;
+import bomberman.entityconfigurations.animations.sprites.Sprite;
+import bomberman.entityconfigurations.animations.sprites.SpriteSpecification;
 
 /**
  * Specific class created for Player Animations since the player uniquely holds several sprites,

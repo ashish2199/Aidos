@@ -6,7 +6,7 @@ import java.util.List;
 
 import bomberman.Sandbox;
 import bomberman.constants.EntityDimensions;
-import bomberman.entity.configurations.boundedbox.CollidableType;
+import bomberman.entityconfigurations.boundedbox.CollidableType;
 
 /**
  * Decorator class for Entity that to account for entities layered on top of each other on the same tile.
