@@ -50,18 +50,20 @@ public class WindowManager {
 		b.setCenter(c);
 		level.setValue("Level: " + gameHandler.getLCurrentLevel());
 		state.setValue("Game Status: " + GameState.gameStatus);
-		System.out.println(width + " ... " + height);
-		System.out.println(b.getWidth());
-		System.out.println(b.getHeight());
-		System.out.println(s.getWidth());
-		System.out.println(s.getHeight());
+		// System.out.println(width + " ... " + height);
+		// System.out.println(b.getWidth());
+		// System.out.println(b.getHeight());
+		// System.out.println(s.getWidth());
+		// System.out.println(s.getHeight());
 	}
 
 	private HBox createControlBar() {
 		// -------- create menu items --------
 		Button newGame = new Button("New Game");
 		newGame.setFocusTraversable(false);
-		newGame.setOnAction(event -> gameHandler.newGame());
+		newGame.setOnAction(event -> {
+			gameHandler.newGame();
+		});
 
 		ToggleButton pauseGame = new ToggleButton("Pause/Play");
 		pauseGame.setFocusTraversable(false);
@@ -73,7 +75,6 @@ public class WindowManager {
 			}
 			state.setValue("Game Status: " + GameState.gameStatus);
 		});
-
 		return new HBox(newGame, pauseGame, createLevelMenu());
 	}
 
@@ -91,16 +92,21 @@ public class WindowManager {
 		ToolBar toolBar = new ToolBar(hbox);
 		return toolBar;
 	}
-	
+
 	// used for development
 	private MenuButton createLevelMenu() {
 		MenuButton levelSwitch = new MenuButton("Change Level");
-		
+
 		// level 2 button
 		MenuItem level2 = new MenuItem("Level 2");
 		level2.setOnAction(event -> gameHandler.loadLevel(2));
-		
-		levelSwitch.getItems().add(level2);
+
+		// level 3 button
+		MenuItem level3 = new MenuItem("Level 3");
+		level3.setOnAction(event -> gameHandler.loadLevel(3));
+
+		levelSwitch.getItems()
+				.addAll(level2, level3);
 		levelSwitch.setFocusTraversable(false);
 		return levelSwitch;
 	}

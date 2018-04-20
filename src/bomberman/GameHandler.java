@@ -58,12 +58,12 @@ public class GameHandler implements Observer {
 
 	void loadLevel(int newLevel) {	//TODO change to private later; kept open for dev.
 		this.level = newLevel;
-		loop.stop();
 		mapL.loadLevel(level);
 		double sceneW = mapL.getSceneWidth();
 		double sceneH = mapL.getSceneHeight();
 		window.resetCanvas(sceneW, sceneH);
 		sb = new Sandbox(this, mapL.getEntities(), window.getGraphicsContext());
+		loop.stop();
 		loop.init(window.getGraphicsContext(), sb, sceneW, sceneH);
 		loop.start();
 	}

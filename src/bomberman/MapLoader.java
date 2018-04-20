@@ -13,9 +13,7 @@ import java.util.Collection;
 import java.util.Vector;
 
 import bomberman.entity.Entity;
-import bomberman.entity.KillableEntity;
 import bomberman.entity.factory.EntityFactory;
-import bomberman.entity.player.Player;
 import bomberman.utils.Tiling;
 
 /**
@@ -26,12 +24,8 @@ import bomberman.utils.Tiling;
 
 public class MapLoader {
 
-	// File mapFile;
-	Player player;
 	private int widthTile, heightTile;
 	private Collection<Entity> entities;
-	private Collection<KillableEntity> killableEntities;
-	File file;
 	String parentPath = "src/resources/scenes/";
 	
 	public MapLoader() {
@@ -40,20 +34,11 @@ public class MapLoader {
 
 	public MapLoader(int gameLevel) {
 		entities = new Vector<Entity>();	// vector used for synchronization, opening a possibility of running multi-player on different threads
-		killableEntities = new Vector<KillableEntity>();
 		loadLevel(gameLevel);
-	}
-
-	Player getPlayer() {
-		return player;
 	}
 
 	Collection<Entity> getEntities() {
 		return entities;
-	}
-
-	Collection<KillableEntity> getKillableEntities() {
-		return killableEntities;
 	}
 
 	int getSceneWidth() {
@@ -66,7 +51,6 @@ public class MapLoader {
 	
 	void loadLevel(int level) {
 		entities.clear();
-		killableEntities.clear();
 		loadMap("Level" + level + ".txt");
 	}
 
