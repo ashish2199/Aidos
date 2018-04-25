@@ -1,5 +1,7 @@
 package bomberman;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Observable;
 import java.util.Observer;
 import static bomberman.constants.GlobalConstants.NUM_LEVELS;
@@ -13,27 +15,28 @@ import static bomberman.constants.GlobalConstants.NUM_LEVELS;
  *
  */
 
-public class GameHandler extends Observable implements Observer {
+public class GameHandler implements Observer {
 
 	private MapLoader mapL;
-	private GameView window;
 	private Sandbox sb;
 	private GameLoop loop;
+	private Collection<GameObserver> observers;
 	private int level = 1;
 
 	public GameHandler() {
 		mapL = new MapLoader();
 		loop = new GameLoop();
+		observers = new ArrayList<GameObserver>();
 	}
-	
+
 	public void update(Observable o, Object arg) {
 		if (sb.gameWon()) {
 			nextLevel();
 		}
 	}
-	
-	public void setView(GameView view) {
-		window = view;
+
+	public void addObserver(GameObserver ob) {
+		observers.add(ob);
 	}
 
 	// -------- Methods for buttons and screen controls---------
@@ -45,11 +48,10 @@ public class GameHandler extends Observable implements Observer {
 	void resumeGame() {
 		loop.start();
 	}
-	
+
 	int getLCurrentLevel() {
 		return level;
 	}
-
 
 	// -------- Private Methods -----------
 
@@ -64,9 +66,7 @@ public class GameHandler extends Observable implements Observer {
 		mapL.loadLevel(level);
 		double sceneW = mapL.getSceneWidth();
 		double sceneH = mapL.getSceneHeight();
-		setChanged();
-		notifyObservers();
-		window.resetCanvas(sceneW, sceneH);
+		observers.forEach(ob -> ob.resetWindow(sceneW, sceneH));
 		sb = new Sandbox(this, mapL.getEntities());
 		loop.stop();
 		loop.init(sb, sceneW, sceneH);

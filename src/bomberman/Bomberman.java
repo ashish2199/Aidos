@@ -13,7 +13,7 @@ public class Bomberman extends Application {
         GameHandler gh = new GameHandler();
         GameController controller = new GameController(gh);
         GameView view = new GameView(controller);
-        gh.setView(view);
+        controller.setView(view);
         controller.newGame();
         Scene s = view.getScene();
         primaryStage.setScene(s);
