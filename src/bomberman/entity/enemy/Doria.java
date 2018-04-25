@@ -15,10 +15,6 @@ public class Doria extends Enemy {
 	protected void setMovementStrategy() {
 		movementStrategy = new RandomMovements(20);
 	}
-	
-	protected void setSteps() {
-		steps = 2;
-	}
 
 	public int setHealth() {
 		// TODO Auto-generated method stub

@@ -47,16 +47,16 @@ public class Sandbox extends Observable implements Iterable<Entity> {
 		return entities;
 	}
 
-//	public GraphicsContext getGraphicsContext() {
-//		return gc;
-//	}
-
 	public Collection<Player> getPlayers() {
 		return players;
 	}
 
 	public boolean gameWon() {
 		return gameWon;
+	}
+	
+	public boolean playerDead() {
+		return players.isEmpty();
 	}
 
 	/*
@@ -113,8 +113,9 @@ public class Sandbox extends Observable implements Iterable<Entity> {
 		addEntities();
 		killEntities();
 		cleanUpEntities();
+		setChanged();
 
-		if (gameWon) {
+		if (gameWon || playerDead()) {
 			notifyObservers(); // let gameHandler know that the game is won
 		}
 	}
@@ -132,6 +133,9 @@ public class Sandbox extends Observable implements Iterable<Entity> {
 		for (Entity e : toBeAdded) {
 			if (e instanceof KillableEntity) {
 				killableEntities.add((KillableEntity) e);
+				if (e instanceof Player) {
+					players.add((Player) e);
+				}
 			}
 		}
 		toBeAdded.clear();

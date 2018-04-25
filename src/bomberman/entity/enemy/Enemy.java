@@ -17,5 +17,9 @@ public abstract class Enemy extends MovingEntity{
 	protected void setCollidableType() {
 		collidableType = CollidableType.PENETRABLE;
 	}
+	
+	protected void setSteps() {
+		steps = 2;
+	}
 
 }

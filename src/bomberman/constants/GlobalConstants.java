@@ -29,4 +29,5 @@ public class GlobalConstants {
 	public static final int BOMB_EXPLODING_TIME = 2000;	// number of milliseconds before a bomb placed explodes
 	public static final double PERSISTANCE_TIME = 0.5; // duration a killable entity should be kept in the game after														// dying
 	public static final int EXPLOSION_RADIUS = 3;	// in terms the number of tiles from the bomb
+	public static final int LIVES = 3;
 }

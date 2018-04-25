@@ -2,8 +2,6 @@ package bomberman;
 
 import bomberman.constants.GlobalConstants;
 import bomberman.gamecontroller.GameEventHandler;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -33,8 +31,6 @@ public class GameView {
 	Scene s;
 	BorderPane b = new BorderPane();
 	Canvas c = new Canvas();
-	StringProperty level = new SimpleStringProperty("");
-	StringProperty state = new SimpleStringProperty("");
 
 	public GameView(GameController controller) {
 		this.controller = controller;
@@ -71,7 +67,6 @@ public class GameView {
 			} else {
 				controller.play();
 			}
-			state.setValue("Game Status: " + GameState.gameStatus);
 		});
 		return new HBox(newGame, pauseGame, createLevelMenu());
 	}
@@ -80,13 +75,17 @@ public class GameView {
 		HBox hbox = new HBox(20);
 		Label levelStats = new Label("Level: 0");
 		Label gameState = new Label("gameState: -");
+		Label lives = new Label("Lives: -");
 		levelStats.textProperty()
 				.bind(controller.levelLabel());
 		gameState.textProperty()
 				.bind(controller.stateLabel());
+		lives.textProperty()
+				.bind(controller.livesLabel());
 		hbox.setAlignment(Pos.CENTER_LEFT);
 		hbox.getChildren()
-				.addAll(createControlBar(), levelStats, new Separator(Orientation.VERTICAL), gameState);
+				.addAll(createControlBar(), levelStats, new Separator(Orientation.VERTICAL), gameState,
+						new Separator(Orientation.VERTICAL), lives);
 		ToolBar toolBar = new ToolBar(hbox);
 		return toolBar;
 	}

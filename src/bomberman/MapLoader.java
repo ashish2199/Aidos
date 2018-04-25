@@ -17,7 +17,8 @@ import bomberman.entity.factory.EntityFactory;
 import bomberman.utils.Tiling;
 
 /**
- * Configuration class for the Sandbox, used to load the different maps 
+ * Configuration class for the Sandbox, used to load the different maps
+ * 
  * @author tialim
  *
  */
@@ -25,15 +26,16 @@ import bomberman.utils.Tiling;
 public class MapLoader {
 
 	private int widthTile, heightTile;
-	private Collection<Entity> entities;
+	private Collection<Entity> entities, players;
 	String parentPath = "src/resources/scenes/";
-	
+
 	public MapLoader() {
 		this(1);
 	}
 
 	public MapLoader(int gameLevel) {
-		entities = new Vector<Entity>();	// vector used for synchronization, opening a possibility of running multi-player on different threads
+		entities = new Vector<Entity>(); // vector used for multi-threading option later
+		players = new Vector<Entity>();
 		loadLevel(gameLevel);
 	}
 
@@ -49,14 +51,23 @@ public class MapLoader {
 		return heightTile * GRID_SIZE;
 	}
 	
+	Collection<Entity> getPlayers() {
+		return players;
+	}
+
 	void loadLevel(int level) {
 		entities.clear();
+		players.clear();
 		loadMap("Level" + level + ".txt");
 	}
 
 	private void addEntity(char entityType, int x, int y) {
 		// adds new entity to the entity list
-		entities.add(EntityFactory.create(entityType, x, y));
+		Entity e = EntityFactory.create(entityType, x, y);
+		entities.add(e);
+		if (entityType == 'P') {
+			players.add(e);
+		}
 	}
 
 	private void loadMap(String filePath) {
@@ -77,7 +88,8 @@ public class MapLoader {
 			InputStream is = new FileInputStream(loadFile(filePath));
 			BufferedReader buf = new BufferedReader(new InputStreamReader(is));
 
-			String[] meta = buf.readLine().split(" ");
+			String[] meta = buf.readLine()
+					.split(" ");
 			widthTile = Integer.parseInt(meta[0]);
 			heightTile = Integer.parseInt(meta[1]);
 			Tiling.tileHeight = heightTile;

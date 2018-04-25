@@ -11,15 +11,24 @@ import bomberman.entityconfigurations.boundedbox.RectBoundedBox;
 import bomberman.gamecontroller.InputManager;
 
 public class Player extends MovingEntity {
+	
+	private final int initX, initY;	// original (x,y) coordinates of Player when initialized
 
 	public Player(int x, int y) {
 		super(x, y);
+		initX = x;
+		initY = y;
 		entityBoundary = new RectBoundedBox(positionX, positionY, (int)ed.gameW - 10, (int)ed.gameH - 5);
 		// this makes it easier to move player around the map 
 		//TODO find a way to remove this
 	}
 	
-	@Override
+	public void reset() {
+		dead = false;
+		positionX = initX;
+		positionY = initY;
+	}
+	
 	protected void updateExtra(Sandbox sb) {
 		if (((InputManager) movementStrategy).placeBomb()) {
 			double x = positionX + EntityDimensions.PLAYERIDLED.width / 2;
@@ -40,22 +49,18 @@ public class Player extends MovingEntity {
 		return "Player";
 	}
 
-	@Override
 	protected void setED() {
 		ed = EntityDimensions.PLAYERIDLED;
 	}
 
-	@Override
 	protected void setMovementStrategy() {
 		movementStrategy = new InputManager();
 	}
 
-	@Override
 	protected void setSteps() {
 		steps = GlobalConstants.PLAYER_SPEED;
 	}
 	
-	@Override
 	protected void setDirectionalSprite() {
 		if (!dead) {
 		switch (currentDirection) {
@@ -77,7 +82,6 @@ public class Player extends MovingEntity {
 	}
 	}
 
-	@Override
 	protected void setCollidableType() {
 		collidableType = CollidableType.PENETRABLE;
 	}

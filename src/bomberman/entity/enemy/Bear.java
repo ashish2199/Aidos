@@ -19,12 +19,6 @@ public class Bear extends Enemy {
 	}
 
 	@Override
-	protected void setSteps() {
-		steps = 2;
-
-	}
-
-	@Override
 	public int setHealth() {
 		// TODO Auto-generated method stub
 		return 0;

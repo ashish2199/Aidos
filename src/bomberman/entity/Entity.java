@@ -41,6 +41,8 @@ public abstract class Entity {
 		ID = IDGenerator++;
 		setCollidableType();
 	}
+	
+	public void reset() {};
 
 	public int getPositionX() {
 		return positionX;

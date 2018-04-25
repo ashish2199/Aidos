@@ -7,13 +7,14 @@ public class GameController implements GameObserver {
 
 	private GameHandler game;
 	private GameView view;
-	private StringProperty level, state;
+	private StringProperty level, state, lives;
 
 	public GameController(GameHandler gh) {
 		game = gh;
 		gh.addObserver(this);
 		level = new SimpleStringProperty("");
 		state = new SimpleStringProperty("");
+		lives = new SimpleStringProperty("");
 	}
 
 	StringProperty levelLabel() {
@@ -23,13 +24,18 @@ public class GameController implements GameObserver {
 	StringProperty stateLabel() {
 		return state;
 	}
+	
+	StringProperty livesLabel() {
+		return lives;
+	}
 
 	void setView(GameView view) {
 		this.view = view;
 	}
 
 	void newGame() {
-		loadLevel(1);
+		game.newGame();
+		updateLabels();
 	}
 
 	void pause() {
@@ -46,6 +52,10 @@ public class GameController implements GameObserver {
 		game.loadLevel(newLevel);
 		updateLabels();
 	}
+	
+	public void update() {
+		updateLabels();
+	}
 
 	public void newLevel(double width, double height) {
 		view.resetCanvas(width, height);
@@ -55,6 +65,7 @@ public class GameController implements GameObserver {
 	private void updateLabels() {
 		level.setValue("Level: " + game.getLCurrentLevel());
 		state.setValue("Game Status: " + game.getGameStatus());
+		lives.setValue("Lives: " + game.getLives());
 	}
 
 }
