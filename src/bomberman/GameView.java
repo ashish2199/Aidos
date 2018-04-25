@@ -28,17 +28,18 @@ import javafx.scene.layout.HBox;
  *
  */
 
-public class WindowManager {
+public class GameView {
 
-	GameHandler gameHandler;
+	GameController controller;
 	Scene s;
 	BorderPane b = new BorderPane();
 	Canvas c = new Canvas();
 	StringProperty level = new SimpleStringProperty("");
 	StringProperty state = new SimpleStringProperty("");
 
-	public WindowManager(GameHandler gh) {
-		gameHandler = gh;
+	public GameView(GameController controller) {
+		this.controller = controller;
+//		controller.setView(this);
 		s = new Scene(b, GlobalConstants.BACKGROUND_COLOR);
 		b.setTop(createToolBar());
 		b.setBackground(Background.EMPTY); // for scene background to show through
@@ -49,20 +50,14 @@ public class WindowManager {
 		return s;
 	}
 
-	public GraphicsContext getGraphicsContext() {
-		return c.getGraphicsContext2D();
-	}
+//	public GraphicsContext getGraphicsContext() {
+//		return c.getGraphicsContext2D();
+//	}
 
 	public void resetCanvas(double width, double height) {
 		c = new Canvas(width, height);
 		b.setCenter(c);
-		level.setValue("Level: " + gameHandler.getLCurrentLevel());
-		state.setValue("Game Status: " + GameState.gameStatus);
-		// System.out.println(width + " ... " + height);
-		// System.out.println(b.getWidth());
-		// System.out.println(b.getHeight());
-		// System.out.println(s.getWidth());
-		// System.out.println(s.getHeight());
+		Renderer.gc = c.getGraphicsContext2D();
 	}
 
 	private HBox createControlBar() {
@@ -70,16 +65,16 @@ public class WindowManager {
 		Button newGame = new Button("New Game");
 		newGame.setFocusTraversable(false);
 		newGame.setOnAction(event -> {
-			gameHandler.newGame();
+			controller.newGame();
 		});
 
 		ToggleButton pauseGame = new ToggleButton("Pause/Play");
 		pauseGame.setFocusTraversable(false);
 		pauseGame.setOnAction(event -> {
 			if (pauseGame.isSelected()) {
-				gameHandler.stopGame();
+				controller.pause();
 			} else {
-				gameHandler.resumeGame();
+				controller.play();
 			}
 			state.setValue("Game Status: " + GameState.gameStatus);
 		});
@@ -91,9 +86,9 @@ public class WindowManager {
 		Label levelStats = new Label("Level: 0");
 		Label gameState = new Label("gameState: -");
 		levelStats.textProperty()
-				.bind(level);
+				.bind(controller.levelLabel());
 		gameState.textProperty()
-				.bind(state);
+				.bind(controller.stateLabel());
 		hbox.setAlignment(Pos.CENTER_LEFT);
 		hbox.getChildren()
 				.addAll(createControlBar(), levelStats, new Separator(Orientation.VERTICAL), gameState);
@@ -107,11 +102,11 @@ public class WindowManager {
 
 		// level 2 button
 		MenuItem level2 = new MenuItem("Level 2");
-		level2.setOnAction(event -> gameHandler.loadLevel(2));
+		level2.setOnAction(event -> controller.loadLevel(2));
 
 		// level 3 button
 		MenuItem level3 = new MenuItem("Level 3");
-		level3.setOnAction(event -> gameHandler.loadLevel(3));
+		level3.setOnAction(event -> controller.loadLevel(3));
 
 		levelSwitch.getItems()
 				.addAll(level2, level3);

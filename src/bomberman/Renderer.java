@@ -26,6 +26,7 @@ public class Renderer {
 	 *
 	 */
 	static Image img1, img2;
+	static GraphicsContext gc;
 	static {
 		img1 = ImageUtils.loadImage("src/Resources/img/sprites_without_border.png");
 		img2 = ImageUtils.loadImage("src/Resources/img/sprite2.png");
@@ -35,12 +36,12 @@ public class Renderer {
 		return (index == 1) ? img1: img2;
 	}
 
-	public static void playAnimation(Sprite sprite, GraphicsContext gc) {
+	public static void playAnimation(Sprite sprite) {
 		double time = GameLoop.getCurrentGameTime();
-		playAnimation(sprite, gc, time, sprite.hasValidImage());
+		playAnimation(sprite, time, sprite.hasValidImage());
 	}
 
-	private static void playAnimation(Sprite sprite, GraphicsContext gc, double time, boolean hasValidImage) {
+	private static void playAnimation(Sprite sprite, double time, boolean hasValidImage) {
 		int index = sprite.getFrame(time);
 		Image[] imgs = sprite.getSpriteImages();
 		double w = sprite.ED().gameW;

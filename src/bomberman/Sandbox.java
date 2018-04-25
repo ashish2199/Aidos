@@ -18,21 +18,18 @@ import bomberman.entity.KillableEntity;
 import bomberman.entity.enemy.Enemy;
 import bomberman.entity.factory.EntityFactory;
 import bomberman.entity.player.Player;
-import javafx.scene.canvas.GraphicsContext;
 
 /**
  *
  * @author Ashish
  */
 public class Sandbox extends Observable implements Iterable<Entity> {
-	private GraphicsContext gc; // temporarily stores the entities to be added to the game at each loop
 	private boolean sceneStarted, gameWon;
 	private Collection<Player> players;
 	private Collection<Entity> toBeAdded, entities;
 	private Collection<KillableEntity> toBeKilled, killableEntities;
 
-	public Sandbox(Observer gameHandler, Collection<Entity> ent, GraphicsContext gc) {
-		this.gc = gc;
+	public Sandbox(Observer gameHandler, Collection<Entity> ent) {
 		entities = ent;
 		killableEntities = new Vector<KillableEntity>();
 		players = new Vector<Player>();
@@ -50,9 +47,9 @@ public class Sandbox extends Observable implements Iterable<Entity> {
 		return entities;
 	}
 
-	public GraphicsContext getGraphicsContext() {
-		return gc;
-	}
+//	public GraphicsContext getGraphicsContext() {
+//		return gc;
+//	}
 
 	public Collection<Player> getPlayers() {
 		return players;

@@ -1,8 +1,6 @@
 package bomberman;
 
-import bomberman.constants.GlobalConstants;
 import javafx.animation.AnimationTimer;
-import javafx.scene.canvas.GraphicsContext;
 
 public class GameLoop {
 
@@ -10,29 +8,27 @@ public class GameLoop {
 	private final long startNanoTime = System.nanoTime();
 	private boolean isStopped;
 	private AnimationTimer animationT;
-	private GraphicsContext gc;
 	private Sandbox sb;
 
 	public GameLoop() {
 		isStopped = true;
 	};
 
-	public GameLoop(GraphicsContext graphicC, Sandbox sandbox, double w, double h) {
+	public GameLoop( Sandbox sandbox, double w, double h) {
 		isStopped = true;
-		init(graphicC, sandbox, w, h);
+		init(sandbox, w, h);
 	}
 
-	public void init(GraphicsContext graphicC, Sandbox sandbox, double w, double h) {
+	public void init(Sandbox sandbox, double w, double h) {
 		width = w;
 		height = h;
-		gc = graphicC;
 		sb = sandbox;
 		animationT = new AnimationTimer() {
 			public void handle(long currentNanoTime) {
 				oldGameTime = currentGameTime;
 				currentGameTime = (currentNanoTime - startNanoTime) / 1000000000.0;
 				deltaTime = currentGameTime - oldGameTime;
-				gc.clearRect(0, 0, width, height);
+				Renderer.gc.clearRect(0, 0, width, height);
 				sb.update();
 				renderGame(sb);
 			}
@@ -45,7 +41,6 @@ public class GameLoop {
 
 	public void start() {
 		if (isStopped) {
-			GameState.gameStatus = GlobalConstants.GameStatus.Running;
 			animationT.start();
 			isStopped = false;
 		}
@@ -53,7 +48,6 @@ public class GameLoop {
 
 	public void stop() {
 		if (!isStopped) {
-			GameState.gameStatus = GlobalConstants.GameStatus.Paused;
 			animationT.stop();
 			isStopped = true;
 		}

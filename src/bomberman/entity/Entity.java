@@ -62,7 +62,8 @@ public abstract class Entity {
 
 	public void draw(Sandbox sb) {
 		if (sprite != null) {
-			Renderer.playAnimation(sprite, sb.getGraphicsContext());
+//			Renderer.playAnimation(sprite, sb.getGraphicsContext());
+			Renderer.playAnimation(sprite);
 		}
 	}
 

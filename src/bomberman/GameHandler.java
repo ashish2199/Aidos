@@ -4,8 +4,6 @@ import java.util.Observable;
 import java.util.Observer;
 import static bomberman.constants.GlobalConstants.NUM_LEVELS;
 
-import javafx.scene.Scene;
-
 /**
  * Manages the game at the highest level, and holds information such as the
  * current level, etc. When a player has won a map, it is responsible for
@@ -15,26 +13,27 @@ import javafx.scene.Scene;
  *
  */
 
-public class GameHandler implements Observer {
+public class GameHandler extends Observable implements Observer {
 
-	private MapLoader mapL = new MapLoader();
-	private WindowManager window = new WindowManager(this);
+	private MapLoader mapL;
+	private GameView window;
 	private Sandbox sb;
-	private GameLoop loop = new GameLoop();
+	private GameLoop loop;
 	private int level = 1;
 
 	public GameHandler() {
-		newGame();
-	}
-
-	Scene getScene() {
-		return window.getScene();
+		mapL = new MapLoader();
+		loop = new GameLoop();
 	}
 	
 	public void update(Observable o, Object arg) {
 		if (sb.gameWon()) {
 			nextLevel();
 		}
+	}
+	
+	public void setView(GameView view) {
+		window = view;
 	}
 
 	// -------- Methods for buttons and screen controls---------
@@ -46,14 +45,11 @@ public class GameHandler implements Observer {
 	void resumeGame() {
 		loop.start();
 	}
-
-	void newGame() {
-		loadLevel(1);
-	}
-
+	
 	int getLCurrentLevel() {
 		return level;
 	}
+
 
 	// -------- Private Methods -----------
 
@@ -68,10 +64,12 @@ public class GameHandler implements Observer {
 		mapL.loadLevel(level);
 		double sceneW = mapL.getSceneWidth();
 		double sceneH = mapL.getSceneHeight();
+		setChanged();
+		notifyObservers();
 		window.resetCanvas(sceneW, sceneH);
-		sb = new Sandbox(this, mapL.getEntities(), window.getGraphicsContext());
+		sb = new Sandbox(this, mapL.getEntities());
 		loop.stop();
-		loop.init(window.getGraphicsContext(), sb, sceneW, sceneH);
+		loop.init(sb, sceneW, sceneH);
 		loop.start();
 	}
 

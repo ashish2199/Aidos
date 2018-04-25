@@ -11,7 +11,11 @@ public class Bomberman extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle(GlobalConstants.GAME_NAME + GlobalConstants.GAME_VERSION);
         GameHandler gh = new GameHandler();
-        Scene s = gh.getScene();
+        GameController controller = new GameController(gh);
+        GameView view = new GameView(controller);
+        gh.setView(view);
+        controller.newGame();
+        Scene s = view.getScene();
         primaryStage.setScene(s);
         primaryStage.show();
     }
