@@ -1,6 +1,5 @@
 package bomberman;
 
-import bomberman.constants.GlobalConstants;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -35,25 +34,27 @@ public class GameController implements GameObserver {
 
 	void pause() {
 		game.stopGame();
-		GameState.gameStatus = GlobalConstants.GameStatus.Paused;
-		state.setValue("Game Status: " + GameState.gameStatus);
+		updateLabels();
 	}
 
 	void play() {
 		game.resumeGame();
-		GameState.gameStatus = GlobalConstants.GameStatus.Running;
-		state.setValue("Game Status: " + GameState.gameStatus);
+		updateLabels();
 	}
 
 	void loadLevel(int newLevel) {
-		GameState.gameStatus = GlobalConstants.GameStatus.Running;
-		level.setValue("Level: " + game.getLCurrentLevel());
-		state.setValue("Game Status: " + GameState.gameStatus);
 		game.loadLevel(newLevel);
+		updateLabels();
 	}
 
-	public void resetWindow(double width, double height) {
+	public void newLevel(double width, double height) {
 		view.resetCanvas(width, height);
+		updateLabels();
+	}
+	
+	private void updateLabels() {
+		level.setValue("Level: " + game.getLCurrentLevel());
+		state.setValue("Game Status: " + game.getGameStatus());
 	}
 
 }

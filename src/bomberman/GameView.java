@@ -8,7 +8,6 @@ import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
@@ -39,7 +38,7 @@ public class GameView {
 
 	public GameView(GameController controller) {
 		this.controller = controller;
-//		controller.setView(this);
+		controller.setView(this);
 		s = new Scene(b, GlobalConstants.BACKGROUND_COLOR);
 		b.setTop(createToolBar());
 		b.setBackground(Background.EMPTY); // for scene background to show through
@@ -49,10 +48,6 @@ public class GameView {
 	public Scene getScene() {
 		return s;
 	}
-
-//	public GraphicsContext getGraphicsContext() {
-//		return c.getGraphicsContext2D();
-//	}
 
 	public void resetCanvas(double width, double height) {
 		c = new Canvas(width, height);

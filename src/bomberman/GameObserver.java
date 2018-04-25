@@ -1,5 +1,5 @@
 package bomberman;
 
 public interface GameObserver {
-	void resetWindow(double width, double height);
+	void newLevel(double width, double height);
 }
