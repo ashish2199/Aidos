@@ -40,7 +40,6 @@ public class GameHandler implements Observer {
 		if (sb.gameWon()) {
 			nextLevel();
 		} else if (sb.playerDead()) {
-			stopGame();
 			if (lives > 0) { // still have lives left
 				lives--;
 				mapL.getPlayers()
@@ -48,7 +47,6 @@ public class GameHandler implements Observer {
 							p.reset(); // reset player
 							sb.addEntityToGame(p); // reinitialize player
 						});
-				resumeGame();
 			} else { // no more lives left
 				state = GameOver;
 			}
