@@ -16,5 +16,5 @@ public class GameState {
     public static int level;
     public static Date lastSaved;
     public static boolean hasUnsavedChanges;
-    public static GlobalConstants.GameStatus gameStatus;
+    public static GlobalConstants.GameStatus gameStatus = GlobalConstants.GameStatus.Running;
 }

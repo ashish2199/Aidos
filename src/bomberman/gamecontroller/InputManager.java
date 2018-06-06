@@ -7,53 +7,67 @@ package bomberman.gamecontroller;
 
 import java.util.List;
 
+import static bomberman.constants.Direction.*;
+
 import bomberman.constants.Direction;
-import bomberman.entity.Entity;
-import bomberman.entity.player.Player;
-import bomberman.entity.staticobjects.BlackBomb;
-import bomberman.scenes.Sandbox;
-import java.util.Iterator;
-import java.util.Vector;
+import bomberman.entityconfigurations.movements.MovementStrategy;
 import javafx.scene.input.KeyCode;
+
 /**
- *
+ * Responsible for taking inputs from the keyboard and translating the KeyCode instruction into the context of the game
+ * @author tialim
  * @author Ashish
  */
-public class InputManager {
+public class InputManager implements MovementStrategy {
 
-    public static void handlePlayerMovements(){
-        List keyboardInputs = EventHandler.getInputList();
-        Player player = Sandbox.getPlayer();
-        //System.err.println(""+keyboardInputs);
-        if(keyboardInputs.contains(KeyCode.UP) || keyboardInputs.contains(KeyCode.W)){
-            player.move(5,Direction.UP);
-        }
-        if(keyboardInputs.contains(KeyCode.DOWN) || keyboardInputs.contains(KeyCode.S)){
-            player.move(5,Direction.DOWN);
-        }
-        if(keyboardInputs.contains(KeyCode.LEFT) || keyboardInputs.contains(KeyCode.A)){
-            player.move(5,Direction.LEFT);
-        }
-        if(keyboardInputs.contains(KeyCode.RIGHT) || keyboardInputs.contains(KeyCode.D)){
-            player.move(5,Direction.RIGHT);
-        }
-        if( !keyboardInputs.contains(KeyCode.LEFT) &&
-            !keyboardInputs.contains(KeyCode.RIGHT) &&
-            !keyboardInputs.contains(KeyCode.UP) &&
-            !keyboardInputs.contains(KeyCode.DOWN) &&
-            !keyboardInputs.contains(KeyCode.W) &&
-            !keyboardInputs.contains(KeyCode.A) &&
-            !keyboardInputs.contains(KeyCode.S) &&
-            !keyboardInputs.contains(KeyCode.D)
-          )
-        {
-            player.move(0, Direction.DOWN);
-        }
-        
-        //Drop bomb
-        if(keyboardInputs.contains(KeyCode.SPACE)){           
-            Sandbox.addEntityToGame(new BlackBomb(player.getPositionX(), player.getPositionY()));
-        }        
-    }
+	Direction direction;
+	boolean placeBomb;
 
+	public InputManager() {
+		direction = IDLE;
+		placeBomb = false;
+	}
+
+	public void handlePlayerMovements() {
+		List<KeyCode> keyboardInputs = GameEventHandler.getInputList();
+		if (keyboardInputs.isEmpty()) {
+			direction = IDLE;
+		} else {
+			switch (keyboardInputs.get(0)) {
+			case UP:
+			case W:
+				direction = UP;
+				break;
+			case DOWN:
+			case S:
+				direction = DOWN;
+				break;
+			case LEFT:
+			case A:
+				direction = LEFT;
+				break;
+			case RIGHT:
+			case D:
+				direction = RIGHT;
+				break;
+			case SPACE:
+				placeBomb = true;
+				break;
+			default:
+				direction = IDLE;
+				break;
+			}
+		}
+	}
+
+	public Direction getDirection() {
+		handlePlayerMovements();
+		return direction;
+	}
+
+	public boolean placeBomb() {
+		placeBomb = false;
+		handlePlayerMovements();
+		return placeBomb;
+	}
 }
