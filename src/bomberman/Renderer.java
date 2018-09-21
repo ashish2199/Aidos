@@ -28,7 +28,7 @@ public class Renderer {
      */
     static Image img;
     static {
-        img = ImageUtils.loadImage("src/Resources/img/sprites_without_border.png");
+        img = ImageUtils.loadImage("Resources/img/sprites_without_border.png");
     }
     public static void init() {
         
