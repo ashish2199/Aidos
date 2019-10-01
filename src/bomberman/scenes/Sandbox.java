@@ -7,6 +7,7 @@ package bomberman.scenes;
 
 import static bomberman.constants.GlobalConstants.CANVAS_HEIGHT;
 import static bomberman.constants.GlobalConstants.CANVAS_WIDTH;
+import static bomberman.constants.GlobalConstants.CELL_SIZE;
 import static bomberman.constants.GlobalConstants.SCENE_HEIGHT;
 import static bomberman.constants.GlobalConstants.SCENE_WIDTH;
 
@@ -85,9 +86,9 @@ public class Sandbox {
     public static void loadMap() {
     	Vector<Wall> walls = new Vector<Wall>();
 
-    	for(int i = 0; i < SCENE_WIDTH; i += 32){
-    		for(int j = 0; j < SCENE_HEIGHT; j += 32){
-    			if(i == 0 || i + 33 > SCENE_HEIGHT || j == 0 || j + 33 > SCENE_WIDTH) {
+    	for(int i = 0; i < SCENE_WIDTH; i += CELL_SIZE){
+    		for(int j = 0; j < SCENE_HEIGHT; j += CELL_SIZE){
+    			if(i == 0 || i + CELL_SIZE + 1 > SCENE_HEIGHT || j == 0 || j + CELL_SIZE + 1 > SCENE_WIDTH) {
     				walls.add(new Wall(i, j));
     			}
     		}
