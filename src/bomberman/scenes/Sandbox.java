@@ -11,6 +11,13 @@ import static bomberman.constants.GlobalConstants.CELL_SIZE;
 import static bomberman.constants.GlobalConstants.SCENE_HEIGHT;
 import static bomberman.constants.GlobalConstants.SCENE_WIDTH;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
 import java.util.Vector;
 
 import bomberman.GameLoop;
@@ -74,7 +81,14 @@ public class Sandbox {
         setPlayer(p);
         
         //load map
-        loadMap();
+        try
+        {
+            loadMap(new File("Resources/maps/sandbox_map.txt"));
+        } catch (IOException e)
+        {
+            System.err.println("Unable to load map file.");
+            System.exit(1);
+        }
 
         //should be called at last it based on player
         EventHandler.attachEventHandlers(s);
@@ -83,16 +97,27 @@ public class Sandbox {
 
 
     //Eventually this should take some kind of map input, maybe a text file or something
-    public static void loadMap() {
+    public static void loadMap(File file) throws IOException
+    {
     	Vector<Wall> walls = new Vector<Wall>();
 
-    	for(int i = 0; i < SCENE_WIDTH; i += CELL_SIZE){
-    		for(int j = 0; j < SCENE_HEIGHT; j += CELL_SIZE){
-    			if(i == 0 || i + CELL_SIZE + 1 > SCENE_HEIGHT || j == 0 || j + CELL_SIZE + 1 > SCENE_WIDTH) {
-    				walls.add(new Wall(i, j));
-    			}
-    		}
-    	}
+        try(BufferedReader inputStream = new BufferedReader(new FileReader(file)))
+        {
+            String line;
+            int y = 0;
+            while((line = inputStream.readLine()) != null)
+            {
+                for(int x = 0; x < line.length(); x++)
+                {
+                    //TODO: Remove this magic W
+                    if(line.charAt(x) == 'W')
+                    {
+                        walls.add(new Wall(x * CELL_SIZE, y * CELL_SIZE));
+                    }
+                }
+                y++;
+            }
+        }
 
     	for(Wall wall : walls) {
     		addEntityToGame(wall);
