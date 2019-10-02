@@ -76,10 +76,6 @@ public class Sandbox {
         Renderer.init();
         GameLoop.start(gc);
 
-        //Initialize Objects
-        Player p = new Player();
-        setPlayer(p);
-        
         //load map
         try
         {
@@ -100,6 +96,7 @@ public class Sandbox {
     public static void loadMap(File file) throws IOException
     {
     	Vector<Wall> walls = new Vector<Wall>();
+    	boolean playerSet = false;
 
         try(BufferedReader inputStream = new BufferedReader(new FileReader(file)))
         {
@@ -109,14 +106,26 @@ public class Sandbox {
             {
                 for(int x = 0; x < line.length(); x++)
                 {
-                    //TODO: Remove this magic W
-                    if(line.charAt(x) == 'W')
+                    switch (line.charAt(x))
                     {
-                        walls.add(new Wall(x * CELL_SIZE, y * CELL_SIZE));
+                        case 'W':
+                            walls.add(new Wall(x * CELL_SIZE, y * CELL_SIZE));
+                            break;
+                        case 'P':
+                            //Initialize Objects
+                            setPlayer(new Player(x * CELL_SIZE, y * CELL_SIZE));
+                            playerSet = true;
+                            break;
                     }
                 }
                 y++;
             }
+        }
+
+        if(!playerSet)
+        {
+            System.err.println("No player location is set on map.");
+            System.exit(1);
         }
 
     	for(Wall wall : walls) {
