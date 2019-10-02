@@ -16,12 +16,12 @@ What things you need to install the software and how to install them
 
 ```
 Java JDK 1.8 or higher
-Netbeans , Eclipse or any other popular IDE 
+Netbeans , Eclipse or any other popular IDE
 ```
 ## Contributing
 
 Please read [CONTRIBUTING.md](https://github.com/ashish2199/Aidos/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
-When in doubt open a Issue, We will respond.
+When in doubt open an Issue, We will be responding.
 
 ## Authors
 * **Ashish Padalkar** - *Initial work* - [ashish2199](https://github.com/ashish2199)
