@@ -7,9 +7,17 @@ package bomberman.scenes;
 
 import static bomberman.constants.GlobalConstants.CANVAS_HEIGHT;
 import static bomberman.constants.GlobalConstants.CANVAS_WIDTH;
+import static bomberman.constants.GlobalConstants.CELL_SIZE;
 import static bomberman.constants.GlobalConstants.SCENE_HEIGHT;
 import static bomberman.constants.GlobalConstants.SCENE_WIDTH;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
 import java.util.Vector;
 
 import bomberman.GameLoop;
@@ -68,12 +76,15 @@ public class Sandbox {
         Renderer.init();
         GameLoop.start(gc);
 
-        //Initialize Objects
-        Player p = new Player();
-        setPlayer(p);
-        
         //load map
-        loadMap();
+        try
+        {
+            loadMap(new File("Resources/maps/sandbox_map.txt"));
+        } catch (IOException e)
+        {
+            System.err.println("Unable to load map file.");
+            System.exit(1);
+        }
 
         //should be called at last it based on player
         EventHandler.attachEventHandlers(s);
@@ -82,16 +93,40 @@ public class Sandbox {
 
 
     //Eventually this should take some kind of map input, maybe a text file or something
-    public static void loadMap() {
+    public static void loadMap(File file) throws IOException
+    {
     	Vector<Wall> walls = new Vector<Wall>();
+    	boolean playerSet = false;
 
-    	for(int i = 0; i < SCENE_WIDTH; i += 32){
-    		for(int j = 0; j < SCENE_HEIGHT; j += 32){
-    			if(i == 0 || i + 33 > SCENE_HEIGHT || j == 0 || j + 33 > SCENE_WIDTH) {
-    				walls.add(new Wall(i, j));
-    			}
-    		}
-    	}
+        try(BufferedReader inputStream = new BufferedReader(new FileReader(file)))
+        {
+            String line;
+            int y = 0;
+            while((line = inputStream.readLine()) != null)
+            {
+                for(int x = 0; x < line.length(); x++)
+                {
+                    switch (line.charAt(x))
+                    {
+                        case 'W':
+                            walls.add(new Wall(x * CELL_SIZE, y * CELL_SIZE));
+                            break;
+                        case 'P':
+                            //Initialize Objects
+                            setPlayer(new Player(x * CELL_SIZE, y * CELL_SIZE));
+                            playerSet = true;
+                            break;
+                    }
+                }
+                y++;
+            }
+        }
+
+        if(!playerSet)
+        {
+            System.err.println("No player location is set on map.");
+            System.exit(1);
+        }
 
     	for(Wall wall : walls) {
     		addEntityToGame(wall);
