@@ -10,7 +10,7 @@ import bomberman.animations.BombAnimations;
 import bomberman.animations.Sprite;
 import bomberman.entity.Entity;
 import bomberman.entity.StaticEntity;
-import bomberman.entity.boundedbox.RectBoundedBox;
+import bomberman.geometry.Boundary;
 import java.util.Date;
 
 /**
@@ -18,17 +18,13 @@ import java.util.Date;
  * @author Ashish
  */
 public class BlackBomb implements StaticEntity {
-    public int positionX = 0;
-    public int positionY = 0;
-    private int height;
-    private int width;
     private Sprite sprite;
-    RectBoundedBox entityBoundary;
+    Boundary entityBoundary;
     BombAnimations bomb_animations;
     Date addedDate;
-    int timerDurationInMillis = 2000; 
+    int timerDurationInMillis = 2000;
     STATE bombState;
-    
+
     enum STATE
     {
         INACTIVE,   //INACTIVE when bomb's timer hasnt yet started
@@ -36,19 +32,15 @@ public class BlackBomb implements StaticEntity {
         EXPLODING,  //when bomb is exploding
         DEAD;   //when the bomb has already exploded
     }
-    
-    public BlackBomb(int x, int y) {
-        positionX = x;
-    	positionY = y;
-    	width = 16;
-    	height = 16;
-        bomb_animations=new BombAnimations(this);
-        sprite=bomb_animations.getBlackBomb();
-        entityBoundary = new RectBoundedBox(positionX, positionY, width, height);
-        addedDate=new Date();
-        bombState=STATE.ACTIVE;
+
+    public BlackBomb(double x, double y) {
+        bomb_animations = new BombAnimations(this);
+        sprite = bomb_animations.getBlackBomb();
+        entityBoundary = new Boundary(x, y, 16, 16);
+        addedDate = new Date();
+        bombState = STATE.ACTIVE;
     }
-    
+
     public boolean isAlive(){
         STATE s = checkBombState();
         if(s==STATE.DEAD){
@@ -61,7 +53,7 @@ public class BlackBomb implements StaticEntity {
             return true;
         }
     }
-    
+
     public STATE checkBombState(){
         if(new Date().getTime()>timerDurationInMillis+addedDate.getTime()){
             return STATE.DEAD;
@@ -69,7 +61,7 @@ public class BlackBomb implements StaticEntity {
             return STATE.ACTIVE;
         }
     }
-    
+
     @Override
     public boolean isColliding(Entity b) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -86,17 +78,17 @@ public class BlackBomb implements StaticEntity {
     }
 
     @Override
-    public int getPositionX() {
-        return positionX;
+    public double getPositionX() {
+        return entityBoundary.getMinX();
     }
 
     @Override
-    public int getPositionY() {
-        return positionY;
+    public double getPositionY() {
+        return entityBoundary.getMinY();
     }
 
     @Override
-    public RectBoundedBox getBoundingBox() {
+    public Boundary getBoundary() {
         return entityBoundary;
     }
 
@@ -104,5 +96,5 @@ public class BlackBomb implements StaticEntity {
     public boolean isPlayerCollisionFriendly() {
         return true;
     }
-    
+
 }
