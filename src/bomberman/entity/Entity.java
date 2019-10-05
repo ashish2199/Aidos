@@ -5,7 +5,7 @@
  */
 package bomberman.entity;
 
-import bomberman.entity.boundedbox.RectBoundedBox;
+import bomberman.geometry.Boundary;
 
 /**
  *
@@ -16,8 +16,8 @@ public interface Entity {
     boolean isPlayerCollisionFriendly();
     void draw();
     void removeFromScene();
-    int getPositionX();
-    int getPositionY();
-    RectBoundedBox getBoundingBox();
-    
+    double getPositionX();
+    double getPositionY();
+    Boundary getBoundary();
+
 }

@@ -24,9 +24,9 @@ public class Sprite
 
         public Image[] spriteImages;
         public boolean hasValidSpriteImages;
-        
+
         public Entity entityReference;
-        
+
 	public Sprite(Entity e, int actualSize, double playSpeed, int spriteLocationOnSheetX, int spriteLocationOnSheetY, int numberOfFrames, double width, double height,
 			int scale, boolean leftToRight)
 	{
@@ -44,11 +44,11 @@ public class Sprite
 	}
 
 	public int getXPosition() {
-		return entityReference.getPositionX();
+		return (int) entityReference.getPositionX();
 	}
 
 	public int getYPosition() {
-		return entityReference.getPositionY();
+		return (int) entityReference.getPositionY();
 	}
 
 
