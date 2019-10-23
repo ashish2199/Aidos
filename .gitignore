@@ -1,8 +1,7 @@
 
 # Created by https://www.gitignore.io/api/git,netbeans,intellij,intellij+iml,intellij+all,eclipse,java
-
+.DS_Store
 ### Eclipse ###
-
 .metadata
 bin/
 tmp/
