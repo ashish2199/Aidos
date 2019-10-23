@@ -1,7 +1,7 @@
 # Aidos
 A beginner friendly project with aim of creating our own version of Bomberman.
 
-![Alt Text](https://media.giphy.com/media/SLaJqMM5IL2cHjgXsx/giphy.gif)
+![Alt Text](assets/img/ezgif-6-e0f2fc739fb7.gif)
 
 ## Getting Started
 
