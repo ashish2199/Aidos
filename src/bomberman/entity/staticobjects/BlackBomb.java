@@ -28,7 +28,9 @@ public class BlackBomb implements StaticEntity {
     Date addedDate;
     int timerDurationInMillis = 2000; 
     STATE bombState;
-    
+    int layer;
+    int scale=1;
+
     enum STATE
     {
         INACTIVE,   //INACTIVE when bomb's timer hasnt yet started
@@ -42,9 +44,11 @@ public class BlackBomb implements StaticEntity {
     	positionY = y;
     	width = 16;
     	height = 16;
+    	layer=-2;
+    	setScale(2);
         bomb_animations=new BombAnimations(this);
         sprite=bomb_animations.getBlackBomb();
-        entityBoundary = new RectBoundedBox(positionX, positionY, width, height);
+        entityBoundary = new RectBoundedBox(positionX, positionY, width * getScale(), height  * getScale());
         addedDate=new Date();
         bombState=STATE.ACTIVE;
     }
@@ -104,5 +108,16 @@ public class BlackBomb implements StaticEntity {
     public boolean isPlayerCollisionFriendly() {
         return true;
     }
-    
+
+    @Override
+    public int getLayer() { return layer; }
+
+    @Override
+    public int getScale() {
+        return scale;
+    }
+
+    public void setScale(int scale) {
+        this.scale = scale;
+    }
 }

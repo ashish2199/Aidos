@@ -13,7 +13,6 @@ import bomberman.entity.boundedbox.RectBoundedBox;
 import javafx.scene.paint.Color;
 
 /**
- *
  * @author kdost
  */
 public class Wall implements StaticEntity {
@@ -24,17 +23,18 @@ public class Wall implements StaticEntity {
     private Color wallColor;
     private Sprite sprite;
     RectBoundedBox entityBoundary;
+    int layer;
+    int scale=1;
 
-
-    public Wall (int x, int y) {
-    	positionX = x;
-    	positionY = y;
-
-    	width = 16;
-    	height = 16;
-
-    	sprite = new Sprite(this, 16, 0, 348, 123, 1, 16, 16, 2, false);
-    	entityBoundary = new RectBoundedBox(positionX, positionY, width, height);
+    public Wall(int x, int y) {
+        positionX = x;
+        positionY = y;
+        setScale(2);
+        width = 16;
+        height = 16;
+        layer = -1;
+        sprite = new Sprite(this, 16, 0, 348, 123, 1, width * getScale(), height * getScale() ,getScale(), false);
+        entityBoundary = new RectBoundedBox(positionX, positionY, width * getScale(), height * getScale());
     }
 
     public void changeColor(Color color) {
@@ -67,9 +67,8 @@ public class Wall implements StaticEntity {
     }
 
     @Override
-    public RectBoundedBox getBoundingBox()
-    {
-            return entityBoundary;
+    public RectBoundedBox getBoundingBox() {
+        return entityBoundary;
     }
 
     @Override
@@ -77,4 +76,14 @@ public class Wall implements StaticEntity {
         return false;
     }
 
+    @Override
+    public int getLayer() { return layer; }
+
+    public int getScale() {
+        return scale;
+    }
+
+    public void setScale(int scale) {
+        this.scale = scale;
+    }
 }

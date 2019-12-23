@@ -21,11 +21,9 @@ public class Sprite
 	public int scale;
 	public int actualSize;
 	public boolean resersePlay;
-
-        public Image[] spriteImages;
-        public boolean hasValidSpriteImages;
-        
-        public Entity entityReference;
+	public Image[] spriteImages;
+	public boolean hasValidSpriteImages;
+	public Entity entityReference;
         
 	public Sprite(Entity e, int actualSize, double playSpeed, int spriteLocationOnSheetX, int spriteLocationOnSheetY, int numberOfFrames, double width, double height,
 			int scale, boolean leftToRight)
@@ -40,7 +38,7 @@ public class Sprite
 		this.height = height;
 		this.scale = scale;
 		resersePlay = leftToRight;
-                this.entityReference=e;
+        this.entityReference=e;
 	}
 
 	public int getXPosition() {
@@ -72,8 +70,15 @@ public class Sprite
             int h=(int)specification.getHeight();
 
             //To DO Check dimensions provided are not going out of spritesheet dimensions\
-
             spriteImages[i]=ImageUtils.crop(spriteSheet, x, y, w, h);
         }
     }
+
+	public Entity getEntityReference() {
+		return entityReference;
+	}
+
+	public void setEntityReference(Entity entityReference) {
+		this.entityReference = entityReference;
+	}
 }

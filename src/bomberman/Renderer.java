@@ -44,6 +44,15 @@ public class Renderer {
         } else {
             playAnimation(gc, time, sprite.actualSize, sprite.spriteLocationOnSheetX, sprite.spriteLocationOnSheetY, sprite.numberOfFrames, sprite.getXPosition(), sprite.getYPosition(), sprite.width, sprite.height, sprite.scale, sprite.resersePlay, sprite.playSpeed);
         }
+
+        /*
+        To draw boundary around the player
+        Double minx = sprite.getEntityReference().getBoundingBox().getBoundary().getMinX();
+        Double miny = sprite.getEntityReference().getBoundingBox().getBoundary().getMinY();
+        Double maxx = sprite.getEntityReference().getBoundingBox().getBoundary().getMaxX();
+        Double maxy = sprite.getEntityReference().getBoundingBox().getBoundary().getMaxY();
+        gc.strokeRect(minx,miny,maxx-minx,maxy-miny);
+        */
     }
 
     public static void playAnimation(Image[] imgs, double speed, int x, int y, double w, double h) {
@@ -68,7 +77,7 @@ public class Renderer {
         int newSpriteSheetY = reversePlay ? startingPointY : startingPointY + index * actualSize;
         //System.out.println("Time, Total Frames" + time + ", " + numberOfFrames);
         //System.out.println("index=" + index + " newSpriteSheetX=" + newSpriteSheetX + " newSpriteSheetY=" + newSpriteSheetY + " width=" + width + " height=" + height + " x=" + x + " y=" + y + " width=" + width * scale + " height=" + height * scale);
-        //img,             sx,              sy,     w,     h,  dx, dy,        dw,             dh
+                    //img,             sx,              sy,     w,     h,  dx, dy,        dw,             dh
         gc.drawImage(img, newSpriteSheetX, newSpriteSheetY, width, height, x, y, width * scale, height * scale);
     }
 

@@ -19,5 +19,14 @@ public interface Entity {
     int getPositionX();
     int getPositionY();
     RectBoundedBox getBoundingBox();
-    
+
+    /**
+     * Layering works by sorting the list of entities to be drawn based on the layer.( created a new layerComparator for this )
+     * 	Player is rendered at layer 0
+     * 	Anything to be rendered below the player will get layer < 0 i.e Negative
+     * 	Anything to be rendered above the player will get layer > 0 i.e Positive
+     * */
+    int getLayer();
+
+    int getScale();
 }
