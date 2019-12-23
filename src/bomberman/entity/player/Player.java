@@ -25,8 +25,9 @@ public class Player implements MovingEntity, KillableEntity {
 
     public int positionX = 0;
     public int positionY = 0;
-
+    int layer;
     String name;
+    int scale = 1;
 
     public Player() {
         init(64, 64);
@@ -36,17 +37,18 @@ public class Player implements MovingEntity, KillableEntity {
         init(posX, posY);
         health = 100;
         isAlive = true;
+        layer=0;
     }
 
     private void init(int x, int y) {
         name = "Player";
 
-        playerAnimations = new PlayerAnimations(this);
-
+        playerAnimations = new PlayerAnimations(this,2);
+        setScale(2);
         positionX = x;
         positionY = y;
 
-        playerBoundary = new RectBoundedBox(positionX, positionY, GlobalConstants.PLAYER_WIDTH, GlobalConstants.PLAYER_HEIGHT);
+        playerBoundary = new RectBoundedBox(positionX, positionY, GlobalConstants.PLAYER_WIDTH * getScale(), GlobalConstants.PLAYER_HEIGHT * getScale());
 
         currentSprite = playerAnimations.getPlayerIdleSprite();
     }
@@ -189,5 +191,16 @@ public class Player implements MovingEntity, KillableEntity {
     @Override
     public boolean isPlayerCollisionFriendly() {
         return true;
+    }
+
+    @Override
+    public int getLayer() { return layer; }
+
+    public int getScale() {
+        return scale;
+    }
+
+    public void setScale(int scale) {
+        this.scale = scale;
     }
 }

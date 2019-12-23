@@ -22,6 +22,10 @@ public class RectBoundedBox {
         return boundary;
     }
 
+    public void setBoundary(Rectangle2D boundaryRect){
+        boundary = boundaryRect;
+    }
+
     public boolean checkCollision(RectBoundedBox b) {
         return b.getBoundary().intersects(getBoundary());
     }

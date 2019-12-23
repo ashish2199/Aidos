@@ -5,26 +5,10 @@
  */
 package bomberman.scenes;
 
-import static bomberman.constants.GlobalConstants.CANVAS_HEIGHT;
-import static bomberman.constants.GlobalConstants.CANVAS_WIDTH;
-import static bomberman.constants.GlobalConstants.CELL_SIZE;
-import static bomberman.constants.GlobalConstants.SCENE_HEIGHT;
-import static bomberman.constants.GlobalConstants.SCENE_WIDTH;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Scanner;
-import java.util.Vector;
-
 import bomberman.GameLoop;
 import bomberman.Renderer;
 import bomberman.entity.Entity;
 import bomberman.entity.player.Player;
-import bomberman.entity.staticobjects.BlackBomb;
 import bomberman.entity.staticobjects.Wall;
 import bomberman.gamecontroller.EventHandler;
 import javafx.scene.Group;
@@ -32,6 +16,16 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Vector;
+
+import static bomberman.constants.GlobalConstants.*;
 
 /**
  *
@@ -55,10 +49,19 @@ public class Sandbox {
 		return entities;
 	}
 
+	static Comparator<Entity> layerComparator=new Comparator<Entity>() {
+        @Override
+        public int compare(Entity o1, Entity o2) {
+            int result = Integer.compare(o1.getLayer(),o2.getLayer());
+            return result;
+        }
+    };
+
 	public static boolean addEntityToGame(Entity e){
 		if(!entities.contains(e)){
 			entities.add(e);
-			return true;
+            Collections.sort(entities,layerComparator);
+            return true;
 		} else {
 			return false;
 		}
