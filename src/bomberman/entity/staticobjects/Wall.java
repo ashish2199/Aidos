@@ -32,7 +32,7 @@ public class Wall implements StaticEntity {
         setScale(2);
         width = 16;
         height = 16;
-        layer = -1;
+        layer = 1;
         sprite = new Sprite(this, 16, 0, 348, 123, 1, width * getScale(), height * getScale() ,getScale(), false);
         entityBoundary = new RectBoundedBox(positionX, positionY, width * getScale(), height * getScale());
     }

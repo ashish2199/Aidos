@@ -40,9 +40,9 @@ public class Renderer {
         double time = GameLoop.getCurrentGameTime();
         GraphicsContext gc = Sandbox.getGraphicsContext();
         if (sprite.hasValidSpriteImages) {
-            playAnimation(sprite.spriteImages, sprite.playSpeed, sprite.getXPosition(), sprite.getYPosition(), sprite.width*sprite.scale, sprite.height*sprite.scale);
+            playAnimation(sprite.spriteImages, sprite.playSpeed, sprite.getXPosition(), sprite.getYPosition(), sprite.width*sprite.getScale(), sprite.height*sprite.getScale());
         } else {
-            playAnimation(gc, time, sprite.actualSize, sprite.spriteLocationOnSheetX, sprite.spriteLocationOnSheetY, sprite.numberOfFrames, sprite.getXPosition(), sprite.getYPosition(), sprite.width, sprite.height, sprite.scale, sprite.resersePlay, sprite.playSpeed);
+            playAnimation(gc, time, sprite.actualSize, sprite.spriteLocationOnSheetX, sprite.spriteLocationOnSheetY, sprite.numberOfFrames, sprite.getXPosition(), sprite.getYPosition(), sprite.width, sprite.height, sprite.getScale(), sprite.resersePlay, sprite.playSpeed);
         }
 
         /*

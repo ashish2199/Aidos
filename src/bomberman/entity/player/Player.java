@@ -28,6 +28,7 @@ public class Player implements MovingEntity, KillableEntity {
     int layer;
     String name;
     int scale = 1;
+    double reduceBoundarySizePercent=0.45;
 
     public Player() {
         init(64, 64);
@@ -48,7 +49,11 @@ public class Player implements MovingEntity, KillableEntity {
         positionX = x;
         positionY = y;
 
-        playerBoundary = new RectBoundedBox(positionX, positionY, GlobalConstants.PLAYER_WIDTH * getScale(), GlobalConstants.PLAYER_HEIGHT * getScale());
+        playerBoundary = new RectBoundedBox(positionX+(int)(GlobalConstants.PLAYER_WIDTH*getReduceBoundarySizePercent()),
+                                            positionY+(int)(GlobalConstants.PLAYER_WIDTH*getReduceBoundarySizePercent()),
+                                            (GlobalConstants.PLAYER_WIDTH * getScale())-2*+(int)(GlobalConstants.PLAYER_WIDTH*getReduceBoundarySizePercent()),
+                                            (GlobalConstants.PLAYER_HEIGHT * getScale())-2*+(int)(GlobalConstants.PLAYER_HEIGHT*getReduceBoundarySizePercent())
+                                            );
 
         currentSprite = playerAnimations.getPlayerIdleSprite();
     }
@@ -97,11 +102,11 @@ public class Player implements MovingEntity, KillableEntity {
     }
 
     private boolean checkCollisions(int x, int y) {
-    	playerBoundary.setPosition(x, y);
+    	playerBoundary.setPosition(x, y,getReduceBoundarySizePercent());
 
         for (Entity e : Sandbox.getEntities()) {
             if (e != this && isColliding(e) && !e.isPlayerCollisionFriendly()) {
-            	playerBoundary.setPosition(positionX, positionY);
+            	playerBoundary.setPosition(positionX, positionY,getReduceBoundarySizePercent());
                 /*
                 System.out.println("Player x="+getPositionX()+" y="
                         +getPositionY()+" colliding with x="+e.getPositionX()
@@ -110,14 +115,15 @@ public class Player implements MovingEntity, KillableEntity {
                 return true;
             }
         }
-    	playerBoundary.setPosition(positionX, positionY);
+    	playerBoundary.setPosition(positionX, positionY,getReduceBoundarySizePercent());
         return false;
     }
 
     @Override
     public void move(int steps, Direction direction) {
 
-        steps *= GameLoop.getDeltaTime();
+        //if(steps!=0){System.out.println("Steps before="+steps+" now="+steps * GameLoop.getDeltaTime());}
+        //steps *= GameLoop.getDeltaTime();
 
         if (steps == 0) {
             setCurrentSprite(playerAnimations.getPlayerIdleSprite());
@@ -184,7 +190,7 @@ public class Player implements MovingEntity, KillableEntity {
 
     @Override
     public RectBoundedBox getBoundingBox() {
-        playerBoundary.setPosition(positionX, positionY);
+        playerBoundary.setPosition(positionX, positionY,getReduceBoundarySizePercent());
         return playerBoundary;
     }
 
@@ -202,5 +208,12 @@ public class Player implements MovingEntity, KillableEntity {
 
     public void setScale(int scale) {
         this.scale = scale;
+    }
+    public double getReduceBoundarySizePercent() {
+        return reduceBoundarySizePercent;
+    }
+
+    public void setReduceBoundarySizePercent(double reduceBoundarySizePercent) {
+        this.reduceBoundarySizePercent = reduceBoundarySizePercent;
     }
 }

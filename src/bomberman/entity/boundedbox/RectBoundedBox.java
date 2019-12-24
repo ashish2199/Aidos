@@ -1,5 +1,6 @@
 package bomberman.entity.boundedbox;
 
+import bomberman.constants.GlobalConstants;
 import javafx.geometry.Rectangle2D;
 
 public class RectBoundedBox {
@@ -30,10 +31,10 @@ public class RectBoundedBox {
         return b.getBoundary().intersects(getBoundary());
     }
 
-    public void setPosition(int x, int y) {
-    	this.x = x;
-    	this.y = y;
-    	boundary = new Rectangle2D(x, y, width, height);
+    public void setPosition(int x, int y, double reductionPercent) {
+    	this.x = x+(int)(GlobalConstants.PLAYER_WIDTH*reductionPercent);
+    	this.y = y+(int)(GlobalConstants.PLAYER_HEIGHT*reductionPercent);
+    	boundary = new Rectangle2D(this.x, this.y, width, height);
     }
 
 }
