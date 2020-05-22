@@ -1,0 +1,11 @@
+Hello,
+
+As part of a University project I had to find and analyze an open source project and I chose to analyze this one as it fascinated me,
+because it is beginner friendly and also it is about Bomberman.
+
+I analyzed the project through the IntelliJ plugin CodeMR and I found that the project is well structured, as there were no issued
+regarding the complexity, the lack of cohesion, the coupling or the size of the classes. Despite the fact that this project is well
+structured, I noticed that there are little to none comments in the different sections of the program and I wanted to point that out
+so maybe it can be fixed in future updates.
+
+Thank you.
