@@ -2,6 +2,7 @@ package bomberman;
 
 import bomberman.constants.GlobalConstants;
 import bomberman.entity.Entity;
+import bomberman.entity.player.Player;
 import bomberman.entity.staticobjects.BlackBomb;
 import bomberman.gamecontroller.InputManager;
 import bomberman.scenes.Sandbox;
@@ -43,6 +44,7 @@ public class GameLoop {
     public static void updateGame() {
         InputManager.handlePlayerMovements();
         Vector<Entity> entities = Sandbox.getEntities();
+        Player player = Sandbox.getPlayer();
         Iterator<Entity> it = entities.iterator();
         //remove the current bomb
         while (it.hasNext()) {
@@ -52,6 +54,7 @@ public class GameLoop {
                 if(!alive){
                     // not removig directly from list to prevent ConcurrentModification
                     it.remove();
+                    player.incrementBombCount();
                 }
             }
         }

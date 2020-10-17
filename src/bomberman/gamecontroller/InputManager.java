@@ -51,9 +51,12 @@ public class InputManager {
         }
         
         //Drop bomb
-        if(keyboardInputs.contains(KeyCode.SPACE)){           
-            Sandbox.addEntityToGame(new BlackBomb(player.getPositionX(), player.getPositionY()));
-        }        
+        if(keyboardInputs.contains(KeyCode.SPACE)){
+            if(player.hasMoreBombs()) {
+                Sandbox.addEntityToGame(new BlackBomb(player.getPositionX(), player.getPositionY()));
+                player.decrementBombCount();
+            }
+        }
     }
 
 }
