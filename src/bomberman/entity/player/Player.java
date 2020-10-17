@@ -29,6 +29,7 @@ public class Player implements MovingEntity, KillableEntity {
     String name;
     int scale = 1;
     double reduceBoundarySizePercent=0.45;
+    public int bombCount = 1;
 
     public Player() {
         init(64, 64);
@@ -209,11 +210,24 @@ public class Player implements MovingEntity, KillableEntity {
     public void setScale(int scale) {
         this.scale = scale;
     }
+
     public double getReduceBoundarySizePercent() {
         return reduceBoundarySizePercent;
     }
 
     public void setReduceBoundarySizePercent(double reduceBoundarySizePercent) {
         this.reduceBoundarySizePercent = reduceBoundarySizePercent;
+    }
+
+    public boolean hasMoreBombs() {
+        return bombCount>0;
+    }
+
+    public void incrementBombCount(){
+        ++bombCount;
+    }
+
+    public void decrementBombCount(){
+        --bombCount;
     }
 }
