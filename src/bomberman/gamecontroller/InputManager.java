@@ -8,6 +8,7 @@ package bomberman.gamecontroller;
 import java.util.List;
 
 import bomberman.constants.Direction;
+import bomberman.constants.GlobalConstants;
 import bomberman.entity.Entity;
 import bomberman.entity.player.Player;
 import bomberman.entity.staticobjects.BlackBomb;
@@ -53,7 +54,7 @@ public class InputManager {
         //Drop bomb
         if(keyboardInputs.contains(KeyCode.SPACE)){
             if(player.hasMoreBombs()) {
-                Sandbox.addEntityToGame(new BlackBomb(player.getPositionX(), player.getPositionY()));
+                Sandbox.addEntityToGame(new BlackBomb(player.getPositionX()+ GlobalConstants.PLAYER_WIDTH/2, player.getPositionY()+GlobalConstants.PLAYER_HEIGHT/2));
                 player.decrementBombCount();
             }
         }

@@ -24,7 +24,7 @@ public class Wall implements StaticEntity {
     private Sprite sprite;
     RectBoundedBox entityBoundary;
     int layer;
-    int scale=1;
+    double scale=1;
 
     public Wall(int x, int y) {
         positionX = x;
@@ -33,8 +33,8 @@ public class Wall implements StaticEntity {
         width = 16;
         height = 16;
         layer = 1;
-        sprite = new Sprite(this, 16, 0, 348, 123, 1, width * getScale(), height * getScale() ,getScale(), false);
-        entityBoundary = new RectBoundedBox(positionX, positionY, width * getScale(), height * getScale());
+        sprite = new Sprite(this, 16, 0, 348, 123, 1,  (int)(width * getScale()), (int)(height  * getScale()) ,getScale(), false);
+        entityBoundary = new RectBoundedBox(positionX, positionY,  (int)(width * getScale()), (int)(height  * getScale()));
     }
 
     public void changeColor(Color color) {
@@ -79,11 +79,11 @@ public class Wall implements StaticEntity {
     @Override
     public int getLayer() { return layer; }
 
-    public int getScale() {
+    public double getScale() {
         return scale;
     }
 
-    public void setScale(int scale) {
+    public void setScale(double scale) {
         this.scale = scale;
     }
 }

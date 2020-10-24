@@ -27,7 +27,7 @@ public class Player implements MovingEntity, KillableEntity {
     public int positionY = 0;
     int layer;
     String name;
-    int scale = 1;
+    double scale = 1;
     double reduceBoundarySizePercent=0.45;
     public int bombCount = 1;
 
@@ -52,8 +52,8 @@ public class Player implements MovingEntity, KillableEntity {
 
         playerBoundary = new RectBoundedBox(positionX+(int)(GlobalConstants.PLAYER_WIDTH*getReduceBoundarySizePercent()),
                                             positionY+(int)(GlobalConstants.PLAYER_WIDTH*getReduceBoundarySizePercent()),
-                                            (GlobalConstants.PLAYER_WIDTH * getScale())-2*+(int)(GlobalConstants.PLAYER_WIDTH*getReduceBoundarySizePercent()),
-                                            (GlobalConstants.PLAYER_HEIGHT * getScale())-2*+(int)(GlobalConstants.PLAYER_HEIGHT*getReduceBoundarySizePercent())
+                                            (int)(GlobalConstants.PLAYER_WIDTH * getScale())-2*+(int)(GlobalConstants.PLAYER_WIDTH*getReduceBoundarySizePercent()),
+                                            (int)(GlobalConstants.PLAYER_HEIGHT * getScale())-2*+(int)(GlobalConstants.PLAYER_HEIGHT*getReduceBoundarySizePercent())
                                             );
 
         currentSprite = playerAnimations.getPlayerIdleSprite();
@@ -203,7 +203,7 @@ public class Player implements MovingEntity, KillableEntity {
     @Override
     public int getLayer() { return layer; }
 
-    public int getScale() {
+    public double getScale() {
         return scale;
     }
 

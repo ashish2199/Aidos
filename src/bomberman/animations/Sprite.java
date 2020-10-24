@@ -18,7 +18,7 @@ public class Sprite
 	public int numberOfFrames;
 	public double width;
 	public double height;
-	private int scale;
+	private double scale;
 	public int actualSize;
 	public boolean resersePlay;
 	public Image[] spriteImages;
@@ -26,7 +26,7 @@ public class Sprite
 	public Entity entityReference;
 
 	public Sprite(Entity e, int actualSize, double playSpeed, int spriteLocationOnSheetX, int spriteLocationOnSheetY, int numberOfFrames, double width, double height,
-				  int scale, boolean leftToRight)
+				  double scale, boolean leftToRight)
 	{
 		super();
 		this.actualSize = actualSize;
@@ -50,7 +50,7 @@ public class Sprite
 	}
 
 
-    public Sprite(Entity e,int actualSize,double playSpeed,Image spriteSheet,List<Rectangle> specifications,double width, double height,int scale, boolean leftToRight){
+    public Sprite(Entity e,int actualSize,double playSpeed,Image spriteSheet,List<Rectangle> specifications,double width, double height,double scale, boolean leftToRight){
         super();
         this.actualSize = actualSize;
         this.playSpeed = playSpeed;
@@ -82,11 +82,11 @@ public class Sprite
 		this.entityReference = entityReference;
 	}
 
-	public int getScale() {
+	public double getScale() {
 		return scale;
 	}
 
-	public void setScale(int scale) {
+	public void setScale(double scale) {
 		this.scale = scale;
 	}
 
