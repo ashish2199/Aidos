@@ -30,14 +30,15 @@ public class BombAnimations {
     public void setBlackBomb(Sprite blackBomb) {
         this.blackBomb = blackBomb;
     }
+
     public BombAnimations(Entity e) {
         Image img = Renderer.getSpiteSheet();
         playSpeed=0.3;
         
         List<Rectangle> specs=new ArrayList<>();
-        specs.add(new Rectangle(180, 93,18,16));
-        specs.add(new Rectangle(211, 93,16,16));
-        specs.add(new Rectangle(240, 93,18,17));
+        specs.add(new Rectangle(181, 94, 16, 15));
+        specs.add(new Rectangle(211, 93, 15, 16));
+        specs.add(new Rectangle(241, 93, 16, 16));
         blackBomb = new Sprite(e,30,playSpeed,img, specs,GlobalConstants.PLAYER_WIDTH+2, GlobalConstants.PLAYER_HEIGHT+2, e.getScale(), false);
     }
 }

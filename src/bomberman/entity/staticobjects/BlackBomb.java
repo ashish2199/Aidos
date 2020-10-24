@@ -29,7 +29,7 @@ public class BlackBomb implements StaticEntity {
     int timerDurationInMillis = 2000; 
     STATE bombState;
     int layer;
-    int scale=1;
+    double scale=1;
 
     enum STATE
     {
@@ -45,10 +45,10 @@ public class BlackBomb implements StaticEntity {
     	width = 16;
     	height = 16;
     	layer=-2;
-    	setScale(2);
+    	setScale(1.3);
         bomb_animations=new BombAnimations(this);
         sprite=bomb_animations.getBlackBomb();
-        entityBoundary = new RectBoundedBox(positionX, positionY, width * getScale(), height  * getScale());
+        entityBoundary = new RectBoundedBox(positionX+2, positionY+4, (int)(width * getScale()), (int)(height  * getScale()));
         addedDate=new Date();
         bombState=STATE.ACTIVE;
     }
@@ -113,11 +113,11 @@ public class BlackBomb implements StaticEntity {
     public int getLayer() { return layer; }
 
     @Override
-    public int getScale() {
+    public double getScale() {
         return scale;
     }
 
-    public void setScale(int scale) {
+    public void setScale(double scale) {
         this.scale = scale;
     }
 }

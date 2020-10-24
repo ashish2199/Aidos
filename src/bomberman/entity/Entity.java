@@ -28,5 +28,5 @@ public interface Entity {
      * */
     int getLayer();
 
-    int getScale();
+    double getScale();
 }
